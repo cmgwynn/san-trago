@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/content/drink_recipe.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "rum_cola"
+display_name = "Rum & cola"
+description = "Build one rum and two cola in a clean glass. No shake or stir required."
+rum_units = 1
+cola_units = 2

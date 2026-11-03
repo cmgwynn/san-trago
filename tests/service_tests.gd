@@ -1,0 +1,378 @@
+extends SceneTree
+
+const Shift = preload("res://scripts/systems/service_shift.gd")
+const Scene = preload("res://scenes/service_lab.tscn")
+var checks: int = 0
+var failures: int = 0
+
+
+func expect(value: bool, message: String) -> void:
+	checks += 1
+	if not value:
+		failures += 1
+		printerr("FAIL: ", message)
+
+
+func _initialize() -> void:
+	call_deferred("_run")
+
+
+func _run() -> void:
+	var shift := Shift.new()
+	shift.advance(0.01)
+	expect(not shift.guests[0].is_empty(), "first guest arrives")
+	expect(shift.select_glass().is_empty(), "clean glass becomes preparing")
+	expect(not shift.select_glass().is_empty(), "cannot allocate second preparation")
+	expect(shift.serve(0).is_empty(), "preparation becomes held glass")
+	expect(not shift.serve(0).is_empty(), "duplicate serving rejected")
+	expect(shift.total_glasses() == 4, "serving conserves glasses")
+	shift.advance(10.1)
+	expect(shift.dirty == 1 and shift.guests[0].is_empty(), "guest returns dirty glass after drinking")
+	expect(shift.start_wash().is_empty(), "dirty glass enters sink")
+	expect(not shift.start_wash().is_empty(), "cannot double allocate sink")
+	shift.advance(3.1)
+	expect(shift.clean == 4 and shift.washing == 0, "washing returns a clean glass")
+	for iteration: int in range(4):
+		shift.select_glass()
+		shift.discard()
+	expect(shift.clean == 0 and shift.dirty == 4, "discard moves glasses to dirty")
+	expect(not shift.select_glass().is_empty(), "no invented glass on empty supply")
+	expect(shift.start_wash().is_empty(), "sink can recover from zero clean glasses")
+	shift.advance(200.0)
+	expect(shift.finished and shift.total_glasses() == 4, "closing conserves all glasses")
+	var idle := Shift.new()
+	idle.advance(200.0)
+	expect(idle.finished and idle.walkouts > 0, "idle shift finishes with explicit walkouts")
+	expect(idle.total_glasses() == 4, "walkouts do not consume unserved glasses")
+	var ticks := Shift.new()
+	for tick: int in range(3000):
+		ticks.advance(0.05)
+		expect(ticks.total_glasses() == 4, "glass invariant throughout unattended shift")
+	expect(ticks.walkouts == idle.walkouts and ticks.missed_arrivals == idle.missed_arrivals, "large and small timesteps give same results")
+	var rack := Shift.new(1)
+	expect(rack.clean == 6 and rack.total_glasses() == 6, "rack adds exactly two glasses without changing timing")
+	expect(not rack.start_machine().is_empty(), "rack cannot use unowned dishwasher")
+	var machine := Shift.new(2)
+	expect(not machine.start_machine().is_empty(), "empty machine reports missing dirty glasses")
+	for glass: int in range(3):
+		machine.select_glass()
+		machine.discard()
+	expect(machine.start_machine().is_empty(), "batch can start with dirty glasses")
+	expect(machine.machine_glasses == 2 and machine.dirty == 1, "batch respects two-glass capacity")
+	expect(machine.hands_busy() and machine.total_glasses() == 4, "loading occupies hands and preserves inventory")
+	expect(not machine.select_glass().is_empty() and not machine.start_wash().is_empty(), "loading blocks conflicting operations in model")
+	machine.advance(1.6)
+	expect(not machine.hands_busy() and machine.machine_glasses == 2, "running cycle frees hands after loading")
+	expect(not machine.start_machine().is_empty(), "running batch cannot be loaded twice")
+	expect(machine.start_wash().is_empty(), "sink works concurrently with running batch")
+	machine.advance(3.1)
+	expect(machine.washing == 0 and machine.machine_glasses == 2 and machine.clean == 2, "sink completes without completing machine early")
+	machine.advance(5.0)
+	expect(machine.machine_glasses == 0 and machine.clean == 4, "batch returns glasses only when cycle finishes")
+	expect(machine.manual_washes == 1 and machine.machine_batches == 1, "work counters distinguish cleaning strategies")
+	machine.select_glass()
+	machine.discard()
+	machine.start_machine()
+	expect(machine.machine_glasses == 1, "partial batch is allowed without inventing glasses")
+	machine.advance(200.0)
+	expect(machine.finished and machine.total_glasses() == 4, "machine setup preserves inventory through closing")
+	var interrupted := Shift.new(2)
+	interrupted.select_glass()
+	interrupted.discard()
+	interrupted.start_machine()
+	interrupted.elapsed = Shift.OPEN_SECONDS + Shift.GRACE_SECONDS - 0.1
+	interrupted.advance(1.0)
+	expect(interrupted.finished and interrupted.machine_glasses == 0 and interrupted.dirty == 1, "closing returns incompletely cleaned batch dirty")
+	expect(interrupted.total_glasses() == 4, "interrupted loading conserves glasses")
+	var combined := Shift.new(3, 1)
+	expect(combined.owned == 6 and combined.has_dishwasher, "combined setup has both upgrades")
+	expect(combined.arrival_times.size() == 16 and combined.recipe_sequence.size() == 16, "busier schedule has matching order count")
+	var baseline := Shift.new()
+	expect(baseline.arrival_times == Shift.ARRIVAL_TIMES, "baseline arrival schedule stays unchanged")
+	for equipment: int in range(4):
+		var profile := Shift.new(equipment, 1)
+		expect(profile.arrival_times == combined.arrival_times and profile.recipe_sequence == combined.recipe_sequence, "equipment does not change busy schedule")
+		profile.advance(200.0)
+		expect(profile.total_glasses() == profile.owned and profile.finished, "every setup conserves its owned inventory through busy closing")
+		expect(profile.served + profile.walkouts + profile.missed_arrivals + profile.closing_unserved == 16, "every scheduled arrival accounted for")
+	var measured := Shift.new(2)
+	measured.advance(0.01)
+	for glass: int in range(4):
+		measured.select_glass()
+		measured.discard()
+	measured.start_machine()
+	measured.advance(1.0)
+	expect(is_equal_approx(measured.no_clean_seconds, 1.0), "zero clean supply duration counted")
+	expect(is_equal_approx(measured.glass_blocked_seconds, 1.0), "waiting order without clean or preparation is blocked")
+	expect(measured.blocked_during_machine_seconds == 0.0, "loading is not counted as automatic machine time")
+	measured.advance(1.0)
+	expect(is_equal_approx(measured.blocked_during_machine_seconds, 0.5), "running-machine blocking excludes loading")
+	expect(measured.blocked_during_machine_seconds <= measured.glass_blocked_seconds, "machine blocking is a subset")
+	measured.start_wash()
+	measured.advance(3.1)
+	var blocked_before := measured.glass_blocked_seconds
+	measured.select_glass()
+	measured.advance(1.0)
+	expect(is_equal_approx(blocked_before, measured.glass_blocked_seconds), "prepared glass prevents false blockage")
+	var no_guest := Shift.new()
+	for glass: int in range(4):
+		no_guest.select_glass()
+		no_guest.discard()
+	no_guest.next_arrival = Shift.ARRIVAL_TIMES.size()
+	no_guest.advance(1.0)
+	expect(no_guest.no_clean_seconds > 0.0 and no_guest.glass_blocked_seconds == 0.0, "empty supply without orders is not service blockage")
+
+	var lab := Scene.instantiate()
+	root.add_child(lab)
+	await process_frame
+	lab.set_process(false)
+	lab._start()
+	lab._select_glass()
+	lab._dock("draft", false)
+	lab._ingredient_down("draft")
+	lab._process(1.3)
+	lab._stop_pour()
+	lab._serve()
+	expect(lab.shift.served == 1 and not lab.bench.has_glass, "service UI uses actual glass and guest lifecycle")
+	lab._process(10.1)
+	expect(lab.shift.dirty == 1, "UI returns served glass dirty")
+	lab._select_glass()
+	lab._dock("rum", false)
+	lab._ingredient_down("rum")
+	lab._process(0.2)
+	lab._stop_pour()
+	var contents: Dictionary = lab.bench.contents.duplicate()
+	lab._wash()
+	expect(not lab._can_act() and lab.shift.washing == 1, "manual washing blocks competing hand actions")
+	lab._toggle_pause()
+	var time: float = lab.shift.elapsed
+	lab._process(5.0)
+	expect(lab.shift.elapsed == time and lab.shift.washing == 1, "pause freezes customers and washing")
+	lab._toggle_pause()
+	lab._process(3.1)
+	expect(lab.bench.contents == contents and lab.shift.washing == 0, "washing preserves partially filled drink")
+	lab._select_guest(1)
+	expect(lab.bench.contents == contents, "changing guest preserves drink")
+	lab._serve()
+	expect(lab.bench.has_glass, "invalid target or recipe preserves preparation")
+	lab._request_discard()
+	var before: float = lab.shift.elapsed
+	lab._process(4.0)
+	expect(lab.shift.elapsed == before, "confirmation freezes service consistently")
+	lab.confirmation.hide()
+	lab._discard()
+	expect(lab.shift.preparing == 0 and not lab.bench.has_glass, "discard synchronizes both inventories")
+	lab._process(200.0)
+	expect(not lab.active and lab.shift.finished and lab.shift.total_glasses() == 4, "UI resolves closing and clears preparation")
+	lab._start()
+	expect(lab.active and lab.shift.served == 0 and lab.shift.clean == 4, "restart resets experiment without old state")
+	expect(lab.guest_buttons[0].button_pressed, "waiting guest has persistent selected appearance")
+	expect(lab.get_node("%Serve").disabled, "serving is unavailable without a glass")
+	expect(not lab.get_node("%TargetGauge").visible, "no empty target gauge before glass docking")
+	lab._select_glass()
+	lab._dock("draft", false)
+	expect(lab.get_node("%TargetGauge").visible and lab.get_node("%TargetGauge").target == 2.0, "first dock shows selected guest target")
+	lab._ingredient_down("draft")
+	lab._process(1.3)
+	lab._stop_pour()
+	lab._serve()
+	expect(lab.selected_spot == -1, "served guest is no longer an active order selection")
+	expect(lab.guest_buttons[0].disabled and not lab.guest_buttons[0].button_pressed, "drinking guest cannot masquerade as selected order")
+	lab._select_glass()
+	lab._dock("rum", false)
+	expect(not lab.get_node("%TargetGauge").visible, "without an order no misleading recipe target is invented")
+	expect(lab.get_node("%TargetLabel").text.contains("Select a waiting guest"), "missing order has an actionable explanation")
+	lab._process(14.0)
+	expect(lab.selected_guest_id == 2, "next waiting guest selected even when a clean glass was prepared early")
+	expect(lab.get_node("%TargetGauge").visible and lab.get_node("%TargetGauge").target == 1.0, "arrival restores rum target at already-docked station")
+	expect(lab.preparation_recipe.id == "rum_cola", "preparation has an explicit recipe reference")
+	lab._ingredient_down("rum")
+	lab._process(0.2)
+	lab._stop_pour()
+	var preserved_fill: Dictionary = lab.bench.contents.duplicate()
+	# Force a departure and reuse of the very same service spot.
+	var old_spot: int = lab.selected_spot
+	lab.shift.guests[old_spot] = {"id": 99, "recipe": 0, "state": "waiting", "remaining": 60.0}
+	lab._sync_selection()
+	lab._update()
+	expect(lab.selected_spot == -1, "slot reuse does not silently select a different guest")
+	expect(lab.preparation_recipe.id == "rum_cola" and lab.get_node("%TargetGauge").target == 1.0, "original target survives departure and slot reuse")
+	expect(lab.get_node("%TargetLabel").text.contains("Recipe kept"), "orphaned recipe reference is explicitly labeled")
+	expect(lab.get_node("%Serve").disabled, "must explicitly select replacement recipient")
+	lab._select_guest(old_spot)
+	expect(lab.selected_guest_id == 99 and lab.preparation_recipe.id == "draft_beer", "explicit guest change retargets the current preparation")
+	expect(lab.bench.contents == preserved_fill, "retargeting never deletes liquid")
+	expect(lab.get_node("%TargetLabel").text.contains("Not in this recipe"), "incompatible station after retarget is explicit")
+	lab._select_guest(-1)
+	expect(lab.selected_guest_id == 99, "invalid spot does not corrupt selection")
+	lab._request_discard()
+	lab.confirmation.hide()
+	lab._discard()
+	expect(lab.preparation_recipe == null and not lab.get_node("%TargetGauge").visible, "discard clears recipe and target together")
+	lab._select_glass()
+	lab._dock("draft", false)
+	lab._ingredient_down("draft")
+	lab._process(0.2)
+	lab._stop_pour()
+	var target_before: float = lab.get_node("%TargetGauge").target
+	lab._wash()
+	expect(lab.get_node("%TargetGauge").visible and lab.get_node("%TargetGauge").target == target_before, "washing preserves reference gauge")
+	lab._process(3.1)
+	expect(lab.feedback.text.contains("Glass washed"), "washing completion has explicit feedback")
+	lab._ingredient_down("draft")
+	lab._notification(Control.NOTIFICATION_APPLICATION_FOCUS_OUT)
+	time = lab.shift.elapsed
+	contents = lab.bench.contents.duplicate()
+	lab._process(2.0)
+	expect(lab.paused and not lab.station_pouring and lab.shift.elapsed == time, "focus loss freezes service and stops pouring")
+	expect(lab.bench.contents == contents, "focus loss retains fractional fill")
+	lab._toggle_pause()
+	lab.shift.elapsed = Shift.OPEN_SECONDS + Shift.GRACE_SECONDS - 0.1
+	lab._ingredient_down("draft")
+	var prior_hold_units: float = lab.trial_hold_units
+	lab._process(10.0)
+	expect(lab.shift.finished and not lab.station_pouring and not lab.bench.has_glass, "closing interrupts held pour and removes stale preparation")
+	expect(lab.trial_hold_units - prior_hold_units < 0.4, "long frame does not pour ten seconds beyond closing")
+	expect(lab.shift.total_glasses() == 4, "closing while pouring and washing recovery conserves glasses")
+	lab._start()
+	lab._select_glass()
+	lab._dock("draft", false)
+	lab._process(200.0)
+	lab.equipment_choice.select(2)
+	lab._start()
+	expect(lab.shift.has_dishwasher and lab.machine_button.visible, "setup choice activates dishwasher UI")
+	expect(lab.equipment_choice.disabled, "cannot change setup during shift")
+	lab._select_glass()
+	lab._discard()
+	lab._machine()
+	expect(not lab._can_act() and lab.shift.machine_load_left > 0, "UI locks hands while loading")
+	lab._toggle_pause()
+	var load_left: float = lab.shift.machine_load_left
+	lab._process(5.0)
+	expect(lab.shift.machine_load_left == load_left, "pause freezes loading")
+	lab._toggle_pause()
+	lab._process(1.6)
+	expect(lab._can_act() and lab.shift.machine_glasses == 1, "UI unlocks during automatic cycle")
+	lab._select_glass()
+	lab._dock("draft", false)
+	lab._ingredient_down("draft")
+	lab._process(0.2)
+	lab._stop_pour()
+	expect(lab.bench.contents.get("draft", 0.0) > 0, "pouring works during machine cycle")
+	lab._toggle_pause()
+	var cycle_left: float = lab.shift.machine_cycle_left
+	lab._process(5.0)
+	expect(lab.shift.machine_cycle_left == cycle_left, "pause freezes automatic cycle")
+	lab._toggle_pause()
+	lab._process(8.0)
+	expect(lab.shift.machine_glasses == 0 and lab.shift.total_glasses() == 4, "UI machine completes without duplicating glasses")
+	lab._process(200.0)
+	lab._export()
+	var export_path: String = lab.feedback.text.trim_prefix("Exported: ")
+	expect(FileAccess.file_exists(export_path), "finished service run exports JSON")
+	var report: Variant = JSON.parse_string(FileAccess.get_file_as_string(export_path))
+	expect(report is Dictionary, "comparison export is valid JSON")
+	if report is Dictionary:
+		expect(report.equipment == "dishwasher" and report.pressure == "baseline", "export identifies actual played setup")
+		expect(report.scheduled_arrivals == 8 and report.arrival_times_seconds.size() == 8, "export records comparison schedule")
+		expect(report.has("glass_blocked_seconds") and report.has("timing"), "export includes diagnostics and protocol")
+	expect(DirAccess.remove_absolute(export_path) == OK, "test removes only generated comparison")
+	lab.equipment_choice.select(3)
+	lab.pressure_choice.select(1)
+	lab._start()
+	expect(lab.shift.owned == 6 and lab.shift.has_dishwasher and lab.shift.pressure_preset == 1, "UI starts combined setup at selected pressure")
+	expect(lab.pressure_choice.disabled and lab.equipment_choice.disabled, "both setup selectors locked during shift")
+	lab._select_glass()
+	lab._dock("draft", false)
+	lab._toggle_pause()
+	var no_clean_before: float = lab.shift.no_clean_seconds
+	time = lab.shift.elapsed
+	lab._process(5.0)
+	expect(lab.shift.elapsed == time and lab.shift.no_clean_seconds == no_clean_before, "pause excludes diagnostic time")
+	lab._toggle_pause()
+	for equipment: int in range(4):
+		for pressure: int in range(2):
+			for size: Vector2i in [Vector2i(1280, 800), Vector2i(1024, 768)]:
+				root.size = size
+				lab.active = false
+				lab.equipment_choice.select(equipment)
+				lab.pressure_choice.select(pressure)
+				lab._start()
+				await _layout_settle()
+				var positions := _button_positions(lab)
+				lab._select_glass()
+				await _layout_settle()
+				_expect_positions(lab, positions, "glass selected")
+				lab._dock("draft", false)
+				await _layout_settle()
+				_expect_positions(lab, positions, "docked target shown")
+				lab._ingredient_down("draft")
+				lab._process(0.65)
+				lab._stop_pour()
+				await _layout_settle()
+				_expect_positions(lab, positions, "fractional contents and feedback")
+				lab._ingredient_down("draft")
+				lab._process(0.65)
+				lab._stop_pour()
+				lab._serve()
+				await _layout_settle()
+				_expect_positions(lab, positions, "served and target hidden")
+				lab._process(10.1)
+				lab._wash()
+				await _layout_settle()
+				_expect_positions(lab, positions, "washing labels")
+				lab._toggle_pause()
+				await _layout_settle()
+				_expect_positions(lab, positions, "paused")
+				lab._toggle_pause()
+				lab._process(200.0)
+				await _layout_settle()
+				_expect_positions(lab, positions, "long closing summary")
+	lab.equipment_choice.select(3)
+	lab.pressure_choice.select(1)
+	lab._start()
+	lab._select_glass()
+	lab._dock("draft", false)
+	for size: Vector2i in [Vector2i(1280, 800), Vector2i(1024, 768)]:
+		root.size = size
+		await process_frame
+		await process_frame
+		var layout := lab.get_node("Margin/Layout") as VBoxContainer
+		expect(layout.get_global_rect().end.y <= lab.size.y, "service layout fits vertically at %s" % size)
+		expect(layout.get_global_rect().end.x <= lab.size.x, "service layout fits horizontally at %s" % size)
+		expect(lab.get_node("%Start").size.x >= 160 and lab.get_node("%Pause").size.x >= 110, "toolbar action labels retain usable width")
+		expect(lab.get_node("%TargetGauge").visible, "docked target remains visible at %s" % size)
+		for control: Control in [lab.get_node("%TargetGauge"), lab.get_node("%TargetLabel"), lab.get_node("%Glass"), lab.machine_button, lab.equipment_choice, lab.pressure_choice, lab.get_node("%Export")]:
+			expect(control.get_global_rect().end.x <= lab.size.x and control.get_global_rect().end.y <= lab.size.y, "target and glass controls fit at %s" % size)
+	if "--capture" in OS.get_cmdline_user_args():
+		root.size = Vector2i(1280, 800)
+		await process_frame
+		await process_frame
+		await RenderingServer.frame_post_draw
+		var path := "user://service-lab-check.png"
+		expect(root.get_texture().get_image().save_png(path) == OK, "native scene capture")
+		print("Capture: ", ProjectSettings.globalize_path(path))
+	lab.queue_free()
+	await process_frame
+	print("%d service checks, %d failures." % [checks, failures])
+	quit(1 if failures else 0)
+
+
+func _layout_settle() -> void:
+	await process_frame
+	await process_frame
+
+
+func _button_positions(lab: Control) -> Dictionary:
+	var positions: Dictionary = {}
+	for node: Node in lab.find_children("*", "Button", true, false):
+		var button := node as Button
+		if button.is_visible_in_tree() and not button.get_parent() is Window:
+			positions[str(button.get_path())] = button.get_global_rect()
+	return positions
+
+
+func _expect_positions(lab: Control, expected: Dictionary, state: String) -> void:
+	var actual := _button_positions(lab)
+	for path: String in expected:
+		expect(actual.has(path) and actual[path] == expected[path], "stable button rect: %s / %s" % [path, state])

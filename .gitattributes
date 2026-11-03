@@ -1,0 +1,9 @@
+# Normalize text to LF so macOS and Windows checkouts diff cleanly.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ogg binary
+*.wav binary
+*.ttf binary
+*.otf binary

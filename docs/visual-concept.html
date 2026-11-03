@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>San Trago | Visual concept 01: Bright day at Pacific Pour</title>
+  <style>
+    :root {
+      --paper: #fbeac0;
+      --paper-shade: #ecd09a;
+      --ink: #5a3324;
+      --wood: #b8743f;
+      --wood-dark: #5e3424;
+      --sea: #2a9dbb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #2d1c22;
+      color: var(--ink);
+      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header, main { max-width: 1312px; margin: 0 auto; padding: 16px; }
+    header { color: #fbeac0; }
+    header p { margin: 0; opacity: .8; }
+    header h1 { margin: 4px 0 0; font-size: 28px; }
+    .stage {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 10;
+      margin: 0 auto;
+      border: 4px solid #1b1014;
+      background: #000;
+    }
+    .stage canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+    }
+    #grid { pointer-events: none; display: none; }
+    .stage.show-grid #grid { display: block; }
+    .controls { display: flex; gap: 16px; align-items: center; color: #fbeac0; margin: 10px auto 0; max-width: 1280px; }
+    .sheet {
+      background: var(--paper);
+      border: 4px solid var(--wood-dark);
+      box-shadow: inset 0 0 0 4px var(--wood);
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+    .sheet h2 { margin: 0 0 8px; font-size: 22px; }
+    .sheet h3 { margin: 18px 0 6px; font-size: 17px; }
+    .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 8px 32px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+    .swatch { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+    .swatch i { width: 32px; height: 32px; border: 2px solid #3a2630; flex: none; }
+    .swatch code { display: block; opacity: .75; }
+    ul { margin: 4px 0; padding-left: 20px; }
+    .screen-title { color: #fbeac0; max-width: 1280px; margin: 32px auto 8px; font-size: 20px; }
+    .caption { color: #fbeac0; opacity: .85; max-width: 1280px; margin: 8px auto 0; }
+    .note { background: var(--paper-shade); padding: 10px 14px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <p>San Trago / Preproduction / Visual concept 01 / Proposal for creative lead review / Compare with <a href="visual-concept-02.html">concept 02 (painted)</a></p>
+    <h1>Bright day at Pacific Pour</h1>
+  </header>
+  <main>
+    <div class="stage" id="stage">
+      <canvas id="scene" width="320" height="200" aria-label="Pixel-art concept of the service screen: behind a beach bar looking out at the Pacific, three guest spots, and a row of bar stations."></canvas>
+      <canvas id="grid" width="1280" height="800" aria-hidden="true"></canvas>
+    </div>
+    <div class="controls">
+      <label><input type="checkbox" id="animateToggle"> Ambient animation</label>
+      <label><input type="checkbox" id="gridToggle"> Show 16 px art grid</label>
+      <span>Native 320 x 200, integer-scaled x4 to 1280 x 800 (x3 = 960 x 600 for 1024 x 768 windows).</span>
+    </div>
+
+    <h2 class="screen-title">Screen 2: end of shift at sunset</h2>
+    <div class="stage">
+      <canvas id="results" width="320" height="200" aria-label="Pixel-art concept of the end-of-shift results screen: the same beach bar at sunset, dimmed behind a tab of the shift's numbers, guest notes, unlocks, and Shop and Next day buttons."></canvas>
+    </div>
+    <p class="caption">The same bar after closing, with a sunset palette swap of the background art. This is the text-heaviest screen, so it is a deliberate stress test of the 5 px pixel font.</p>
+
+    <section class="sheet">
+      <h2>What this concept proposes</h2>
+      <p class="note">This concept is original, code-drawn placeholder art. It is inspired by Stardew Valley's cozy, readable pixel style but copies none of its assets, UI, or characters. It is a direction to react to, not final art, and the creative lead owns the final call.</p>
+      <div class="cols">
+        <div>
+          <h3>Scene, front to back</h3>
+          <ul>
+            <li><b>Workstation:</b> stations on a wooden shelf in front of a Talavera tile wall, with the glass docked at the cola gun mid-pour (Mode C).</li>
+            <li><b>Bar top:</b> a bevelled plank counter where guests rest their hands, with a coaster waiting for Maya's drink, Jules's beer, a tip jar, and a potted aloe.</li>
+            <li><b>Guests:</b> three spots. Maya is selected and waiting, Jules is enjoying a beer and asking for peanuts, and spot 3 is open (a seagull is taking advantage).</li>
+            <li><b>Life:</b> optional ambient animation, with clouds, waves, sun glitter, palms, and papel picado swaying, plus blinking, a pecking seagull, the cola stream, sink bubbles, and the washer counting down with steam. It is off by default for users who prefer reduced motion. State and selection never blink.</li>
+            <li><b>View:</b> an open-front shack under a Mission tile roof, papel picado, fan palms, Crystal Pier-style cottages, a lifeguard tower, and the Point Loma lighthouse on the horizon.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Readability rules</h3>
+          <ul>
+            <li>Interactables get a dark warm outline (<code>#3a2630</code>); the background gets none and lower contrast.</li>
+            <li>Selection is a gold frame (bubble and docked glass), never only a color change.</li>
+            <li>State is always shown with an icon or number as well (hearts for patience, counts on tags, units on the gauge).</li>
+            <li>The pixel font is 5 px tall, which is 20 px on screen at x4. Nothing smaller.</li>
+            <li>All UI uses one parchment panel with a wood frame, so the HUD reads as one family.</li>
+            <li>Soft cast shadows under every object, plus a roof-eave shadow, anchor things in space without heavy outlines.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h3>Screen 2: end of shift</h3>
+          <ul>
+            <li><b>Background:</b> the same layers as service, recolored with a sunset palette (sun setting into the sea) and dimmed, so the bar visibly "closes" without new art.</li>
+            <li><b>The tab:</b> service stats, then money with dotted leaders: drinks, tips in green, spills in red, and the total carried into savings ($128 to $252, matching the service HUD).</li>
+            <li><b>Guest notes:</b> small portraits with one line each. Regulars, requests for tomorrow, and a seagull who stole peanuts give the numbers some heart.</li>
+            <li><b>Unlocked:</b> previews what the shop and the next wave hold, so the Shop button has a reason to be pressed.</li>
+            <li><b>Choices:</b> two large buttons, with the gold selection frame used everywhere else and a hint bar that also confirms the autosave.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What screen 2 tests</h3>
+          <ul>
+            <li><b>Font load:</b> about 25 lines of 5 px text. If this feels tiring, that is the evidence for a crisper 2x HUD font on text-heavy screens.</li>
+            <li><b>Palette swaps:</b> sunset is a recolor, not a repaint. If it holds up, day, sunset, and night can share one set of background art.</li>
+            <li><b>One UI family:</b> panels, tags, buttons, and selection all reuse the service-screen parts.</li>
+            <li><b>Placeholder numbers:</b> every figure is illustrative and not taken from the balance worksheet.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Palette</h3>
+      <div class="swatches" id="swatches"></div>
+
+      <div class="cols">
+        <div>
+          <h3>Very San Diego, on purpose</h3>
+          <ul>
+            <li>Washingtonia fan palms with brown frond skirts</li>
+            <li>Crystal Pier-style white cottages with blue trim</li>
+            <li>Point Loma lighthouse and headland on the horizon</li>
+            <li>Lifeguard tower, surfers, sailboats, seagulls</li>
+            <li>Mission terracotta roof, Talavera tile, papel picado</li>
+            <li>Surfboard tap handle; brown-and-gold baseball tee (no team logos)</li>
+          </ul>
+          <p>Each neighborhood can swap this layer: Pacific Pour is beach and pier, and the others get their own skyline and tile.</p>
+        </div>
+        <div>
+          <h3>Production implications (for review)</h3>
+          <ul>
+            <li>16 px base grid; characters about 20 x 36 px; stations about 24 to 48 px wide.</li>
+            <li>Integer scaling only, with nearest-neighbor filtering in Godot (texture filter Nearest, stretch mode viewport).</li>
+            <li>The layout is 16:10. Letterbox other aspect ratios rather than stretching.</li>
+            <li>Background, guests, stations, and HUD are separate layers, so animation and neighborhood swaps stay independent.</li>
+            <li>The text-heavy screens (shop and results) may need a crisp HUD font at 2x. Decide before production.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Questions for the creative lead</h3>
+      <ul>
+        <li>Does pixel art at this density feel right, or should it be chunkier (fewer pixels) or finer?</li>
+        <li>Is daytime the default service look, with sunset or night as later waves or neighborhoods?</li>
+        <li>Are guests visible from the chest up, or should they be smaller full-body figures at stools?</li>
+        <li>Should the bubbles keep the recipe text, or switch to icons only with the recipe on hover?</li>
+        <li>Is the results screen comfortable to read in the 5 px font, or should text-heavy screens use a crisper 2x font?</li>
+        <li>Do the guest notes and the seagull joke fit the tone you want, or should results stay purely numbers?</li>
+      </ul>
+    </section>
+  </main>
+
+<script>
+(() => {
+  const P = {
+    outline: '#3a2630',
+    skyTop: '#5ab4e6', skyMid: '#7fcbef', skyLow: '#b4e4f5',
+    cloud: '#ffffff', cloudShade: '#d2eef8',
+    sun: '#ffe27a', sunCore: '#fff6c8',
+    hill: '#86a8a0', hillDark: '#6b8f88', lighthouse: '#f4efe4', lighthouseRoof: '#b8463a',
+    seaDeep: '#1f7fa6', sea: '#2a9dbb', seaLight: '#4fc2c9', foam: '#eafaf7',
+    sand: '#f2d9a0', sandShade: '#e0bd7c', sandWet: '#d9bb83', sandShadow: '#d4b07a',
+    trunk: '#a8784c', trunkDark: '#7d5434', trunkLight: '#c79a68', frond: '#4f9a4a', frondLight: '#79c25a', frondDark: '#2f6b3a', skirt: '#a8824a',
+    woodLight: '#d99a5b', wood: '#b8743f', woodDark: '#8a5030', woodDeep: '#5e3424', woodHi: '#f0bd84',
+    tile: '#c8553d', tileLight: '#e07a52', tileDark: '#93392b',
+    talaWhite: '#efe6d2', talaLine: '#ddd3bd', talaBlue: '#8fa8d6', talaYellow: '#e8b04a',
+    chrome: '#c9d3d6', chromeLight: '#f2f7f8', chromeDark: '#7f8d93',
+    glass: '#d6f1f6', glassEdge: '#8ec5d1',
+    beer: '#f0b23a', beerFoam: '#fff4d6', rum: '#c27a34', rumLight: '#e19a4e', cola: '#5a2a1c', colaLight: '#8a4a2c',
+    parchment: '#fbeac0', parchmentShade: '#ecd09a', uiText: '#5a3324', uiSoft: '#94664a',
+    gold: '#f3c13a', goldDark: '#c68a1e', good: '#5fb85a', goodDark: '#3d8a3c', heart: '#e8505b', heartEmpty: '#d9b98f',
+    sunHalo: '#d8f1fb', lime: '#8fd14f', blush: '#f29a8f', teal: '#2fc4b2', coral: '#ff7a6b', cash: '#8fd18a',
+  };
+
+  const scene = document.getElementById('scene');
+  const sceneCtx = scene.getContext('2d');
+  const resultsCtx = document.getElementById('results').getContext('2d');
+  let ctx = sceneCtx;
+
+  let seed = 7;
+  const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  let T = 1.2;
+
+  const R = (x, y, w, h, c) => { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), w, h); };
+  const px = (x, y, c) => R(x, y, 1, 1, c);
+  function line(x0, y0, x1, y1, c, t = 1) {
+    x0 = Math.round(x0); y0 = Math.round(y0); x1 = Math.round(x1); y1 = Math.round(y1);
+    const dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0);
+    const sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+    let err = dx + dy;
+    for (;;) {
+      R(x0, y0, t, t, c);
+      if (x0 === x1 && y0 === y1) break;
+      const e2 = 2 * err;
+      if (e2 >= dy) { err += dy; x0 += sx; }
+      if (e2 <= dx) { err += dx; y0 += sy; }
+    }
+  }
+  function dither(x, y, w, h, c1, c2) {
+    for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) px(x + i, y + j, (i + j) % 2 ? c2 : c1);
+  }
+  function box(x, y, w, h, fill, edge = P.outline) {
+    R(x + 1, y, w - 2, 1, edge); R(x + 1, y + h - 1, w - 2, 1, edge);
+    R(x, y + 1, 1, h - 2, edge); R(x + w - 1, y + 1, 1, h - 2, edge);
+    R(x + 1, y + 1, w - 2, h - 2, fill);
+  }
+  // Rounded outline shape with 2 px corners, used for heads, bodies, and hands.
+  function blob(x, y, w, h, fill, edge = P.outline) {
+    for (let j = 0; j < h; j++) {
+      const i = (j === 0 || j === h - 1) ? 2 : (j === 1 || j === h - 2) ? 1 : 0;
+      if (j === 0 || j === h - 1) R(x + i, y + j, w - 2 * i, 1, edge);
+      else { px(x + i, y + j, edge); px(x + w - 1 - i, y + j, edge); R(x + i + 1, y + j, w - 2 * i - 2, 1, fill); }
+    }
+  }
+  function sprite(rows, map, x, y) {
+    rows.forEach((row, j) => [...row].forEach((ch, i) => { if (map[ch]) px(x + i, y + j, map[ch]); }));
+  }
+  const shadow = (x, y, w, a = 0.28) => {
+    R(x + 1, y, w - 2, 1, `rgba(94,52,36,${a})`);
+    R(x + 2, y + 1, w - 4, 1, `rgba(94,52,36,${a * 0.6})`);
+  };
+
+  const GLYPH_ROWS = {
+    A: '.#. #.# ### #.# #.#', B: '##. #.# ##. #.# ##.', C: '.## #.. #.. #.. .##', D: '##. #.# #.# #.# ##.',
+    E: '### #.. ##. #.. ###', F: '### #.. ##. #.. #..', G: '.## #.. #.# #.# .##', H: '#.# #.# ### #.# #.#',
+    I: '### .#. .#. .#. ###', J: '..# ..# ..# #.# .#.', K: '#.# #.# ##. #.# #.#', L: '#.. #.. #.. #.. ###',
+    M: '#...# ##.## #.#.# #...# #...#', N: '#..# ##.# #.## #..# #..#', O: '.#. #.# #.# #.# .#.', P: '##. #.# ##. #.. #..',
+    Q: '.#. #.# #.# ##. .##', R: '##. #.# ##. #.# #.#', S: '.## #.. .#. ..# ##.', T: '### .#. .#. .#. .#.',
+    U: '#.# #.# #.# #.# ###', V: '#.# #.# #.# #.# .#.', W: '#...# #...# #.#.# ##.## #...#', X: '#.# #.# .#. #.# #.#',
+    Y: '#.# #.# .#. .#. .#.', Z: '### ..# .#. #.. ###',
+    0: '### #.# #.# #.# ###', 1: '.#. ##. .#. .#. ###', 2: '##. ..# .#. #.. ###', 3: '##. ..# .#. ..# ##.',
+    4: '#.# #.# ### ..# ..#', 5: '### #.. ##. ..# ##.', 6: '.## #.. ### #.# ###', 7: '### ..# .#. .#. .#.',
+    8: '### #.# ### #.# ###', 9: '### #.# ### ..# ##.',
+    ':': '. # . # .', '.': '. . . . #', '/': '..# ..# .#. #.. #..', '$': '.## ##. .#. .## ##.',
+    '-': '... ... ### ... ...', '+': '... .#. ### .#. ...', '!': '# # # . #', '?': '##. ..# .#. ... .#.',
+    "'": '# # . . .', '&': '.#. #.# .#. #.# .##', '%': '#.. ..# .#. #.. ..#', ',': '.. .. .. .# #.', '>': '#.. .#. ..# .#. #..',
+  };
+  const GLYPHS = Object.fromEntries(Object.entries(GLYPH_ROWS).map(([k, v]) => {
+    const rows = v.split(' ');
+    return [k, { w: rows[0].length, rows }];
+  }));
+  function text(str, x, y, c) {
+    let cx = x;
+    for (const ch of str.toUpperCase()) {
+      const g = GLYPHS[ch];
+      if (!g) { cx += 3; continue; }
+      g.rows.forEach((row, j) => [...row].forEach((b, i) => { if (b === '#') px(cx + i, y + j, c); }));
+      cx += g.w + 1;
+    }
+    return cx;
+  }
+  const textW = str => [...str.toUpperCase()].reduce((w, ch) => w + (GLYPHS[ch] ? GLYPHS[ch].w + 1 : 3), 0) - 1;
+
+  function panel(x, y, w, h) {
+    R(x + 2, y + h, w - 2, 1, 'rgba(58,38,48,0.35)');
+    box(x, y, w, h, P.woodDark);
+    R(x + 1, y + 1, w - 2, 1, P.woodLight);
+    R(x + 1, y + 1, 1, h - 2, P.woodLight);
+    box(x + 2, y + 2, w - 4, h - 4, P.parchment, P.woodDeep);
+    R(x + 3, y + h - 4, w - 6, 1, P.parchmentShade);
+    for (const [nx, ny] of [[x + 1, y + 1], [x + w - 2, y + 1], [x + 1, y + h - 2], [x + w - 2, y + h - 2]]) px(nx, ny, P.gold);
+  }
+  function tag(cx, y, str) {
+    const w = textW(str) + 6;
+    const x = Math.round(cx - w / 2);
+    box(x, y, w, 9, P.parchment);
+    R(x + 1, y + 7, w - 2, 1, P.parchmentShade);
+    text(str, x + 3, y + 2, P.uiText);
+  }
+
+  const HEART = ['##.##', '#####', '.###.', '..#..'];
+  const heart = (x, y, full) => {
+    sprite(HEART, { '#': full ? P.heart : P.heartEmpty }, x, y);
+    if (full) px(x, y, '#ffb3b8');
+  };
+
+  // ---------- sky and beach ----------
+  function sky(sx = 200, sy = 30) {
+    R(0, 0, 320, 18, P.skyTop);
+    dither(0, 18, 320, 4, P.skyTop, P.skyMid);
+    R(0, 22, 320, 14, P.skyMid);
+    dither(0, 36, 320, 4, P.skyMid, P.skyLow);
+    R(0, 40, 320, 12, P.skyLow);
+
+    for (let j = -12; j <= 12; j++) for (let i = -12; i <= 12; i++) {
+      const d = Math.hypot(i, j);
+      if (d <= 6.5) px(sx + i, sy + j, d < 4.5 ? P.sunCore : P.sun);
+      else if (d <= 9 && (i + j) % 2 === 0) px(sx + i, sy + j, P.sunCore);
+      else if (d <= 11.5 && (i + j) % 4 === 0 && i % 2 === 0) px(sx + i, sy + j, P.sunHalo);
+    }
+
+    const drift = T * 1.2;
+    const cloud = (x0, y, w) => {
+      const x = Math.round(((x0 + drift) % 360 + 360) % 360) - 30;
+      R(x + 3, y, w - 10, 3, P.cloud);
+      R(x, y + 3, w, 4, P.cloud);
+      R(x + 6, y - 2, Math.floor(w / 3), 2, P.cloud);
+      R(x + w - 12, y - 1, 6, 1, P.cloud);
+      R(x + 1, y + 6, w - 2, 2, P.cloudShade);
+      dither(x + 2, y + 7, w - 4, 1, P.cloudShade, P.skyLow);
+    };
+    cloud(104, 24, 30); cloud(250, 38, 24); cloud(36, 34, 22); cloud(150, 42, 18); cloud(310, 26, 20);
+
+    [[148, 32], [156, 28], [238, 22], [90, 44]].forEach(([x, y], i) => {
+      const up = Math.floor(T * 3 + i) % 2 === 0;
+      px(x - 2, y - (up ? 2 : 0), P.outline); px(x - 1, y - (up ? 1 : 0), P.outline); px(x, y, P.outline);
+      px(x + 1, y - (up ? 1 : 0), P.outline); px(x + 2, y - (up ? 2 : 0), P.outline);
+    });
+  }
+
+  function horizon() {
+    for (let x = 0; x < 100; x++) {
+      const h = Math.max(0, Math.round(7 - Math.abs(x - 34) / 9 + Math.sin(x / 5) * 0.8));
+      if (h > 0) { R(x, 52 - h, 1, h, P.hill); px(x, 52 - h, P.hillDark); }
+    }
+    R(56, 39, 4, 8, P.lighthouse); R(55, 38, 6, 1, P.outline); R(57, 36, 2, 2, P.lighthouseRoof);
+    px(57, 41, P.seaDeep); px(58, 41, P.seaDeep);
+    if (Math.floor(T * 1.5) % 3 === 0) { px(55, 36, P.sunCore); px(60, 36, P.sunCore); }
+
+    R(0, 52, 320, 4, P.seaDeep);
+    dither(0, 56, 320, 2, P.seaDeep, P.sea);
+    R(0, 58, 320, 4, P.sea);
+    dither(0, 62, 320, 2, P.sea, P.seaLight);
+    R(0, 64, 320, 3, P.seaLight);
+    for (let i = 0; i < 70; i++) {
+      const x = Math.floor(rand() * 318), y = 53 + Math.floor(rand() * 12), w = 2 + Math.floor(rand() * 3);
+      R(x + Math.round(Math.sin(T * 0.8 + i) * 1.5), y, w, 1, P.foam);
+    }
+    for (let i = 0; i < 12; i++) {
+      if ((Math.floor(T * 5) + i) % 3 !== 0) continue;
+      px(200 + Math.round(Math.sin(T * 2 + i * 1.7) * (3 + i)), 53 + i, '#ffffff');
+    }
+
+    const sb = Math.round(124 + Math.sin(T * 0.15) * 8);
+    R(sb + 4, 41, 1, 9, P.outline);
+    sprite(['#....', '##...', '###..', '####.', '#####'], { '#': '#ffffff' }, sb + 5, 42);
+    sprite(['..#', '.##', '###'], { '#': P.coral }, sb + 1, 47);
+    R(sb, 50, 10, 2, '#d2604a');
+
+    const bob = Math.round(Math.sin(T * 2));
+    R(94, 63 + bob, 8, 1, '#f3e05a'); px(97, 61 + bob, '#f0c49a'); px(97, 62 + bob, '#2b2b3a'); px(98, 62 + bob, '#2b2b3a');
+    px(150, 60 - bob, '#f0c49a'); px(176, 59 + bob, '#a8673f');
+
+    R(0, 68, 320, 40, P.sand);
+    const wash = Math.round(Math.sin(T * 0.9) + 1);
+    R(0, 67, 320, 2 + wash, P.sandWet);
+    for (let x = 0; x < 320; x++) {
+      px(x, 66 + wash, P.foam);
+      if (Math.sin(x / 3 + T) > 0.2) px(x, 67 + wash, P.foam);
+    }
+    for (let i = 0; i < 90; i++) px(Math.floor(rand() * 320), 71 + Math.floor(rand() * 34), P.sandShade);
+
+    // Lifeguard tower with a breezy flag
+    shadow(203, 77, 30, 0.22);
+    R(206, 56, 18, 9, '#6fb6d8'); box(206, 56, 18, 9, '#6fb6d8');
+    R(208, 58, 6, 3, P.glass); R(204, 55, 22, 2, '#e9f3f5'); R(204, 57, 22, 1, P.chromeDark);
+    line(208, 65, 206, 76, P.woodDark); line(222, 65, 224, 76, P.woodDark); line(208, 70, 222, 70, P.woodDark);
+    line(224, 66, 230, 76, P.woodDark);
+    R(222, 47, 1, 8, P.outline);
+    const flap = Math.floor(T * 4) % 2;
+    R(223, 47, 5, 3, '#e8505b'); R(223, 50, 4 + flap, 1, '#f3e05a');
+
+    // Pier with Crystal Pier-style cottages
+    R(260, 54, 60, 3, P.woodDark); R(260, 53, 60, 1, P.woodLight);
+    for (let x = 262; x < 320; x += 6) R(x, 57, 2, 10, P.woodDeep);
+    for (const x of [264, 279, 294, 309]) {
+      R(x, 46, 10, 7, '#fbf8f0'); box(x, 46, 10, 7, '#fbf8f0');
+      R(x - 1, 44, 12, 2, '#3d7ec0'); R(x + 1, 43, 8, 1, '#3d7ec0');
+      R(x + 2, 48, 2, 2, '#3d7ec0'); R(x + 6, 48, 2, 3, P.woodDark);
+    }
+
+    // Umbrella, towel, and sandcastle
+    for (let j = 0; j < 4; j++) R(106 + j, 88 + j, 26 - j * 2, 1, P.sandShadow);
+    R(102, 91, 20, 5, '#ffffff');
+    for (let i = 0; i < 20; i += 4) R(102 + i, 91, 2, 5, P.teal);
+    R(102, 96, 20, 1, P.sandShadow);
+    R(118, 71, 1, 19, P.outline);
+    for (let i = 0; i < 7; i++) R(108 + i * 3, 70 - (i < 3 ? i : 6 - i), 3, 4, i % 2 ? '#ffffff' : '#e8505b');
+    R(108, 74, 21, 1, '#b9363f'); px(118, 66, P.outline);
+    sprite(['.#..#.', '.####.', '######', '#.##.#', '######'], { '#': '#d9b678' }, 133, 92);
+    px(134, 89, '#e8505b'); px(134, 90, P.outline); px(134, 91, P.outline);
+
+    // Surfboard planted in the sand
+    shadow(259, 98, 14, 0.22);
+    blob(262, 73, 7, 26, P.coral);
+    R(265, 75, 1, 22, '#ffffff'); R(263, 76, 1, 18, '#ffb3a8');
+
+    // Dune grass tufts
+    for (const [x, y] of [[44, 96], [140, 101], [236, 90], [290, 96], [90, 84]]) {
+      line(x, y, x - 2, y - 4, P.frondDark); line(x + 1, y, x + 1, y - 5, P.frond); line(x + 2, y, x + 4, y - 3, P.frondDark);
+    }
+  }
+
+  function palm(baseX, baseY, topX, topY, flip) {
+    const steps = baseY - topY;
+    shadow(baseX - 6, baseY - 3, 14, 0.25);
+    for (let s = 0; s <= steps; s++) {
+      const t = s / steps;
+      const x = Math.round(baseX + (topX - baseX) * t + Math.sin(t * 3) * 2 * flip);
+      const y = baseY - s;
+      const w = s < steps * 0.4 ? 4 : 3;
+      R(x - 1, y, w, 1, s % 4 === 0 ? P.trunkDark : P.trunk);
+      px(x - 1, y, s % 4 === 0 ? P.trunkDark : P.trunkLight);
+      px(x + w - 2, y, P.trunkDark);
+    }
+    for (let j = 0; j < 9; j++) {
+      const w = 8 - Math.floor(j / 3);
+      R(topX - w / 2, topY + 2 + j, w, 1, j % 2 ? P.skirt : P.trunkDark);
+    }
+    const sway = Math.sin(T * 1.3 + baseX) * 0.05;
+    const angles = [-2.9, -2.5, -2.05, -1.6, -1.15, -0.7, -0.25, 0.25, 2.9];
+    angles.forEach((a0, n) => {
+      const a = a0 + sway * (1 + (n % 3) * 0.4);
+      const L = 16 + (n % 3) * 2;
+      for (let t = 0; t <= L; t++) {
+        const x = topX + Math.cos(a) * t;
+        const y = topY + Math.sin(a) * t + (t / L) ** 2 * 7;
+        const c = t < 4 ? P.frondDark : (n % 2 ? P.frond : P.frondLight);
+        R(x, y, 2, 2, c);
+        if (t % 3 === 0 && t > 4) px(x, y + 2, P.frondDark);
+        if (t % 4 === 1 && t > 6 && n % 2 === 0) px(x, y - 1, '#a6dd7a');
+      }
+    });
+    R(topX - 2, topY - 1, 4, 3, P.frondDark);
+    px(topX - 1, topY + 3, '#6b4a2b'); px(topX + 1, topY + 4, '#6b4a2b');
+  }
+
+  function frame() {
+    for (let x = -2; x < 322; x += 8) {
+      R(x, 0, 8, 8, P.tile);
+      R(x + 1, 0, 2, 7, P.tileLight);
+      R(x + 6, 0, 2, 8, P.tileDark);
+      R(x + 2, 8, 4, 1, P.tileDark);
+    }
+    R(0, 8, 320, 4, P.woodDark); R(0, 8, 320, 1, P.woodLight); R(0, 12, 320, 1, P.woodDeep);
+    for (let y = 13; y < 18; y++) R(7, y, 306, 1, `rgba(40,60,80,${0.28 - (y - 13) * 0.055})`);
+    R(0, 12, 7, 96, P.woodDark); R(1, 12, 2, 96, P.wood); R(6, 12, 1, 96, P.woodDeep);
+    R(313, 12, 7, 96, P.woodDark); R(314, 12, 2, 96, P.wood); R(313, 12, 1, 96, P.woodDeep);
+    for (const y of [30, 60, 90]) { px(4, y, P.woodHi); px(316, y, P.woodHi); }
+
+    const papel = ['#ff6fa8', '#ffb43c', '#2fc4b2', '#ffe066', '#9c6ade', '#5ab0ff'];
+    const sag = x => 13 + Math.round(9 * Math.sin(Math.PI * (x - 7) / 306));
+    for (let x = 97; x < 239; x++) px(x, sag(x), P.outline);
+    let k = 0;
+    for (let x = 100; x < 230; x += 13, k++) {
+      const y = sag(x + 4) + 1;
+      const c = papel[k % papel.length];
+      const swing = Math.round(Math.sin(T * 2.2 + k * 0.9) * 0.6);
+      R(x + swing, y, 9, 8, c);
+      px(x + swing + 4, y + 2, P.skyTop); px(x + swing + 3, y + 3, P.skyTop); px(x + swing + 5, y + 3, P.skyTop); px(x + swing + 4, y + 4, P.skyTop);
+      px(x + swing + 1, y + 5, P.skyTop); px(x + swing + 7, y + 5, P.skyTop);
+      for (let i = 0; i < 9; i += 2) px(x + swing + i, y + 8, c);
+    }
+  }
+
+  // ---------- characters ----------
+  const MAYA = {
+    cx: 72, blinkOffset: 0.3,
+    skin: '#a8673f', skinShade: '#8a5232', shirt: '#5c3b24', shirtShade: '#472c1a', shirtHi: '#76503a', sleeve: '#f2c14e',
+    backHair: (cx, top) => {
+      blob(cx - 11, top - 3, 22, 19, '#2b1a14');
+      for (let i = -9; i <= 7; i += 4) { px(cx + i, top - 4, P.outline); px(cx + i + 1, top - 4, P.outline); }
+      px(cx - 12, top + 4, P.outline); px(cx + 11, top + 6, P.outline);
+    },
+    frontHair: (cx, top) => {
+      R(cx - 7, top + 1, 14, 2, '#2b1a14');
+      px(cx - 7, top + 3, '#2b1a14'); px(cx - 3, top + 3, '#2b1a14'); px(cx + 2, top + 3, '#2b1a14'); px(cx + 6, top + 3, '#2b1a14');
+      for (let i = -8; i <= 6; i += 3) px(cx + i, top - 2, '#5a3a2a');
+      R(cx - 6, top, 5, 2, '#2b2b3a'); R(cx + 1, top, 5, 2, '#2b2b3a'); px(cx - 1, top, '#2b2b3a');
+      px(cx - 5, top, '#7fcbef'); px(cx + 2, top, '#7fcbef');
+      px(cx - 9, top + 10, P.gold); px(cx + 8, top + 10, P.gold);
+    },
+    torso: (cx, top) => {
+      R(cx - 11, top + 19, 4, 20, P.gold); R(cx + 7, top + 19, 4, 20, P.goldDark);
+      R(cx - 3, top + 17, 6, 1, P.gold);
+      for (let y = top + 22; y < top + 42; y += 3) px(cx - 4, y, '#6b4a2b'), px(cx + 3, y, '#6b4a2b');
+    },
+  };
+  const JULES = {
+    cx: 160, blinkOffset: 1.9, happy: true,
+    skin: '#f0c49a', skinShade: '#d9a57a', shirt: '#2b2b3a', shirtShade: '#1d1d28', shirtHi: '#3d3d52', sleeve: '#2b2b3a',
+    frontHair: (cx, top) => {
+      blob(cx - 9, top - 3, 18, 8, '#f2d16b');
+      R(cx + 1, top + 4, 7, 2, '#f2d16b'); px(cx + 1, top + 6, P.outline); R(cx + 2, top + 6, 6, 1, '#d9b04a');
+      R(cx - 9, top + 3, 2, 6, '#f2d16b'); px(cx - 9, top + 9, P.outline);
+      R(cx - 5, top - 2, 6, 1, '#fff0a8'); R(cx - 6, top - 1, 3, 1, '#fff0a8');
+    },
+    torso: (cx, top) => {
+      R(cx - 11, top + 27, 22, 2, P.teal);
+      R(cx - 2, top + 17, 4, 5, '#f0c49a'); px(cx - 1, top + 22, '#f0c49a'); px(cx, top + 22, '#f0c49a');
+      R(cx - 1, top + 23, 1, 4, '#9aa6ad');
+    },
+  };
+
+  function guestBody(o) {
+    const cx = o.cx, top = 64;
+    o.backHair?.(cx, top);
+    blob(cx - 12, top + 17, 24, 32, o.shirt);
+    R(cx + 6, top + 19, 4, 26, o.shirtShade);
+    R(cx - 10, top + 19, 1, 22, o.shirtHi);
+    o.torso?.(cx, top);
+    R(cx - 3, top + 13, 6, 5, o.skinShade);
+    px(cx - 3, top + 15, P.outline); px(cx + 2, top + 15, P.outline);
+    blob(cx - 8, top, 16, 15, o.skin);
+    R(cx + 4, top + 3, 2, 9, o.skinShade);
+    if (!o.happy) R(cx - 4, top + 13, 8, 1, o.skinShade);
+    const blink = ((T + o.blinkOffset) % 4) < 0.15;
+    if (o.happy) {
+      for (const ex of [cx - 5, cx + 2]) { px(ex, top + 8, P.outline); px(ex + 1, top + 7, P.outline); px(ex + 2, top + 8, P.outline); }
+    } else if (blink) {
+      R(cx - 5, top + 8, 3, 1, P.outline); R(cx + 2, top + 8, 3, 1, P.outline);
+    } else {
+      for (const ex of [cx - 5, cx + 2]) { R(ex, top + 6, 2, 3, '#2b1a14'); px(ex, top + 6, '#ffffff'); }
+    }
+    R(cx - 6, top + 10, 2, 1, P.blush); R(cx + 4, top + 10, 2, 1, P.blush);
+    px(cx, top + 9, o.skinShade);
+    if (o.happy) { R(cx - 1, top + 11, 2, 1, P.outline); px(cx - 2, top + 10, P.outline); px(cx + 1, top + 10, P.outline); R(cx - 1, top + 12, 2, 1, '#c8505b'); }
+    else { R(cx - 1, top + 11, 3, 1, P.outline); }
+    o.frontHair(cx, top);
+  }
+  function guestHands(o) {
+    for (const hx of [o.cx - 14, o.cx + 6]) {
+      shadow(hx, 108, 8, 0.3);
+      blob(hx, 99, 8, 5, o.sleeve);
+      blob(hx, 102, 8, 6, o.skin);
+      px(hx + 3, 106, o.skinShade); px(hx + 5, 106, o.skinShade);
+      R(hx + 1, 103, 6, 1, o.skinShade);
+    }
+  }
+
+  function seagull(x, y) {
+    const peck = (T % 3.2) < 0.3;
+    y -= (T % 5) < 0.2 ? 1 : 0;
+    shadow(x + 1, y + 11, 10, 0.3);
+    sprite([
+      '....###.....',
+      '...#WWW#....',
+      '..#WWoWW#yy.',
+      '..#WWWWW####',
+      '.#GGGWWW#...',
+      '#GGGGWWWW#..',
+      '.#GGGGWWW#..',
+      '..##GWWW#...',
+      '....####....',
+      '.....y.y....',
+      '....yy.yy...',
+    ].map((r, j) => (peck && j < 4 ? '.' + r.slice(0, -1) : r)),
+    { '#': P.outline, W: '#ffffff', G: '#a7b4bc', o: P.outline, y: '#f2a83c' }, x, y + (peck ? 1 : 0));
+  }
+
+  function bubble(x, y, w, h, tailX, selected) {
+    const edge = selected ? P.goldDark : P.outline;
+    R(x + 2, y + h, w - 2, 1, 'rgba(58,38,48,0.25)');
+    if (selected) box(x - 2, y - 2, w + 4, h + 4, P.gold, P.goldDark);
+    box(x, y, w, h, P.parchment, edge);
+    R(x + 1, y + h - 2, w - 2, 1, P.parchmentShade);
+    sprite(['#####', '.###.', '..#..'], { '#': P.parchment }, tailX - 2, y + h - 1);
+    px(tailX - 3, y + h - 1, edge); px(tailX + 3, y + h - 1, edge);
+    px(tailX - 2, y + h, edge); px(tailX + 2, y + h, edge);
+    px(tailX - 1, y + h + 1, edge); px(tailX + 1, y + h + 1, edge); px(tailX, y + h + 2, edge);
+  }
+
+  function rumColaIcon(x, y) {
+    sprite([
+      '.....gg.',
+      '#....gg#',
+      '#.....g#',
+      '#cWcccc#',
+      '#cccccc#',
+      '#cccWcc#',
+      '#cccccc#',
+      '#rrrrrr#',
+      '#rrrrrr#',
+      '.######.',
+    ], { '#': P.outline, g: P.lime, c: P.cola, W: '#ffffff', r: P.rum }, x, y);
+  }
+  function peanutIcon(x, y) {
+    sprite(['.##..##.', '#tt##tt#', '#tTttTt#', '#tttttt#', '.##..##.'],
+      { '#': P.outline, t: '#d8a865', T: '#b07d3c' }, x, y);
+  }
+
+  // ---------- bar top ----------
+  function counter() {
+    R(0, 106, 320, 7, P.woodLight);
+    R(0, 106, 320, 1, P.woodHi);
+    for (let x = 40; x < 320; x += 56) { R(x, 107, 1, 6, P.wood); px(x + 1, 107, P.woodHi); }
+    for (let i = 0; i < 46; i++) R(Math.floor(rand() * 316), 108 + Math.floor(rand() * 4), 2 + Math.floor(rand() * 3), 1, P.wood);
+    R(0, 113, 320, 1, P.woodHi);
+    R(0, 114, 320, 4, P.wood);
+    R(0, 117, 320, 1, P.woodDark);
+    for (let x = 12; x < 320; x += 28) px(x, 115, P.woodDeep);
+    R(0, 118, 320, 3, P.woodDeep);
+  }
+
+  function counterProps() {
+    // Coaster at Maya's spot, waiting for her drink
+    shadow(66, 112, 12, 0.3);
+    R(67, 109, 10, 1, P.outline); R(66, 110, 12, 2, P.outline); R(67, 112, 10, 1, P.outline);
+    R(67, 110, 10, 2, '#e9d4a8'); R(70, 110, 4, 1, P.teal);
+
+    // Jules's beer, half finished
+    shadow(170, 111, 12, 0.32);
+    sprite([
+      '.#######..',
+      '#FFFFFF#..',
+      '#bbbbbb###',
+      '#bWbbbb#.#',
+      '#bWbbbb#.#',
+      '#bbbbbb###',
+      '#bbbbbb#..',
+      '#bbbbbb#..',
+      '.######...',
+    ], { '#': P.outline, F: P.beerFoam, b: P.beer, W: '#ffe9a8' }, 170, 102);
+    const rise = Math.floor(T * 4) % 4;
+    px(173, 108 - rise, '#ffe9a8');
+
+    // Tip jar
+    shadow(194, 110, 18, 0.3);
+    R(196, 95, 14, 2, P.chromeDark); R(196, 95, 14, 1, P.chrome);
+    blob(195, 97, 16, 14, P.glass);
+    R(197, 106, 12, 3, P.gold); px(198, 106, P.goldDark); px(203, 107, P.goldDark); px(207, 106, '#fff2a8');
+    R(201, 98, 4, 6, P.cash); px(202, 100, '#5a9a58');
+    R(196, 101, 14, 6, P.parchment);
+    text('TIP', 198, 102, P.uiText);
+    R(197, 98, 1, 3, '#ffffff');
+
+    // Potted aloe
+    shadow(283, 110, 14, 0.3);
+    line(289, 100, 286, 91, P.frond, 2); line(290, 100, 290, 89, P.frondLight, 2); line(291, 100, 295, 92, P.frond, 2);
+    line(288, 100, 284, 95, P.frondDark); line(292, 100, 296, 96, P.frondDark);
+    box(284, 100, 13, 3, P.tileLight);
+    box(285, 102, 11, 9, P.tile);
+    R(286, 104, 9, 1, P.talaWhite); px(288, 106, P.talaBlue); px(292, 106, P.talaBlue);
+  }
+
+  // ---------- back bar ----------
+  function talavera() {
+    for (let ty = 121; ty < 174; ty += 10) for (let tx = 0; tx < 320; tx += 10) {
+      R(tx, ty, 10, 10, P.talaWhite);
+      R(tx, ty, 10, 1, P.talaLine); R(tx, ty, 1, 10, P.talaLine);
+      const cx = tx + 5, cy = ty + 5;
+      px(cx, cy - 3, P.talaBlue); px(cx, cy + 3, P.talaBlue); px(cx - 3, cy, P.talaBlue); px(cx + 3, cy, P.talaBlue);
+      R(cx - 1, cy - 1, 3, 3, P.talaBlue);
+      px(cx, cy, P.talaYellow);
+      px(tx + 1, ty + 1, P.talaYellow);
+    }
+    for (let y = 121; y < 127; y++) R(0, y, 320, 1, `rgba(58,38,48,${0.4 - (y - 121) * 0.065})`);
+    R(0, 146, 320, 26, 'rgba(94,52,36,0.16)');
+  }
+
+  function glassSprite(x, y, dirty) {
+    sprite([
+      '#.....#',
+      '#gH...#',
+      '#gH...#',
+      '#g....#',
+      '#g....#',
+      '#g....#',
+      '#g....#',
+      '#gggggg',
+      '.#####.',
+    ].map(r => r.padEnd(7, '#').slice(0, 7)), { '#': P.outline, g: P.glassEdge, H: '#ffffff', '.': dirty ? '#c8c2a8' : P.glass }, x, y);
+    if (dirty) { px(x + 3, y + 3, '#9a8f6c'); px(x + 4, y + 5, '#9a8f6c'); px(x + 2, y + 6, '#9a8f6c'); }
+  }
+  const sparkle = (x, y, on) => {
+    if (!on) return;
+    px(x, y, '#ffffff'); px(x - 1, y, '#ffffff'); px(x + 1, y, '#ffffff'); px(x, y - 1, '#ffffff'); px(x, y + 1, '#ffffff');
+  };
+
+  function stations() {
+    R(0, 172, 320, 1, P.woodHi);
+    R(0, 173, 320, 10, P.wood);
+    R(0, 173, 320, 1, P.woodLight);
+    for (let x = 30; x < 320; x += 52) R(x, 174, 1, 9, P.woodDark);
+    R(0, 182, 320, 1, P.woodDeep);
+    for (const [x, w] of [[6, 42], [54, 26], [86, 26], [118, 34], [166, 42], [214, 42], [262, 22], [288, 28]]) shadow(x, 171, w + 2, 0.35);
+
+    // Glass rack
+    box(6, 160, 42, 12, P.wood);
+    R(7, 161, 40, 1, P.woodHi);
+    for (let i = 0; i < 4; i++) R(9 + i * 10, 163, 7, 7, P.woodDeep);
+    for (let i = 0; i < 3; i++) glassSprite(9 + i * 10, 151, false);
+    sparkle(10 + (Math.floor(T * 0.8) % 3) * 10, 151, Math.floor(T * 3) % 4 === 0);
+    tag(27, 174, 'CLEAN 3');
+
+    // Draft tap with a surfboard handle
+    box(54, 167, 26, 5, P.chromeDark);
+    for (let x = 57; x < 78; x += 3) px(x, 169, P.outline);
+    box(63, 138, 9, 30, P.chrome);
+    R(64, 139, 2, 28, P.chromeLight);
+    R(69, 139, 2, 28, '#a9b6bb');
+    box(58, 141, 7, 4, P.chrome); R(58, 144, 2, 4, P.chromeDark);
+    sprite([
+      '.###.',
+      '#TTT#',
+      '#TWT#',
+      '#TWT#',
+      '#TWT#',
+      '#TTT#',
+      '#TTT#',
+      '.#T#.',
+      '..#..',
+    ], { '#': P.outline, T: P.teal, W: '#ffffff' }, 63, 127);
+    px(64, 128, '#a8f0e6');
+    tag(67, 174, 'DRAFT');
+
+    // Rum on the speed rail
+    box(86, 166, 26, 6, P.chromeDark);
+    R(87, 167, 24, 1, P.chrome);
+    box(95, 134, 6, 4, '#b9363f');
+    box(95, 137, 6, 10, P.rum);
+    blob(91, 145, 14, 23, P.rum);
+    R(93, 147, 2, 19, P.rumLight);
+    R(102, 148, 1, 18, '#9a5a24');
+    box(91, 152, 14, 10, P.parchment);
+    R(92, 153, 12, 1, P.gold); R(92, 160, 12, 1, P.gold);
+    text('RON', 92, 155, P.uiText);
+    tag(99, 174, 'RUM');
+
+    // Cola gun, hose, and the docked glass mid-pour
+    line(116, 168, 118, 150, P.outline, 2);
+    line(118, 150, 124, 136, P.outline, 2);
+    box(122, 131, 20, 9, P.chrome);
+    R(123, 132, 18, 1, P.chromeLight);
+    px(126, 135, '#e8505b'); px(129, 135, P.cola); px(132, 135, P.teal); px(135, 135, '#f3e05a');
+    R(128, 134, 3, 3, 'rgba(255,255,255,0.35)');
+    box(134, 139, 5, 4, P.chromeDark);
+
+    R(124, 169, 26, 3, P.outline); R(125, 169, 24, 2, '#4a3a3a');
+    const gx = 130, gy = 148, inner = 20;
+    const rumRows = 6, colaRows = 10;
+    const surface = gy + 1 + inner - rumRows - colaRows;
+    R(gx, gy, 12, 22, P.outline);
+    R(gx + 1, gy, 10, 21, P.glass);
+    R(gx + 1, gy + 1 + inner - rumRows, 10, rumRows, P.rum);
+    R(gx + 1, surface, 10, colaRows, P.cola);
+    R(gx + 1, surface, 10, 1, P.colaLight);
+    R(gx + 2, gy + 1, 1, 19, '#ffffff');
+    R(gx + 9, gy + 1, 1, 19, '#b5dce5');
+    for (let y = 143; y < surface; y++) px(136, y, (y + Math.floor(T * 18)) % 3 === 0 ? P.colaLight : P.cola);
+    const sp = Math.floor(T * 10) % 2;
+    px(134 - sp, surface - 1, P.colaLight); px(138 + sp, surface - 1, P.colaLight);
+    for (let i = 0; i < 3; i++) {
+      const by = surface + colaRows - 1 - Math.floor((T * 6 + i * 3.3) % colaRows);
+      px(gx + 4 + i * 2, by, '#a8644a');
+    }
+    R(gx - 3, gy - 3, 4, 1, P.gold); R(gx - 3, gy - 3, 1, 4, P.gold);
+    R(gx + 11, gy - 3, 4, 1, P.gold); R(gx + 14, gy - 3, 1, 4, P.gold);
+    R(gx - 3, gy + 24, 4, 1, P.gold); R(gx - 3, gy + 21, 1, 4, P.gold);
+    R(gx + 11, gy + 24, 4, 1, P.gold); R(gx + 14, gy + 21, 1, 4, P.gold);
+
+    // Cola gauge: 0 to 3 units, target 2 +/- 0.25, currently 1.6
+    const bx = 151, by = 133, bh = 36;
+    box(bx, by, 9, bh, P.parchment);
+    const unit = (bh - 4) / 3;
+    const yAt = u => Math.round(by + bh - 2 - u * unit);
+    R(bx + 2, yAt(2.25), 5, yAt(1.75) - yAt(2.25), P.good);
+    R(bx + 2, yAt(2), 5, 1, P.goodDark);
+    R(bx + 3, yAt(1.6), 3, by + bh - 2 - yAt(1.6), P.cola);
+    R(bx + 1, yAt(1.6), 7, 1, P.outline);
+    sprite(['#..', '##.', '###', '##.', '#..'], { '#': P.outline }, bx + 9, yAt(1.6) - 2);
+    for (const u of [1, 2, 3]) px(bx + 1, yAt(u), P.uiSoft);
+    tag(137, 174, 'COLA');
+
+    // Sink
+    line(186, 160, 186, 142, P.chromeDark, 2);
+    line(186, 142, 194, 140, P.chromeDark, 2);
+    line(194, 140, 196, 146, P.chromeDark, 2);
+    px(186, 142, P.chromeLight);
+    box(166, 158, 42, 14, P.chrome);
+    R(167, 159, 40, 1, P.chromeLight);
+    R(168, 160, 38, 10, '#7aa9b8');
+    R(168, 160, 38, 1, '#9cc6d2');
+    for (let i = 0; i < 14; i++) {
+      const x = 169 + Math.floor(rand() * 34), y = 159 + Math.floor(rand() * 4);
+      const dx = Math.round(Math.sin(T * 1.5 + i) * 1);
+      R(x + dx, y, 2, 2, '#ffffff'); px(x + dx + 1, y + 1, P.cloudShade);
+    }
+    glassSprite(196, 152, true);
+    const drip = Math.floor(T * 6) % 6;
+    if (drip < 4) px(196, 147 + drip * 2, '#9cc6d2');
+    tag(187, 174, 'SINK');
+
+    // Dishwasher, running
+    box(214, 138, 42, 34, P.chrome);
+    R(215, 139, 40, 1, P.chromeLight);
+    R(215, 140, 1, 30, P.chromeLight);
+    R(216, 150, 38, 1, P.chromeDark);
+    R(222, 153, 26, 2, P.chromeDark); R(222, 153, 26, 1, '#a9b6bb');
+    box(232, 141, 20, 8, '#22302a');
+    const left = 8 - Math.floor(T % 8);
+    text(`${left}S`, 238, 143, '#6df08a');
+    px(219, 144, P.good); px(219, 145, P.good);
+    for (let i = 0; i < 3; i++) {
+      const ph = (T * 0.7 + i / 3) % 1;
+      const sx = 222 + i * 10 + Math.round(Math.sin(ph * 6 + i) * 1.5);
+      const sy = 136 - Math.round(ph * 10);
+      if (ph < 0.8) { px(sx, sy, '#ffffff'); if (ph < 0.5) px(sx + 1, sy, P.cloudShade); }
+    }
+    tag(235, 174, 'WASHER');
+
+    // Peanut barrel
+    box(262, 152, 22, 20, P.wood);
+    R(262, 156, 22, 1, P.woodDeep); R(262, 166, 22, 1, P.woodDeep);
+    R(264, 153, 2, 18, P.woodLight);
+    R(280, 153, 2, 18, P.woodDark);
+    for (let i = 0; i < 9; i++) peanutIconSmall(264 + (i % 5) * 4, 148 + Math.floor(i / 5) * 3);
+    line(279, 150, 284, 143, P.chromeDark, 2);
+    tag(273, 174, 'NUTS');
+
+    // Bus tub with a dirty glass
+    glassSprite(298, 150, true);
+    box(288, 158, 28, 14, '#8d9aa0');
+    R(289, 159, 26, 1, '#b7c3c8');
+    R(289, 168, 26, 1, '#6f7b81');
+    tag(302, 174, 'DIRTY 1');
+  }
+  function peanutIconSmall(x, y) {
+    sprite(['.##.', '#tt#', '.##.'], { '#': P.trunkDark, t: '#d8a865' }, x, y);
+  }
+
+  // ---------- HUD ----------
+  function hud() {
+    panel(4, 3, 92, 22);
+    text('PACIFIC POUR', 9, 8, P.uiText);
+    text('DAY 1 - OPENING WAVE', 9, 16, P.uiSoft);
+
+    panel(240, 3, 76, 30);
+    sprite(['..#..', '#.#.#', '.###.', '##o##', '.###.', '#.#.#', '..#..'],
+      { '#': P.goldDark, o: P.sun }, 247, 7);
+    text('3:40 PM', 256, 8, P.uiText);
+    sprite(['.###.', '#GgG#', '#gGg#', '#GgG#', '.###.'], { '#': P.goldDark, G: P.gold, g: '#ffe48a' }, 247, 16);
+    text('$128', 256, 16, P.uiText);
+    R(247, 25, 34, 3, P.parchmentShade);
+    R(247, 25, 12, 3, P.good);
+    R(247, 25, 12, 1, '#8fd88a');
+    text('CALM', 286, 24, P.uiSoft);
+
+    panel(2, 184, 316, 15);
+    sprite(['.###.', '#.#.#', '###.#', '#...#', '#...#', '.###.'], { '#': P.uiText }, 8, 188);
+    let x = text('HOLD TO POUR COLA', 16, 189, P.uiText);
+    x = text('1.6 / 2', x + 8, 189, P.goodDark);
+    text('- RELEASE ANYTIME, FILL STAYS', x + 8, 189, P.uiSoft);
+    text('ESC PAUSE', 276, 189, P.uiSoft);
+  }
+
+  function floatingHearts() {
+    for (let i = 0; i < 2; i++) {
+      const ph = (T * 0.45 + i * 0.5) % 1;
+      if (ph > 0.85) continue;
+      heart(180 + i * 5 + Math.round(Math.sin(ph * 8 + i) * 1), 84 - Math.round(ph * 16), true);
+    }
+  }
+
+  // ---------- compose ----------
+  function render() {
+    ctx = sceneCtx;
+    seed = 7;
+    sky();
+    horizon();
+    palm(18, 108, 30, 42, 1);
+    palm(302, 108, 296, 40, -1);
+    frame();
+    guestBody(MAYA);
+    guestBody(JULES);
+    seagull(242, 95);
+    counter();
+    counterProps();
+    guestHands(MAYA);
+    guestHands(JULES);
+    talavera();
+    stations();
+
+    bubble(46, 26, 52, 31, 72, true);
+    text('MAYA', 51, 30, P.uiText);
+    rumColaIcon(50, 38);
+    text('RUM 1', 62, 38, P.uiText);
+    text('COLA 2', 62, 45, P.uiText);
+    for (let i = 0; i < 4; i++) heart(62 + i * 6, 51, i < 3);
+
+    bubble(146, 42, 30, 15, 160, false);
+    peanutIcon(150, 47);
+    text('?', 162, 47, P.uiText);
+    floatingHearts();
+
+    hud();
+  }
+
+
+  // ---------- screen 2: end of shift ----------
+  const SUNSET = {
+    skyTop: '#6a5a9e', skyMid: '#ef8a74', skyLow: '#ffc98a', cloud: '#ffe0b0', cloudShade: '#f3a585',
+    sun: '#ffb04a', sunCore: '#fff2b8', sunHalo: '#ffd9a6',
+    hill: '#8a6f8f', hillDark: '#6c5675', seaDeep: '#3f5d8f', sea: '#5d7fae', seaLight: '#e7a08a', foam: '#ffe6c8',
+    sand: '#eebf8e', sandShade: '#d9a274', sandWet: '#cf9577', sandShadow: '#c98d6c',
+  };
+  function withPalette(over, fn) {
+    const saved = {};
+    for (const k in over) { saved[k] = P[k]; P[k] = over[k]; }
+    try { fn(); } finally { Object.assign(P, saved); }
+  }
+  const ctext = (str, cx, y, c) => text(str, Math.round(cx - textW(str) / 2), y, c);
+  function row(x, y, w, label, value, c = P.uiText) {
+    text(label, x, y, P.uiSoft);
+    const vx = x + w - textW(value);
+    for (let i = x + textW(label) + 3; i < vx - 2; i += 2) px(i, y + 4, P.uiSoft);
+    text(value, vx, y, c);
+  }
+  function button(x, y, w, label, selected) {
+    const h = 13;
+    R(x + 2, y + h, w - 2, 1, 'rgba(58,38,48,0.45)');
+    if (selected) box(x - 2, y - 2, w + 4, h + 4, P.gold, P.goldDark);
+    box(x, y, w, h, selected ? '#fff3cf' : P.parchment, selected ? P.goldDark : P.woodDeep);
+    R(x + 1, y + 1, w - 2, 1, '#ffffff');
+    R(x + 1, y + h - 2, w - 2, 1, P.parchmentShade);
+    ctext(label, x + w / 2, y + 4, P.uiText);
+  }
+  function sunIcon(x, y, on) {
+    sprite(['..#..', '#.#.#', '.###.', '##o##', '.###.', '#.#.#', '..#..'],
+      { '#': on ? P.goldDark : P.heartEmpty, o: on ? P.gold : P.parchmentShade }, x, y);
+  }
+  function miniHead(x, y, skin, hair, happy, curly) {
+    if (curly) { blob(x - 2, y - 2, 16, 13, hair); for (let i = 0; i < 14; i += 3) px(x - 1 + i, y - 3, P.outline); }
+    blob(x, y, 12, 12, skin);
+    R(x + 1, y + 1, 10, 3, hair); px(x + 1, y + 4, hair); px(x + 10, y + 4, hair);
+    if (!curly) { R(x + 1, y - 1, 9, 2, hair); px(x + 3, y - 1, '#fff0a8'); px(x + 4, y - 1, '#fff0a8'); }
+    if (happy) for (const ex of [x + 2, x + 7]) { px(ex, y + 7, P.outline); px(ex + 1, y + 6, P.outline); px(ex + 2, y + 7, P.outline); }
+    else for (const ex of [x + 3, x + 7]) R(ex, y + 5, 2, 3, '#2b1a14'), px(ex, y + 5, '#ffffff');
+    px(x + 2, y + 9, P.blush); px(x + 9, y + 9, P.blush);
+    R(x + 5, y + 9, 2, 1, P.outline);
+  }
+  function miniGull(x, y) {
+    sprite([
+      '..###.....',
+      '.#WWW#yy..',
+      '.#WoWW###.',
+      '#GGWWWW#..',
+      '#GGGWWW#..',
+      '.#######..',
+      '...y.y....',
+    ], { '#': P.outline, W: '#ffffff', G: '#a7b4bc', o: P.outline, y: '#f2a83c' }, x, y);
+  }
+  function limeIcon(x, y) {
+    sprite(['..###..', '.#LLL#.', '#LlLlL#', '#lLLLl#', '#######'], { '#': P.outline, L: P.lime, l: '#c8f08a' }, x, y);
+  }
+
+  function renderResults() {
+    ctx = resultsCtx;
+    seed = 7;
+    withPalette(SUNSET, () => {
+      sky(200, 50);
+      horizon();
+      palm(18, 108, 30, 42, 1);
+      palm(302, 108, 296, 40, -1);
+      frame();
+      counter();
+    });
+    talavera();
+    R(0, 172, 320, 12, P.wood); R(0, 172, 320, 1, P.woodHi);
+    R(0, 0, 320, 200, 'rgba(48,26,44,0.3)');
+
+    // Title banner
+    panel(80, 4, 160, 24);
+    sunIcon(87, 10, true); sunIcon(226, 10, true);
+    ctext('SHIFT COMPLETE!', 160, 9, P.uiText);
+    ctext('DAY 1 - PACIFIC POUR - 9:00 PM', 160, 17, P.uiSoft);
+
+    // The tab
+    const L = 8, Y = 33, W = 148, H = 124;
+    panel(L, Y, W, H);
+    const lx = L + 7, lw = W - 14;
+    text('THE TAB', lx, Y + 6, P.uiText);
+    R(lx, Y + 12, lw, 1, P.parchmentShade);
+    row(lx, Y + 16, lw, 'GUESTS SERVED', '14/16');
+    row(lx, Y + 24, lw, 'PERFECT POURS', '9');
+    row(lx, Y + 32, lw, 'WALKOUTS', '2');
+    row(lx, Y + 40, lw, 'GLASSES WASHED', '11');
+    R(lx, Y + 48, lw, 1, P.parchmentShade);
+    row(lx, Y + 52, lw, 'DRINKS', '$96');
+    row(lx, Y + 60, lw, 'TIPS', '+$32', P.goodDark);
+    row(lx, Y + 68, lw, 'SPILLS', '-$4', '#c0392b');
+    R(lx, Y + 77, lw, 1, P.goldDark); R(lx, Y + 78, lw, 1, P.gold);
+    sprite(['.###.', '#GgG#', '#gGg#', '#GgG#', '.###.'], { '#': P.goldDark, G: P.gold, g: '#ffe48a' }, lx, Y + 82);
+    text('TONIGHT', lx + 8, Y + 82, P.uiText);
+    const total = '$124', tx = lx + lw - textW(total);
+    text(total, tx, Y + 82, P.goodDark);
+    const glint = (T * 0.6) % 1;
+    if (glint < 0.25) R(tx + Math.floor(glint * 4 * textW(total)), Y + 81, 1, 7, 'rgba(255,255,255,0.8)');
+    row(lx, Y + 90, lw, 'SAVINGS', '$128 > $252');
+    R(lx, Y + 99, lw, 1, P.parchmentShade);
+    text('BAR VIBE', lx, Y + 105, P.uiText);
+    for (let i = 0; i < 3; i++) sunIcon(lx + 48 + i * 9, Y + 104, i < 2);
+    text('SUNNY', lx + lw - textW('SUNNY'), Y + 105, P.goldDark);
+
+    // Guest notes
+    const G = 164;
+    panel(G, Y, W, H);
+    const gx = G + 7, gw = W - 14;
+    text('GUEST NOTES', gx, Y + 6, P.uiText);
+    R(gx, Y + 12, gw, 1, P.parchmentShade);
+    miniHead(gx + 2, Y + 18, '#a8673f', '#2b1a14', false, true);
+    text('MAYA', gx + 20, Y + 17, P.uiText);
+    for (let i = 0; i < 4; i++) heart(gx + 40 + i * 6, Y + 17, true);
+    text('NEW REGULAR!', gx + 20, Y + 25, P.goldDark);
+    miniHead(gx + 2, Y + 39, '#f0c49a', '#f2d16b', true, false);
+    text('JULES', gx + 20, Y + 38, P.uiText);
+    for (let i = 0; i < 4; i++) heart(gx + 44 + i * 6, Y + 38, i < 3);
+    text('WANTS NUTS TOMORROW', gx + 20, Y + 46, P.uiSoft);
+    miniGull(gx + 2, Y + 60);
+    text('SEAGULL', gx + 20, Y + 58, P.uiText);
+    text('STOLE 3 PEANUTS', gx + 20, Y + 66, P.uiSoft);
+    R(gx, Y + 77, gw, 1, P.parchmentShade);
+    text('UNLOCKED', gx, Y + 82, P.uiText);
+    limeIcon(gx + 1, Y + 91);
+    text('LIME WEDGES IN SHOP', gx + 12, Y + 91, P.uiSoft);
+    sunIcon(gx + 1, Y + 100, true);
+    text('NEXT: SUNSET RUSH', gx + 12, Y + 101, P.uiSoft);
+
+    // Choices and hints
+    button(98, 164, 56, 'SHOP', true);
+    button(166, 164, 56, 'NEXT DAY', false);
+    panel(2, 184, 316, 15);
+    text('ARROWS CHOOSE - ENTER CONFIRM', 8, 189, P.uiText);
+    sprite(['....#', '...##', '#.##.', '###..', '.#...'], { '#': P.goodDark }, 262, 189);
+    text('SAVED', 270, 189, P.uiSoft);
+  }
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animate = document.getElementById('animateToggle');
+  animate.checked = !reduceMotion;
+  let last = 0;
+  function loop(now) {
+    if (animate.checked && now - last >= 83) {
+      T = now / 1000;
+      render();
+      renderResults();
+      last = now;
+    }
+    requestAnimationFrame(loop);
+  }
+  render();
+  renderResults();
+  requestAnimationFrame(loop);
+
+  // ---------- grid overlay and palette ----------
+  const grid = document.getElementById('grid').getContext('2d');
+  grid.strokeStyle = 'rgba(255,255,255,0.35)';
+  for (let x = 0; x <= 1280; x += 64) { grid.beginPath(); grid.moveTo(x + 0.5, 0); grid.lineTo(x + 0.5, 800); grid.stroke(); }
+  for (let y = 0; y <= 800; y += 64) { grid.beginPath(); grid.moveTo(0, y + 0.5); grid.lineTo(1280, y + 0.5); grid.stroke(); }
+  document.getElementById('gridToggle').addEventListener('change', e =>
+    document.getElementById('stage').classList.toggle('show-grid', e.target.checked));
+
+  const named = [
+    ['Outline', 'outline'], ['Sky', 'skyMid'], ['Sea', 'sea'], ['Sea foam', 'seaLight'], ['Sand', 'sand'],
+    ['Palm', 'frond'], ['Wood', 'wood'], ['Wood light', 'woodLight'], ['Terracotta', 'tile'],
+    ['Talavera blue', 'talaBlue'], ['Talavera white', 'talaWhite'], ['Chrome', 'chrome'],
+    ['Parchment UI', 'parchment'], ['UI text', 'uiText'], ['Selection gold', 'gold'], ['On target', 'good'],
+    ['Patience heart', 'heart'], ['Beer', 'beer'], ['Rum', 'rum'], ['Cola', 'cola'],
+  ];
+  document.getElementById('swatches').innerHTML = named.map(([label, key]) =>
+    `<div class="swatch"><i style="background:${P[key]}"></i><span>${label}<code>${P[key]}</code></span></div>`).join('');
+})();
+</script>
+</body>
+</html>

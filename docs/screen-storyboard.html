@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>San Trago | Pacific Pour screen storyboard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #fff7e8;
+      --ink: #263d3d;
+      --muted: #52635f;
+      --ocean: #185c60;
+      --sun: #f5cd76;
+      --line: #c9c4af;
+      --error: #813c2e;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #eae5d7; color: var(--ink); font: 17px/1.5 system-ui, sans-serif; }
+    a { color: var(--ocean); text-underline-offset: 4px; }
+    a:focus-visible { outline: 3px solid var(--error); outline-offset: 4px; }
+    h1, h2, h3, p { margin: 0 0 12px; }
+    h1 { font: 700 clamp(38px, 5vw, 64px)/1.1 Georgia, serif; }
+    h2 { font: 700 30px/1.2 Georgia, serif; }
+    h3 { font-size: 19px; }
+    header, main, footer { max-width: 1240px; margin: auto; padding: 32px; }
+    header { padding-top: 48px; }
+    .eyebrow { font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+    .intro { max-width: 840px; color: var(--muted); }
+    nav { display: flex; flex-wrap: wrap; gap: 10px 24px; padding-top: 16px; }
+    section { margin-bottom: 48px; scroll-margin-top: 20px; }
+    .caption { color: var(--muted); max-width: 920px; }
+    .frame { background: var(--paper); border: 2px solid var(--ink); border-radius: 16px; overflow: hidden; margin-top: 20px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: var(--ocean); color: white; padding: 16px 24px; }
+    .topbar p { margin: 0; }
+    .topbar a { color: white; }
+    .scene { padding: 24px; }
+    .coast { background: #d7e8df; border-bottom: 8px solid #bc7752; padding: 22px 24px; }
+    .coast p { margin: 0; }
+    .grid { display: grid; gap: 16px; }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .station { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr); margin-top: 20px; }
+    .card { border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: #fffdf6; min-width: 0; }
+    .selected { border: 3px solid var(--ocean); padding: 16px; }
+    .tag { display: inline-block; padding: 3px 9px; background: #e4eee6; border-radius: 5px; font-size: 13px; font-weight: 750; margin-bottom: 10px; }
+    .label { font-size: 14px; color: var(--muted); }
+    .mock { display: inline-block; background: var(--ocean); color: white; padding: 9px 13px; border-radius: 7px; font-size: 15px; font-weight: 650; margin: 4px 3px 4px 0; }
+    .secondary { background: #e5e5d7; color: var(--ink); }
+    .unavailable { background: #ebe6df; color: #665449; border: 1px dashed #806c5b; }
+    .notice { border-left: 5px solid var(--ocean); padding: 14px 18px; background: #e9f0e5; margin-top: 16px; }
+    .warning { border-color: var(--error); background: #fae7dc; }
+    .notice p:last-child, .card p:last-child { margin-bottom: 0; }
+    .notes { margin-top: 14px; font-size: 15px; color: var(--muted); }
+    .notes strong { color: var(--ink); }
+    .bar { height: 10px; background: #e3e3d5; border-radius: 5px; overflow: hidden; margin: 8px 0 12px; }
+    .bar span { display: block; height: 100%; background: var(--ocean); }
+    .glass { width: 72px; height: 88px; border: 4px solid var(--ocean); border-top-width: 2px; border-radius: 4px 4px 20px 20px; margin: 16px auto; background: linear-gradient(to top, #c18b45 55%, transparent 55%); }
+    .ledger { width: 100%; border-collapse: collapse; }
+    .ledger th, .ledger td { text-align: left; padding: 10px 4px; border-bottom: 1px solid var(--line); }
+    .ledger td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+    .modal { max-width: 620px; margin: 12px auto; border: 2px solid var(--ink); box-shadow: 8px 8px 0 #d9d3be; }
+    .swatch { display: inline-block; width: 24px; height: 24px; border: 1px solid var(--ink); vertical-align: middle; margin-right: 7px; }
+    .checklist li { margin-bottom: 8px; }
+    @media (max-width: 900px) {
+      header, main, footer { padding: 24px; }
+      .station { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .station .mixing { grid-column: 1 / -1; grid-row: 1; }
+    }
+    @media (max-width: 620px) {
+      header, main, footer { padding: 18px; }
+      .three, .two, .station { grid-template-columns: 1fr; }
+      .scene, .coast, .topbar { padding: 16px; }
+    }
+    @media print {
+      body { background: white; }
+      header, main, footer { padding: 12px; }
+      .frame { break-inside: avoid; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">San Trago / Preproduction / Review draft 01</p>
+    <h1>A little sunshine.<br>A busy little bar.</h1>
+    <p class="intro">Pacific Pour screen storyboard. Review the information, actions, and recovery paths before building the Godot prototype. Coastal colors are exploratory, not approved final art. For the proposed look, see <a href="visual-concept.html">visual concept 01</a>.</p>
+    <div class="notice">
+      <strong>This is a static storyboard, not a playable game.</strong>
+      <p>Filled action labels show proposed game controls; they do not execute actions. Underlined links navigate between storyboard states. All prices, counts, timing, recipes, and people below are illustrative. Scenes are separate snapshots, not a continuous simulation.</p>
+    </div>
+    <nav aria-label="Storyboard screens">
+      <a href="#prep">01 Prep</a><a href="#service">02 Service</a>
+      <a href="#rejection">03 Correction</a><a href="#washing">04 Washing</a>
+      <a href="#closing">05 Closing</a><a href="#results">06 Results</a>
+      <a href="#pause">07 Pause</a><a href="#save-error">08 Save recovery</a>
+      <a href="#review">Review checklist</a>
+    </nav>
+  </header>
+  <main>
+    <section id="prep" aria-labelledby="prep-title">
+      <p class="eyebrow">01 / Afternoon / No clock running</p>
+      <h2 id="prep-title">Make the bar yours.</h2>
+      <p class="caption">Equipment and decor share a quiet management screen, but their effects are distinguished. The bar preview reflects confirmed choices, not hover states.</p>
+      <div class="frame">
+        <div class="topbar"><strong>Pacific Pour / Afternoon</strong><span>Available cash: $94</span><span class="mock secondary">Start shift</span></div>
+        <div class="coast"><p><strong>Bar preview:</strong> sunlit window, worn wooden counter, a small plant, six glasses. Fixed decor slots are outlined when customizing.</p></div>
+        <div class="scene grid three">
+          <div class="card"><span class="tag">Equipment / Capacity</span><h3>Extra glass rack</h3><p>Adds two glasses. More breathing room before you need to wash.</p><p><strong>$24 / You have $94</strong></p><span class="mock">Buy rack / $24</span></div>
+          <div class="card"><span class="tag">Equipment / Workflow</span><h3>Batch dishwasher</h3><p>Load dirty glasses, then let a cycle clean them while you serve.</p><p><strong>$120 / Need $26 more</strong></p><span class="mock unavailable">Unavailable / Not enough cash</span></div>
+          <div class="card"><span class="tag">Decor / Cosmetic</span><h3>Coastal wall color</h3><p>Preview a warm cream or ocean-green wall. No earnings bonus.</p><p><span class="swatch" style="background:#fff7e8"></span>Cream <span class="swatch" style="background:#d7e8df"></span>Sea glass</p><span class="mock secondary">Preview color</span><span class="mock">Confirm selection</span></div>
+        </div>
+      </div>
+      <p class="notes"><strong>Outcomes:</strong> purchase confirmation updates cash and ownership once, then saves. A save failure opens <a href="#save-error">recovery</a>. Start Shift creates the opening checkpoint before starting timers. The real shop also needs an owned-item state and a confirmation for costly purchases.</p>
+    </section>
+
+    <section id="service" aria-labelledby="service-title">
+      <p class="eyebrow">02 / Service / Main workstation</p>
+      <h2 id="service-title">Read, prepare, serve, regroup.</h2>
+      <p class="caption">Orders stay visible while mixing. Selection has a border and text label. Ingredient controls are grouped away from customer targets to reduce accidental serving.</p>
+      <div class="frame">
+        <div class="topbar"><strong>Pacific Pour / Night 1</strong><span>Opening wave / Calm</span><a href="#pause">Pause / settings</a></div>
+        <div class="scene">
+          <div class="grid three">
+            <div class="card selected"><span class="tag">Selected guest / Spot 1</span><h3>Maya: Rum &amp; cola</h3><p>Waiting comfortably</p><div class="bar" aria-hidden="true"><span style="width:80%"></span></div><p class="label">Order: 1 rum + 2 cola / Build in glass</p><span class="mock">Serve to Maya</span></div>
+            <div class="card"><span class="tag">Enjoying drink / Spot 2</span><h3>Jules: Draft beer</h3><p>Beer served. Peanuts still requested.</p><span class="mock">Serve peanuts</span><p class="label">One glass returns when Jules finishes.</p></div>
+            <div class="card"><span class="tag">Available / Spot 3</span><h3>A moment to breathe.</h3><p>The next arrival belongs to the paced wave, not a surprise countdown alarm.</p></div>
+          </div>
+          <div class="grid station">
+            <div class="card"><h3>Ingredients</h3><span class="mock">Draft / +1</span><span class="mock">Rum / +1</span><span class="mock">Cola / +1</span><p class="label">Measured portions in Experiment A. Experiment B tests holding to pour with a measured-click alternative.</p></div>
+            <div class="card mixing"><span class="tag">Preparation / One glass</span><h3>Rum &amp; cola in progress</h3><div class="glass" aria-hidden="true"></div><p><strong>Contents:</strong> Rum 1 / Cola 1</p><p><strong>Recipe:</strong> Rum 1 / Cola 2. Add one more cola. No separate shake or stir required for this starter drink.</p><span class="mock secondary">View recipe</span><span class="mock secondary">Discard drink</span><p class="label">Discarding consumes ingredients and returns a dirty glass. Show confirmation when a drink contains ingredients.</p></div>
+            <div class="card"><h3>Glass station</h3><p><strong>3 clean / 1 dirty</strong></p><p class="label">1 preparing / 1 with guest / 0 washing<br>Total owned: 6</p><span class="mock unavailable">Select glass / Workstation occupied</span><span class="mock">Wash one glass</span><p><a href="#washing">View washing state</a></p></div>
+          </div>
+          <div class="notice"><strong>Next action:</strong> add one cola, then serve to Maya. Later, use this same layout to compare discrete and light tactile input.</div>
+        </div>
+      </div>
+      <p class="notes"><strong>Outcomes:</strong> valid service moves the glass to the guest and explains payment/tip; invalid service opens <a href="#rejection">correction feedback</a>. An abandoned order frees its spot but does not erase the drink in preparation. Switching customer selection must not discard that drink.</p>
+    </section>
+
+    <section id="rejection" aria-labelledby="rejection-title">
+      <p class="eyebrow">03 / Recoverable mistake / No modal interruption</p>
+      <h2 id="rejection-title">Explain the fix, not just the failure.</h2>
+      <div class="frame"><div class="scene">
+        <div class="notice warning" role="note"><strong>Not served: Maya's drink needs one more cola.</strong><p>No payment taken. Your glass and ingredients are still on the counter.</p></div>
+        <div class="grid two" style="margin-top:16px">
+          <div class="card"><h3>Current contents</h3><p>Rum 1 / Cola 1</p><span class="mock">Add cola / +1</span><span class="mock secondary">View recipe</span></div>
+          <div class="card"><h3>Your options</h3><p>Correct this drink, offer it to a compatible order, or discard it. Excess ingredients may require starting over; the message must say so.</p><span class="mock secondary">Discard drink</span></div>
+        </div>
+      </div></div>
+      <p class="notes"><strong>Behavior:</strong> feedback remains close to preparation without covering orders. No automatic retry or silent ingredient substitution. Patience continues during ordinary corrections; mandatory tutorial explanations pause it. <a href="#service">Return to service layout</a>.</p>
+    </section>
+
+    <section id="washing" aria-labelledby="washing-title">
+      <p class="eyebrow">04 / Resource bottleneck / Recovery always available</p>
+      <h2 id="washing-title">No clean glasses? Show the way back.</h2>
+      <div class="frame"><div class="scene">
+        <div class="notice warning"><strong>No clean glasses.</strong><p>All six are dirty in this snapshot. Wash one now, or load your owned dishwasher.</p></div>
+        <div class="grid two" style="margin-top:16px">
+          <div class="card"><h3>Manual sink</h3><p>Clean one glass with a short, timed action. Do not require repeated rapid clicking.</p><span class="mock">Wash one glass</span><p class="label">During washing: 1 washing / 5 dirty. On completion: 1 clean / 5 dirty.</p></div>
+          <div class="card"><h3>Dishwasher / Owned variant</h3><p>Illustrative capacity: four. Load a batch, start it, and keep serving.</p><span class="mock">Load up to four</span><span class="mock">Start loaded cycle</span><p class="label">Running state: 4 washing / 2 dirty. Show cycle progress and a completion cue. Loading and active washing are distinct states.</p></div>
+        </div>
+      </div></div>
+      <p class="notes"><strong>Behavior:</strong> these are alternative branches from the same bottleneck, not simultaneous counts. The real screen shows current values and available equipment only. A dishwasher keeps loaded glasses in the washing allocation, even before its cycle starts. The sink remains usable while a batch runs, provided dirty glasses remain.</p>
+    </section>
+
+    <section id="closing" aria-labelledby="closing-title">
+      <p class="eyebrow">05 / Closing / Predictable transition</p>
+      <h2 id="closing-title">Last orders, then a soft landing.</h2>
+      <div class="frame">
+        <div class="topbar"><strong>Pacific Pour / Closing</strong><span>No new arrivals</span><a href="#pause">Pause</a></div>
+        <div class="scene"><div class="notice"><strong>Finish the guests already here.</strong><p>A visible grace countdown replaces the wave indicator. Continue mixing, serving, and washing. No new or repeat orders are created.</p></div>
+          <div class="card" style="margin-top:16px"><h3>At the end of closing</h3><p>Unserved orders end without payment or an extra closing penalty. Remaining prepared drinks count as waste. Customer-held glasses return dirty. Explain these outcomes before committing results.</p><span class="mock">Review shift</span></div>
+        </div>
+      </div>
+      <p class="notes"><strong>Behavior:</strong> if guests finish early, proceed without making the player wait out the grace period. <a href="#results">View results</a>. Grace duration is an experiment variable, not approved tuning.</p>
+    </section>
+
+    <section id="results" aria-labelledby="results-title">
+      <p class="eyebrow">06 / Results / Understand the night</p>
+      <h2 id="results-title">Celebrate progress. Explain the numbers.</h2>
+      <div class="frame">
+        <div class="topbar"><strong>Night complete / Pacific Pour</strong><span>Illustrative first-shift results</span></div>
+        <div class="scene grid two">
+          <div class="card"><h3>Shift account</h3><table class="ledger"><caption class="label">Cash movement for this example</caption><tbody>
+            <tr><th scope="row">Opening cash</th><td>$40</td></tr>
+            <tr><th scope="row">Sales</th><td>+$60</td></tr>
+            <tr><th scope="row">Tips</th><td>+$8</td></tr>
+            <tr><th scope="row">Ingredients consumed</th><td>-$14</td></tr>
+            <tr><th scope="row">Shift profit</th><td>$54</td></tr>
+            <tr><th scope="row">Cash for tomorrow</th><td>$94</td></tr>
+          </tbody></table><p class="label">The $14 already includes $2 of wasted ingredients. Waste is a breakdown, not a second charge. Waived costs, if any, get their own explicit line.</p></div>
+          <div class="card"><span class="tag">A little better every night</span><h3>Your next improvement</h3><p>Extra glasses can give you room to recover during the next rush. A dishwasher changes how you clean.</p><p>No star grade or financial punishment for learning. Optional service statistics should explain bottlenecks, not shame the player.</p><p><strong>Progress saved.</strong> Show this only after a successful write.</p><span class="mock">Next afternoon</span><p><a href="#prep">View next-day shop</a> / <a href="#save-error">View failed-save variant</a></p></div>
+        </div>
+      </div>
+      <p class="notes"><strong>Behavior:</strong> settlement is applied once. Cash, equipment, settings, and next-day state survive restart. Returning to these results must never pay the same shift twice.</p>
+    </section>
+
+    <section id="pause" aria-labelledby="pause-title">
+      <p class="eyebrow">07 / Pause and settings / All service timers frozen</p>
+      <h2 id="pause-title">Give the player room to breathe.</h2>
+      <div class="frame"><div class="scene">
+        <div class="card modal"><span class="tag">Paused</span><h3>Your guests can wait.</h3><p>Patience, arrivals, washing, and the shift clock are stopped.</p><span class="mock">Resume</span><span class="mock secondary">Settings</span>
+          <hr><p><strong>Settings panel:</strong> master/music/effects volume, normal or relaxed pressure, text size, reduced motion/flashes. Pressure changes take effect next shift, with that timing shown clearly.</p>
+          <div class="notice warning"><strong>Leave this shift?</strong><p>This unfinished shift will restart from opening. Your prep purchases are saved; tonight's unfinished earnings and costs are not.</p><span class="mock secondary">Keep playing</span><span class="mock">Leave shift</span></div>
+        </div>
+      </div></div>
+      <p class="notes"><strong>Behavior:</strong> Escape opens pause; closing settings returns to pause, not immediately to service. Focus must stay inside the open dialog. In the actual game, quitting from the desktop should use the same warning where possible; abrupt termination still restores the checkpoint.</p>
+    </section>
+
+    <section id="save-error" aria-labelledby="save-title">
+      <p class="eyebrow">08 / Save failure / Honest recovery</p>
+      <h2 id="save-title">Never call unsaved progress saved.</h2>
+      <div class="frame"><div class="scene">
+        <div class="card modal"><span class="tag">Progress not saved</span><h3>We couldn't save your progress.</h3><p>Your current session is still here. The last good checkpoint has not been replaced. Show an actionable reason when available, such as a storage or permission problem.</p>
+          <span class="mock">Retry save</span><span class="mock secondary">Show details</span>
+          <p>Keep this checkpoint transition pending until saving succeeds. Do not begin a new shift or replay settlement when Retry is selected.</p>
+          <div class="notice warning"><strong>Need to leave anyway?</strong><p>Quitting may lose changes since the last successful save. Show the checkpoint's day and phase when available, then require explicit confirmation.</p><span class="mock secondary">Stay here</span><span class="mock">Quit without saving</span></div>
+        </div>
+      </div></div>
+      <p class="notes"><strong>Variants:</strong> failed purchase persistence shows the purchased item as pending save, not safely stored. Missing opening-checkpoint persistence prevents service from starting. Corrupt or unsupported saves get a separate recovery prompt; never overwrite them with a new game without consent.</p>
+    </section>
+
+    <section id="review" aria-labelledby="review-title">
+      <p class="eyebrow">Review / Before interaction experiments</p>
+      <h2 id="review-title">What we need to learn from these screens</h2>
+      <ul class="checklist">
+        <li>Can both creators locate every action and explain its state change?</li>
+        <li>Are orders, glass availability, and the current drink readable at a glance?</li>
+        <li>Does the service view feel like a bar, rather than a dashboard? The Godot experiment should test spatial props in place of some panels.</li>
+        <li>Is wrong-order recovery forgiving enough without hiding real mistakes?</li>
+        <li>Does washing look like a useful rhythm rather than a chore to escape?</li>
+        <li>Can players understand purchases, costs, checkpoint limits, and save failures?</li>
+        <li>Check primary 1280 x 800 and smaller 1024 x 768 desktop windows. Browser reflow is only a layout reference; Godot must be tested separately.</li>
+        <li>Approve or revise information placement before comparing discrete and light tactile preparation. No final art or game implementation is approved by this storyboard.</li>
+      </ul>
+      <p>Return feedback by screen number: what is confusing, what is missing, and what should feel different. The second creator's review and complete-day approval remain outstanding.</p>
+    </section>
+  </main>
+  <footer><p>Original HTML/CSS mockups. No external assets, scripts, fonts, analytics, or network dependencies. HTML is a review deliverable only; the game remains a Godot project.</p><a href="../PREPRODUCTION-PLAN.md">Read the shared preproduction plan</a></footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/content/guest_profile.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/content/guest_fact.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/content/guest_topic.gd" id="3"]
+
+[sub_resource type="Resource" id="fact_0"]
+script = ExtResource("2")
+id = "usual"
+text = "Usual: rum and cola"
+unlock = 2
+target = "rum_cola"
+count = 1
+
+[sub_resource type="Resource" id="fact_1"]
+script = ExtResource("2")
+id = "tower"
+text = "Guards Tower 20 at OB"
+unlock = 0
+count = 2
+
+[sub_resource type="Resource" id="fact_2"]
+script = ExtResource("2")
+id = "quarters"
+text = "Tips in quarters"
+unlock = 1
+count = 2
+
+[sub_resource type="Resource" id="fact_3"]
+script = ExtResource("2")
+id = "pier_surfer"
+text = "Pulled the pier surfer out herself"
+unlock = 3
+target = "pier"
+count = 1
+hint = "Ask about the pier"
+
+[sub_resource type="Resource" id="fact_4"]
+script = ExtResource("2")
+id = "taco_dream"
+text = "Saving up for a taco stand of her own"
+unlock = 0
+count = 6
+requires = "pier_surfer"
+
+[sub_resource type="Resource" id="topic_0"]
+script = ExtResource("3")
+id = "pier"
+line = "Someone tried to surf the pier today!"
+
+[resource]
+script = ExtResource("1")
+id = "maya"
+display_name = "Maya Reyes"
+role = "Lifeguard"
+usual_drink = "rum_cola"
+topics = Array[Resource]([SubResource("topic_0")])
+facts = Array[Resource]([SubResource("fact_0"), SubResource("fact_1"), SubResource("fact_2"), SubResource("fact_3"), SubResource("fact_4")])

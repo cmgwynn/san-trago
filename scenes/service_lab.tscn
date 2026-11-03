@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/bartending_lab.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/service_lab.gd" id="2"]
+
+[node name="ServiceLab" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="Layout" parent="Margin" index="0"]
+theme_override_constants/separation = 8
+
+[node name="Title" parent="Margin/Layout" index="0"]
+text = "SAN TRAGO / Service rhythm experiment"
+theme_override_font_sizes/font_size = 26
+
+[node name="Scope" parent="Margin/Layout" index="1"]
+text = "Compare equipment with Mode C + guests. No purchases or saved progress. All timings provisional."
+
+[node name="Preparation" parent="Margin/Layout/Workbench" index="1"]
+theme_override_constants/separation = 6
+
+[node name="Glass" parent="Margin/Layout/Workbench/Preparation" index="1"]
+custom_minimum_size = Vector2(0, 44)
+
+[node name="Serve" parent="Margin/Layout/Workbench/Preparation" index="7"]
+custom_minimum_size = Vector2(0, 44)
+
+[node name="Feedback" parent="Margin/Layout" index="7"]
+custom_minimum_size = Vector2(0, 42)

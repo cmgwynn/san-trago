@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>San Trago | Visual concept 02: Golden hour at Pacific Pour</title>
+  <style>
+    :root { --paper: #f1e2bf; --paper-shade: #dcc596; --ink: #3b2418; --brass: #c9973f; --wood: #4a2c1c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #17100d; color: var(--ink); font: 16px/1.55 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; }
+    header, main { max-width: 1632px; margin: 0 auto; padding: 16px; }
+    header { color: #f1e2bf; }
+    header p { margin: 0; opacity: .75; }
+    header h1 { margin: 4px 0 0; font-size: 30px; font-weight: 600; }
+    .stage { position: relative; width: 100%; max-width: 1600px; aspect-ratio: 16 / 9; margin: 0 auto; border: 3px solid #0d0806; background: #000; }
+    .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; color: #f1e2bf; margin: 10px auto 0; max-width: 1600px; }
+    .screen-title { color: #f1e2bf; font-size: 22px; font-weight: 600; margin: 28px auto 10px; max-width: 1600px; }
+    .caption { color: #f1e2bf; opacity: .8; max-width: 1600px; margin: 10px auto 0; }
+    .sheet { background: var(--paper); border: 3px solid #2a170f; box-shadow: inset 0 0 0 5px var(--wood), inset 0 0 0 7px var(--brass); border-radius: 6px; padding: 28px 32px; margin-top: 20px; }
+    .sheet h2 { margin: 0 0 8px; font-size: 24px; }
+    .sheet h3 { margin: 20px 0 6px; font-size: 18px; }
+    .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 8px 36px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+    .swatch { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+    .swatch i { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #2a170f; flex: none; }
+    .swatch code { display: block; opacity: .7; }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; }
+    th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--paper-shade); vertical-align: top; }
+    ul { margin: 4px 0; padding-left: 20px; }
+    .note { background: var(--paper-shade); padding: 10px 14px; border-radius: 4px; }
+    a { color: #7a3b1c; }
+  </style>
+</head>
+<body>
+  <header>
+    <p>San Trago / Preproduction / Visual concept 02 / Proposal for creative lead review / Compare with <a href="visual-concept.html" style="color:#f3c76a">concept 01 (pixel art)</a></p>
+    <h1>Golden hour at Pacific Pour</h1>
+  </header>
+  <main>
+    <div class="stage">
+      <canvas id="scene" aria-label="Painted-style concept of the service screen: a candle-warm beach bar at golden hour. Maya stands in a central arch that frames the sunset over the Pacific. Two waiting guests sit in shadow at the ends of the bar. A large glass sits mid-pour on a bar mat under Maya, with a brass gauge and a short tutorial tip beside it. Below the counter: order tickets on the left, a speed rail of draft, rum, cola, and nuts with number keys in the middle, and a compact back-bar strip of dirty glasses, sink, and washer on the right, next to the brass day dial. Churro the bar cat and the glowing guest book sit on the counter."></canvas>
+    </div>
+    <div class="controls">
+      <label><input type="checkbox" id="animateToggle"> Ambient animation</label>
+      <span>Screen 1, service. Authored at 1600 x 900 (16:9) and rendered at 2x for sharpness. Illustrated style with smooth scaling, not pixel art.</span>
+    </div>
+
+    <h2 class="screen-title">Screen 1b: the serve</h2>
+    <div class="stage">
+      <canvas id="serve" aria-label="The moment after serving. The full glass slides across the mat to Maya, who beams with her eyes closed and says 'Ooh, perfect. Just how I like it.' A brass PERFECT medallion glows beside the glass, coins hop into the tip jar with plus 9 dollars, her ticket is stamped PERFECT, and a parchment toast above the guest book says NEW in the guest book: Maya tips in quarters."></canvas>
+    </div>
+    <p class="caption">About a second and a half after each serve: the glass slides to the guest, they react, coins hop into the jar, and any new guest-book fact pops up where the book is. A perfect serve gets the medallion; a sloppy one gets a smaller reaction.</p>
+
+    <h2 class="screen-title">Screen 2: the guest book</h2>
+    <div class="stage">
+      <canvas id="book" aria-label="The guest book open over the blurred bar, on Maya's page. Her portrait sketch and name are on the left; on the right, three known facts with a newly unlocked one highlighted, and two locked facts with hints. Tabs for Jules, Ines, and Churro sit on the edge."></canvas>
+    </div>
+    <p class="caption">Opened from the glowing book on the lower shelf or the book button. It pauses service, so reading is never punished. The new fact is highlighted where it was learned.</p>
+
+    <h2 class="screen-title">Screen 3: last call</h2>
+    <div class="stage">
+      <canvas id="results" aria-label="End-of-shift results over the bar at night. A ledger card on the left lists guests served, perfect pours, walkouts, glasses washed, earnings, tonight's total of 124 dollars, savings, and the bar vibe. A card on the right lists tonight's stories: Maya became a regular with a new guest-book fact, Jules wanted nuts, and Churro napped on the tip jar with a new fact. Below are Shop and Next day buttons."></canvas>
+    </div>
+    <p class="caption">The same bar after closing, with night falling. Money and stories get equal space: new guest-book facts are celebrated here as well as in the book. Serif type keeps this text-heavy screen readable, unlike the pixel font in concept 01.</p>
+
+    <section class="sheet">
+      <h2>What this concept proposes</h2>
+      <p class="note">Original, code-drawn placeholder art. It borrows the <i>feeling</i> of Strange Antiquities (a warm, dim, symmetrical shop with a framed visitor, parchment cards, and brass UI) and copies none of its assets, characters, or layout details. It is a mood target for the creative lead, not final art. A real illustrator's hand would replace every shape here.</p>
+      <div class="cols">
+        <div>
+          <h3>Scene, front to back</h3>
+          <ul>
+            <li><b>Bar mat (center):</b> the work area. The glass is drawn large, front and center under the guest, mid-pour (Mode C) with the brass gauge beside it. A tutorial-only tip sits next to it; once you know the controls it disappears.</li>
+            <li><b>Speed rail (under the glass):</b> every pour source in one row, labeled on the item, with number keys 1 to 4. An empty slot shows where upgrades go. The active source glows.</li>
+            <li><b>Order rail (bottom left):</b> one parchment ticket per guest. Recipe blocks carry a letter (R, C, D) as well as a color, and the selected ticket ticks off what you've poured. The selected guest stands in the arch; the others sit in shadow at the ends of the bar.</li>
+            <li><b>Back bar (bottom right):</b> dirty glasses, sink, and washer share one compact strip, so washing never competes with the guest for attention. A hired busser takes this strip over.</li>
+            <li><b>Counter:</b> the clean-glass rack, tip jar, Churro, and the guest book. The book glows with a badge when you learn something; opening it (screen 2) pauses service.</li>
+            <li><b>Churro:</b> the bar cat. Pet him once a shift; he naps on the counter and swishes his tail.</li>
+            <li><b>Keepsakes:</b> as you get to know regulars, they leave gifts on the shelves (Maya's surfboard, with a tag). Dashed empty spots hint at more.</li>
+            <li><b>The arch:</b> the guest stands framed against a golden-hour Pacific, with Point Loma, the pier, and palms in silhouette. The guest is the focal point, as in a portrait. A single speech card holds small talk only; the order lives on the ticket.</li>
+            <li><b>Back bar:</b> dark cabinets of bottles, plants, and keepsakes, lit by two warm sconces and a string of bistro lights.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Readability rules</h3>
+          <ul>
+            <li>The scene is dim; everything you can act on has a brass plate and glows on hover. Decor gets neither and stays in shadow.</li>
+            <li>Each piece of information appears once: one fill gauge (by the glass), one guest-book button (on the counter), and each label sits on its object.</li>
+            <li>Selection uses brass corner brackets, never only a color change.</li>
+            <li>Speech is parchment with serif type. Game numbers sit on brass, so dialogue and state never look alike.</li>
+            <li>Smallest text is 15 px at 1600 x 900, which is 12 px on a Steam Deck (1280 x 800) and 18 px at 1080p. No pixel font, so the results, shop, and guest-book screens have no font problem.</li>
+            <li>Every station has a number key, so the game can be played from the keyboard, and later from a controller with a selection cursor.</li>
+            <li>Patience is four sand dollars on each ticket: an icon with a count, readable at a glance. The last one turns red.</li>
+            <li>Fixed zones: top bar (money, settings), stage (back bar, arch, waiting guests), bar top (glass rack, mat, tip jar, Churro, guest book), and lower bar (orders, speed rail, back bar, day dial). Nothing overlaps the arch or the guest's face.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Palette</h3>
+      <div class="swatches" id="swatches"></div>
+
+      <h3>Concept 01 vs. concept 02</h3>
+      <table>
+        <tr><th></th><th>01: Pixel bright day</th><th>02: Painted golden hour</th></tr>
+        <tr><td>Feel</td><td>Sunny, busy, playful</td><td>Warm, intimate, story-first</td></tr>
+        <tr><td>Focus</td><td>Many guests at once, stations</td><td>One guest at a time, framed like a portrait</td></tr>
+        <tr><td>Art cost</td><td>Small sprites, but every motion needs frames</td><td>Fewer, larger paintings: one portrait per guest with 3 or 4 expressions; motion is subtle tweening</td></tr>
+        <tr><td>Text-heavy screens</td><td>Pixel font strains (see concept 01, screen 2)</td><td>Serif type reads well everywhere</td></tr>
+        <tr><td>Fit with gameplay</td><td>Suits several guests at once and busy rushes</td><td>Suits fewer guests, longer conversations, and learning about regulars. Busy rushes use the order rail: one guest in the arch, the rest as tickets in a queue.</td></tr>
+        <tr><td>Godot setup</td><td>320 x 200 viewport, nearest filter</td><td>1920 x 1080 base, canvas_items stretch, linear filter, art authored at 2x</td></tr>
+      </table>
+
+      <div class="cols">
+        <div>
+          <h3>Very San Diego, still</h3>
+          <ul>
+            <li>Golden-hour Pacific with Point Loma and the lighthouse</li>
+            <li>Pier and Washingtonia palms in silhouette</li>
+            <li>Talavera tile trim around the arch, and a Talavera planter</li>
+            <li>Lifeguard and surf keepsakes on the shelves</li>
+            <li>Maya works at a lifeguard tower; Churro is named after a churro</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Production implications (for review)</h3>
+          <ul>
+            <li>Who paints? The creative lead could paint guests and props, or we could commission portraits. This is the biggest cost question.</li>
+            <li>Separate layers: view (swappable by time and neighborhood), back bar, guest portrait, counter, stations, and UI.</li>
+            <li>Guests: one bust per guest, 3 or 4 expressions, blink and breathing tweens. No walk cycles.</li>
+            <li>The guest book's fact system is prototyped in Godot (<code>scripts/systems/guest_book.gd</code>, with guests in <code>content/guests/</code>). Facts unlock from visits, perfect serves, serving a drink, or small talk, and can chain. Writing the facts is the content cost.</li>
+            <li>A gray-box of this layout runs in Godot (<code>scenes/layout_lab.tscn</code>). Tests check that zones and controls never overlap the guest's face and that the layout fits from 1024 x 768 to ultrawide.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Questions for the creative lead</h3>
+      <ul>
+        <li>Concept 01, concept 02, or a blend (for example, painted portraits over pixel stations)?</li>
+        <li>Waiting guests now sit in shadow at the ends of the bar. Is that enough presence, or too busy?</li>
+        <li>Which keepsakes should each regular leave, and at what point in their story?</li>
+        <li>Should the guest book pause service (as proposed), or stay live so reading costs time?</li>
+        <li>How dark is "dark but cozy"? Is this golden hour warm enough, or should it be brighter?</li>
+        <li>Which guest facts are fun to unlock: jobs, secrets, favorite drinks, relationships between guests?</li>
+        <li>Do you want to paint, or should we budget for commissioned art?</li>
+      </ul>
+    </section>
+  </main>
+<script>
+(() => {
+  const W = 1600, H = 900, S = 2;
+  const canvas = document.getElementById('scene');
+  canvas.width = W * S; canvas.height = H * S;
+  const sceneCtx = canvas.getContext('2d');
+  const bookCanvas = document.getElementById('book');
+  bookCanvas.width = W * S; bookCanvas.height = H * S;
+  const bookCtx = bookCanvas.getContext('2d');
+  const resultsCanvas = document.getElementById('results');
+  resultsCanvas.width = W * S; resultsCanvas.height = H * S;
+  const resultsCtx = resultsCanvas.getContext('2d');
+  const serveCanvas = document.getElementById('serve');
+  serveCanvas.width = W * S; serveCanvas.height = H * S;
+  const serveCtx = serveCanvas.getContext('2d');
+  let ctx = sceneCtx;
+
+  const C = {
+    ink: '#3b2418', wallDeep: '#1c110c', wall: '#2e1c13', wallLight: '#4a2e1e', cubby: '#120b08',
+    wood: '#6b3f25', woodLight: '#9a6338', woodHi: '#d29a5c', woodDark: '#3a2216',
+    brass: '#c9973f', brassLight: '#f2d08a', brassDark: '#7a5520',
+    paper: '#f1e2bf', paperShade: '#d9c08e', paperInk: '#3b2418', paperSoft: '#7a5a40',
+    skyTop: '#3d2c5c', skyMid: '#c4566c', skyLow: '#f39a4a', sun: '#ffd27a', seaTop: '#a65a5e', seaDeep: '#2c2f4f',
+    silhouette: '#2a1b2a', glow: '#ffb35c', tealTile: '#2f7f86', talaBlue: '#2e4f9a', talaWhite: '#efe3c8', talaYellow: '#e2a93a',
+    skin: '#a8673f', skinShade: '#7d4627', skinLight: '#c88456', hair: '#20120d',
+    shirt: '#4a2c1c', sleeve: '#d6a23e', cat: '#d98a3e', catDark: '#a85e24', catLight: '#f2b56a',
+    cola: '#4a1f14', rum: '#b8692a', good: '#6dbb63', heart: '#d9534f',
+  };
+
+  let seed = 11;
+  const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  let T = 2.0;
+
+  function rr(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function lin(x0, y0, x1, y1, stops) {
+    const g = ctx.createLinearGradient(x0, y0, x1, y1);
+    stops.forEach(([o, c]) => g.addColorStop(o, c));
+    return g;
+  }
+  function rad(x, y, r0, r1, stops) {
+    const g = ctx.createRadialGradient(x, y, r0, x, y, r1);
+    stops.forEach(([o, c]) => g.addColorStop(o, c));
+    return g;
+  }
+  function glow(x, y, r, color, a) {
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalAlpha = a;
+    ctx.fillStyle = rad(x, y, 0, r, [[0, color], [1, 'rgba(0,0,0,0)']]);
+    ctx.fillRect(x - r, y - r, r * 2, r * 2);
+    ctx.restore();
+  }
+  function ellipse(x, y, rx, ry, fill, rot = 0) {
+    ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill();
+  }
+  function softShadow(fn, blur = 18, color = 'rgba(0,0,0,0.55)', oy = 6) {
+    ctx.save(); ctx.shadowColor = color; ctx.shadowBlur = blur; ctx.shadowOffsetY = oy; fn(); ctx.restore();
+  }
+  function grain(x, y, w, h, color, n, alpha) {
+    ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color;
+    for (let i = 0; i < n; i++) ctx.fillRect(x + rand() * w, y + rand() * h, 2 + rand() * 40, 1);
+    ctx.restore();
+  }
+  const font = (size, weight = 400, italic = false) =>
+    `${italic ? 'italic ' : ''}${weight} ${size}px "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif`;
+  function label(str, x, y, size, color, align = 'left', weight = 400, italic = false) {
+    ctx.font = font(size, weight, italic); ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = 'middle';
+    ctx.fillText(str, x, y);
+  }
+
+  // ---------- the arch ----------
+  const AX = 800, AW = 400, ATOP = 120, ABOT = 572, AR = AW / 2;
+  function archPath(inset = 0, begin = true) {
+    const r = AR - inset;
+    if (begin) ctx.beginPath();
+    ctx.moveTo(AX - r, ABOT);
+    ctx.lineTo(AX - r, ATOP + AR);
+    ctx.arc(AX, ATOP + AR, r, Math.PI, 0);
+    ctx.lineTo(AX + r, ABOT);
+    ctx.closePath();
+  }
+
+  function view() {
+    ctx.save();
+    archPath(); ctx.clip();
+    const HZ = 448;
+    ctx.fillStyle = lin(0, ATOP, 0, HZ, [[0, C.skyTop], [0.45, '#8e4168'], [0.72, C.skyMid], [0.9, C.skyLow], [1, '#ffd08a']]);
+    ctx.fillRect(AX - AR, ATOP, AW, HZ - ATOP);
+    // Sun, half set
+    glow(870, HZ, 160, '#ff9a3c', 0.55);
+    ellipse(870, HZ, 38, 38, rad(870, HZ, 0, 38, [[0, '#fff3c8'], [0.6, C.sun], [1, '#ffb04a']]));
+    // Clouds catching the light
+    for (const [cx, cy, w] of [[700, 250, 120], [905, 300, 150], [760, 360, 90]]) {
+      ctx.fillStyle = lin(0, cy - 10, 0, cy + 12, [[0, 'rgba(255,190,140,0.75)'], [1, 'rgba(160,70,100,0.6)']]);
+      rr(cx - w / 2, cy - 7, w, 14, 7); ctx.fill();
+      rr(cx - w / 4, cy - 15, w / 2, 12, 6); ctx.fill();
+    }
+    // Point Loma headland and lighthouse
+    ctx.fillStyle = '#5a3550';
+    ctx.beginPath(); ctx.moveTo(600, HZ); ctx.bezierCurveTo(640, 410, 700, 404, 760, HZ); ctx.fill();
+    ctx.fillStyle = '#e9d6c4'; ctx.fillRect(688, 396, 6, 14);
+    ctx.fillStyle = '#7a2e2e'; ctx.fillRect(686, 392, 10, 5);
+    if (Math.floor(T * 1.4) % 3 === 0) glow(691, 394, 18, '#fff1b0', 0.9);
+    // Sea
+    ctx.fillStyle = lin(0, HZ, 0, ABOT, [[0, C.seaTop], [0.35, '#6a3f5e'], [1, C.seaDeep]]);
+    ctx.fillRect(AX - AR, HZ, AW, ABOT - HZ);
+    // Sun path glints (animated, no rand)
+    for (let i = 0; i < 26; i++) {
+      const y = HZ + 4 + i * 4.5;
+      const spread = 8 + i * 3.2;
+      const x = 870 + Math.sin(i * 12.9898 + T * 1.7) * spread;
+      const w = 10 + (i % 4) * 6;
+      ctx.fillStyle = `rgba(255,${200 - i * 2},${120 - i * 2},${0.85 - i * 0.025})`;
+      ctx.fillRect(x - w / 2, y, w, 2);
+    }
+    // Pier silhouette
+    ctx.fillStyle = C.silhouette;
+    ctx.fillRect(905, 452, 100, 6);
+    for (let x = 910; x < 1005; x += 12) ctx.fillRect(x, 458, 3, 16);
+    for (const x of [930, 958, 986]) { ctx.fillRect(x, 440, 16, 12); ctx.beginPath(); ctx.moveTo(x - 3, 441); ctx.lineTo(x + 8, 433); ctx.lineTo(x + 19, 441); ctx.fill(); }
+    // Palms
+    palmSilhouette(632, 572, 618, 300, -1);
+    palmSilhouette(978, 572, 990, 270, 1);
+    // Gulls
+    ctx.strokeStyle = C.silhouette; ctx.lineWidth = 2;
+    [[760, 300], [790, 285], [830, 312]].forEach(([x, y], i) => {
+      const f = Math.sin(T * 4 + i) * 3;
+      ctx.beginPath(); ctx.moveTo(x - 8, y - f); ctx.quadraticCurveTo(x - 4, y - 5, x, y); ctx.quadraticCurveTo(x + 4, y - 5, x + 8, y - f); ctx.stroke();
+    });
+    ctx.restore();
+  }
+  function palmSilhouette(bx, by, tx, ty, dir) {
+    ctx.strokeStyle = C.silhouette; ctx.lineCap = 'round';
+    ctx.lineWidth = 9;
+    ctx.beginPath(); ctx.moveTo(bx, by); ctx.quadraticCurveTo(bx + dir * 4, (by + ty) / 2, tx, ty); ctx.stroke();
+    ctx.fillStyle = C.silhouette;
+    ctx.beginPath(); ctx.ellipse(tx, ty + 22, 9, 24, 0, 0, Math.PI * 2); ctx.fill();
+    const sway = Math.sin(T * 1.1 + bx) * 0.05;
+    ctx.lineWidth = 5;
+    for (let k = 0; k < 9; k++) {
+      const a = -Math.PI + (k / 8) * Math.PI + sway;
+      const L = 58 + (k % 3) * 8;
+      const ex = tx + Math.cos(a) * L, ey = ty + Math.sin(a) * L * 0.55 + 26;
+      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.quadraticCurveTo(tx + Math.cos(a) * L * 0.6, ty + Math.sin(a) * L * 0.5 - 8, ex, ey); ctx.stroke();
+    }
+  }
+
+  function archFrame() {
+    // Carved wood surround with a Talavera band
+    ctx.save();
+    archPath(-40); archPath(0, false);
+    ctx.fillStyle = lin(AX - AR - 40, 0, AX + AR + 40, 0, [[0, C.woodDark], [0.08, C.wood], [0.5, C.woodLight], [0.92, C.wood], [1, C.woodDark]]);
+    ctx.fill('evenodd');
+    ctx.restore();
+    // Tile band
+    ctx.save();
+    archPath(-30); archPath(-10, false);
+    ctx.clip('evenodd');
+    ctx.fillStyle = C.talaWhite; ctx.fillRect(AX - AR - 40, ATOP - 40, AW + 80, ABOT - ATOP + 40);
+    for (let i = 0; i < 64; i++) {
+      const t = i / 63;
+      const p = archPoint(t, -20);
+      ctx.fillStyle = C.talaBlue;
+      ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = C.talaYellow;
+      ctx.beginPath(); ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2); ctx.fill();
+      if (i % 2) { const q = archPoint(t + 0.008, -20); ctx.fillStyle = C.tealTile; ctx.fillRect(q.x - 2, q.y - 2, 4, 4); }
+    }
+    ctx.restore();
+    // Inner edge highlight and keystone
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,190,120,0.55)'; ctx.lineWidth = 3;
+    archPath(-1); ctx.stroke();
+    ctx.restore();
+    softShadow(() => {
+      ctx.fillStyle = lin(AX - 26, 0, AX + 26, 0, [[0, C.brassDark], [0.5, C.brassLight], [1, C.brassDark]]);
+      ctx.beginPath(); ctx.moveTo(AX - 24, ATOP - 44); ctx.lineTo(AX + 24, ATOP - 44); ctx.lineTo(AX + 16, ATOP - 4); ctx.lineTo(AX - 16, ATOP - 4); ctx.closePath(); ctx.fill();
+    }, 10);
+    ctx.fillStyle = C.brassDark;
+    ctx.beginPath(); ctx.arc(AX, ATOP - 24, 7, 0, Math.PI * 2); ctx.fill();
+  }
+  function archPoint(t, inset) {
+    // Walk the arch from bottom left, over the top, to bottom right.
+    const r = AR - inset, side = ABOT - (ATOP + AR), arcLen = Math.PI * r, total = side * 2 + arcLen;
+    let d = t * total;
+    if (d < side) return { x: AX - r, y: ABOT - d };
+    d -= side;
+    if (d < arcLen) { const a = Math.PI + d / r; return { x: AX + Math.cos(a) * r, y: ATOP + AR + Math.sin(a) * r }; }
+    d -= arcLen;
+    return { x: AX + r, y: ATOP + AR + d };
+  }
+
+  // ---------- back wall and cabinets ----------
+  function wall() {
+    ctx.fillStyle = lin(0, 0, 0, H, [[0, C.wallDeep], [0.5, C.wall], [1, C.wallDeep]]);
+    ctx.fillRect(0, 0, W, H);
+    for (let x = 0; x < W; x += 80) {
+      ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fillRect(x, 0, 2, 600);
+      ctx.fillStyle = 'rgba(255,200,150,0.04)'; ctx.fillRect(x + 2, 0, 1, 600);
+    }
+    grain(0, 0, W, 600, '#000', 500, 0.18);
+    // Crown molding and shop sign
+    ctx.fillStyle = lin(0, 0, 0, 48, [[0, C.woodDark], [0.6, C.wood], [1, C.woodDark]]);
+    ctx.fillRect(0, 0, W, 48);
+    ctx.fillStyle = 'rgba(255,210,150,0.35)'; ctx.fillRect(0, 44, W, 2);
+  }
+
+  function cabinet(x0, y0, cols, rows, cw, ch, items) {
+    const w = cols * cw + 24, h = rows * ch + 24;
+    softShadow(() => { ctx.fillStyle = C.woodDark; ctx.fillRect(x0 - 12, y0 - 12, w, h); }, 30, 'rgba(0,0,0,0.6)', 10);
+    ctx.fillStyle = lin(x0 - 12, 0, x0 - 12 + w, 0, [[0, C.woodDark], [0.5, C.wood], [1, C.woodDark]]);
+    ctx.fillRect(x0 - 12, y0 - 12, w, h);
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const x = x0 + c * cw, y = y0 + r * ch;
+      ctx.fillStyle = lin(0, y, 0, y + ch - 12, [[0, '#0b0605'], [1, '#22140e']]);
+      ctx.fillRect(x, y, cw - 12, ch - 12);
+      ctx.fillStyle = 'rgba(0,0,0,0.5)'; ctx.fillRect(x, y, cw - 12, 10);
+      // Shelf lip catches the light
+      ctx.fillStyle = lin(0, y + ch - 14, 0, y + ch - 4, [[0, C.woodHi], [0.3, C.woodLight], [1, C.woodDark]]);
+      ctx.fillRect(x - 4, y + ch - 14, cw - 4, 10);
+      const item = items[r * cols + c];
+      if (item) item(x + (cw - 12) / 2, y + ch - 14, cw - 12, ch - 12);
+    }
+  }
+
+  // ---------- shelf props ----------
+  function bottle(color, h, opts = {}) {
+    return (cx, by) => {
+      const w = opts.w || 34, neck = opts.neck || 10;
+      const x = cx - w / 2, y = by - h;
+      ctx.fillStyle = lin(x, 0, x + w, 0, [[0, shade(color, -0.45)], [0.35, color], [0.6, shade(color, 0.15)], [1, shade(color, -0.55)]]);
+      rr(x, y + h * 0.32, w, h * 0.68, 6); ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(x + 4, y + h * 0.34); ctx.quadraticCurveTo(cx - neck / 2, y + h * 0.26, cx - neck / 2, y + h * 0.12);
+      ctx.lineTo(cx + neck / 2, y + h * 0.12); ctx.quadraticCurveTo(cx + neck / 2, y + h * 0.26, x + w - 4, y + h * 0.34); ctx.fill();
+      ctx.fillStyle = opts.cap || '#2a1a12'; ctx.fillRect(cx - neck / 2 - 1, y, neck + 2, h * 0.13);
+      if (opts.label) { ctx.fillStyle = opts.label; rr(x + 4, y + h * 0.52, w - 8, h * 0.26, 2); ctx.fill();
+        ctx.fillStyle = 'rgba(60,30,20,0.6)'; ctx.fillRect(x + 8, y + h * 0.6, w - 16, 2); ctx.fillRect(x + 10, y + h * 0.66, w - 20, 2); }
+      ctx.fillStyle = 'rgba(255,230,190,0.35)'; ctx.fillRect(x + 6, y + h * 0.36, 3, h * 0.55);
+    };
+  }
+  function shade(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const f = c => Math.max(0, Math.min(255, Math.round(amt < 0 ? c * (1 + amt) : c + (255 - c) * amt)));
+    return `rgb(${f(n >> 16)},${f((n >> 8) & 255)},${f(n & 255)})`;
+  }
+  const group = (...fns) => (cx, by, w, h) => fns.forEach(([dx, fn]) => fn(cx + dx, by, w, h));
+  function jar(color, fill) {
+    return (cx, by) => {
+      ctx.fillStyle = 'rgba(200,230,230,0.18)'; rr(cx - 22, by - 52, 44, 52, 8); ctx.fill();
+      ctx.fillStyle = fill; rr(cx - 19, by - 34, 38, 32, 6); ctx.fill();
+      for (let i = 0; i < 6; i++) ellipse(cx - 12 + (i % 3) * 12, by - 26 + Math.floor(i / 3) * 12, 6, 5, color);
+      ctx.fillStyle = C.brassDark; ctx.fillRect(cx - 20, by - 58, 40, 8);
+      ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.fillRect(cx - 16, by - 48, 3, 40);
+    };
+  }
+  function plant(trailing) {
+    return (cx, by) => {
+      ctx.fillStyle = lin(cx - 22, 0, cx + 22, 0, [[0, '#7a3a24'], [0.5, '#c0623e'], [1, '#6a2f1c']]);
+      ctx.beginPath(); ctx.moveTo(cx - 22, by - 40); ctx.lineTo(cx + 22, by - 40); ctx.lineTo(cx + 16, by); ctx.lineTo(cx - 16, by); ctx.fill();
+      ctx.fillStyle = C.talaWhite; ctx.fillRect(cx - 20, by - 30, 40, 8);
+      for (let i = -14; i <= 14; i += 7) ellipse(cx + i, by - 26, 2.5, 2.5, C.talaBlue);
+      const leaf = (x, y, a, s) => ellipse(x, y, 9 * s, 5 * s, (a * 7) % 2 > 1 ? '#3f7a3a' : '#5c9a48', a);
+      if (trailing) {
+        for (const side of [-1, 1]) for (let i = 0; i < 9; i++) {
+          const sw = Math.sin(T * 0.8 + i * 0.6 + side) * 2;
+          leaf(cx + side * (20 + Math.sin(i) * 6) + sw, by - 36 + i * 13, side * 0.9 + i * 0.3, 0.9);
+        }
+        for (let i = 0; i < 7; i++) leaf(cx - 18 + i * 6, by - 48 - (i % 2) * 8, i * 0.7, 1);
+      } else {
+        for (let i = 0; i < 7; i++) {
+          const a = -Math.PI / 2 + (i - 3) * 0.32;
+          ctx.strokeStyle = i % 2 ? '#6fa86a' : '#4f8a58'; ctx.lineWidth = 7; ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(cx, by - 40); ctx.lineTo(cx + Math.cos(a) * 34, by - 40 + Math.sin(a) * 40); ctx.stroke();
+        }
+      }
+    };
+  }
+  function surfTrophy(cx, by) {
+    ctx.fillStyle = C.brassDark; ctx.fillRect(cx - 18, by - 10, 36, 10);
+    ctx.fillStyle = C.brass; ctx.fillRect(cx - 14, by - 14, 28, 4);
+    ctx.save(); ctx.translate(cx, by - 62); ctx.rotate(0.12);
+    ctx.fillStyle = lin(-10, 0, 10, 0, [[0, '#d9634f'], [0.5, '#ff9a7a'], [1, '#b84a3a']]);
+    ctx.beginPath(); ctx.ellipse(0, 0, 11, 48, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#fff1e0'; ctx.fillRect(-1, -44, 2, 88);
+    ctx.restore();
+  }
+  function shipInBottle(cx, by) {
+    ctx.fillStyle = 'rgba(190,230,220,0.22)'; rr(cx - 46, by - 40, 82, 36, 16); ctx.fill();
+    ctx.fillRect(cx + 34, by - 28, 14, 12);
+    ctx.fillStyle = '#4a2c1c'; ctx.fillRect(cx - 22, by - 16, 40, 6);
+    ctx.fillStyle = '#efe3c8';
+    ctx.beginPath(); ctx.moveTo(cx - 6, by - 18); ctx.lineTo(cx - 6, by - 38); ctx.lineTo(cx + 10, by - 18); ctx.fill();
+    ctx.fillStyle = C.brassDark; ctx.fillRect(cx - 40, by - 4, 72, 4);
+    ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fillRect(cx - 34, by - 36, 30, 2);
+  }
+  function photo(cx, by) {
+    ctx.save(); ctx.translate(cx, by - 36); ctx.rotate(-0.06);
+    ctx.fillStyle = '#e9dcc0'; ctx.fillRect(-30, -34, 60, 70);
+    ctx.fillStyle = lin(0, -28, 0, 20, [[0, '#d97a52'], [0.55, '#f2b46a'], [0.56, '#3f6f8a'], [1, '#2c4a66']]);
+    ctx.fillRect(-25, -29, 50, 50);
+    ctx.fillStyle = '#2a1b2a'; ctx.fillRect(-14, 0, 3, 20); ctx.beginPath(); ctx.arc(-12, -2, 8, Math.PI, 0); ctx.fill();
+    ctx.restore();
+  }
+  function conch(cx, by) {
+    ctx.fillStyle = lin(cx - 30, 0, cx + 30, 0, [[0, '#d9a58a'], [0.5, '#f7d6c0'], [1, '#c48468']]);
+    ctx.beginPath(); ctx.moveTo(cx - 34, by - 6); ctx.quadraticCurveTo(cx - 20, by - 46, cx + 10, by - 40);
+    ctx.quadraticCurveTo(cx + 34, by - 30, cx + 30, by - 6); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#f2a08a'; ellipse(cx - 4, by - 14, 16, 8, '#f6b4a0');
+  }
+  function radio(cx, by) {
+    ctx.fillStyle = lin(0, by - 70, 0, by, [[0, '#8a5532'], [1, '#4a2c1c']]);
+    ctx.beginPath(); ctx.moveTo(cx - 40, by); ctx.lineTo(cx - 40, by - 44); ctx.quadraticCurveTo(cx, by - 86, cx + 40, by - 44); ctx.lineTo(cx + 40, by); ctx.fill();
+    ctx.fillStyle = '#d9c08e'; ellipse(cx, by - 44, 22, 18, '#c9b07e');
+    ctx.strokeStyle = '#6b4a2a'; ctx.lineWidth = 2;
+    for (let i = -16; i <= 16; i += 6) { ctx.beginPath(); ctx.moveTo(cx + i, by - 58); ctx.lineTo(cx + i, by - 30); ctx.stroke(); }
+    ellipse(cx - 20, by - 12, 5, 5, C.brass); ellipse(cx + 20, by - 12, 5, 5, C.brass);
+  }
+  function books(cx, by) {
+    const cols = ['#5a2a2a', '#2e4a3a', '#7a5a2a', '#2a3a5a', '#6a3a4a'];
+    let x = cx - 44;
+    cols.forEach((c, i) => {
+      const h = 58 + (i % 3) * 8, w = 14 + (i % 2) * 4;
+      ctx.fillStyle = lin(x, 0, x + w, 0, [[0, shade(c, -0.3)], [0.5, shade(c, 0.15)], [1, shade(c, -0.4)]]);
+      if (i === 4) { ctx.save(); ctx.translate(x + 4, by); ctx.rotate(0.28); ctx.fillRect(0, -h, w, h); ctx.restore(); }
+      else ctx.fillRect(x, by - h, w, h);
+      ctx.fillStyle = C.brass; if (i !== 4) ctx.fillRect(x + 2, by - h + 10, w - 4, 2);
+      x += w + 2;
+    });
+  }
+  function shaker(cx, by) {
+    ctx.fillStyle = lin(cx - 16, 0, cx + 16, 0, [[0, '#7f8a8e'], [0.4, '#eef3f4'], [1, '#6a7478']]);
+    ctx.beginPath(); ctx.moveTo(cx - 16, by); ctx.lineTo(cx - 12, by - 52); ctx.lineTo(cx + 12, by - 52); ctx.lineTo(cx + 16, by); ctx.fill();
+    rr(cx - 10, by - 72, 20, 20, 4); ctx.fill(); rr(cx - 4, by - 80, 8, 8, 3); ctx.fill();
+  }
+  function coupes(cx, by) {
+    for (const [dx, dy] of [[-22, 0], [22, 0], [0, -36]]) {
+      const x = cx + dx, y = by + dy;
+      ctx.fillStyle = 'rgba(220,240,240,0.28)';
+      ctx.beginPath(); ctx.moveTo(x - 18, y - 34); ctx.quadraticCurveTo(x, y - 14, x + 18, y - 34); ctx.closePath(); ctx.fill();
+      ctx.fillRect(x - 1, y - 24, 2, 20); ctx.fillRect(x - 9, y - 4, 18, 3);
+      ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fillRect(x - 14, y - 33, 8, 2);
+    }
+  }
+
+  function sconce(x, y) {
+    ctx.fillStyle = C.brassDark; rr(x - 10, y + 10, 20, 34, 4); ctx.fill();
+    ctx.fillStyle = C.brass; ctx.fillRect(x - 3, y - 6, 6, 18);
+    const f = 0.85 + Math.sin(T * 9 + x) * 0.06 + Math.sin(T * 23 + x) * 0.04;
+    glow(x, y - 30, 260 * f, '#ff9a40', 0.35);
+    glow(x, y - 30, 70, '#ffd08a', 0.55 * f);
+    ctx.fillStyle = 'rgba(255,240,200,0.9)';
+    ctx.beginPath(); ctx.ellipse(x, y - 24, 14, 20, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = C.brass; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(x, y - 24, 16, 22, 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = '#fff6d8'; ctx.beginPath(); ctx.ellipse(x, y - 22, 3, 7 * f, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  function stringLights() {
+    ctx.strokeStyle = '#140c08'; ctx.lineWidth = 2;
+    const pts = [];
+    ctx.beginPath();
+    for (let i = 0; i <= 40; i++) {
+      const t = i / 40, x = 70 + t * 1460, y = 58 + Math.sin(t * Math.PI * 4) ** 2 * 26;
+      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      if (i % 2 === 0) pts.push([x, y]);
+    }
+    ctx.stroke();
+    pts.forEach(([x, y], i) => {
+      const tw = 0.75 + 0.25 * Math.sin(T * 2.3 + i * 1.7);
+      glow(x, y + 9, 34, '#ffb35c', 0.28 * tw);
+      ellipse(x, y + 9, 4, 6, `rgba(255,${215 + Math.round(tw * 30)},160,1)`);
+    });
+  }
+
+  // ---------- Maya, framed in the arch ----------
+  function maya() {
+    const cx = 800, hy = 352;
+    const breathe = Math.sin(T * 1.6) * 1.5;
+    ctx.save();
+    archPath(); ctx.clip();
+    // Back hair: a soft cloud of curls with a sunset rim
+    const curls = [];
+    for (let i = 0; i < 46; i++) {
+      const a = Math.PI * 0.9 + (i / 45) * Math.PI * 1.2 + Math.sin(i * 7.1) * 0.1;
+      const r = 58 + Math.sin(i * 3.7) * 8;
+      curls.push([cx + Math.cos(a) * r * 0.95, hy - 6 + Math.sin(a) * r * 0.92, 16 + (i % 4) * 3]);
+    }
+    for (const [x, y, r] of [[cx - 50, hy + 30, 22], [cx + 50, hy + 30, 22], [cx - 44, hy + 52, 18], [cx + 46, hy + 54, 18]]) curls.push([x, y, r]);
+    curls.forEach(([x, y, r]) => ellipse(x, y, r, r, C.hair));
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    curls.forEach(([x, y, r]) => { if (x > cx + 20 && y < hy + 10) ellipse(x + r * 0.45, y - r * 0.3, r * 0.4, r * 0.22, 'rgba(255,140,70,0.12)'); });
+    ctx.restore();
+
+    // Shoulders and tee
+    ctx.fillStyle = lin(cx - 120, 0, cx + 120, 0, [[0, '#2e1a10'], [0.45, C.shirt], [1, '#24140c']]);
+    ctx.beginPath();
+    ctx.moveTo(cx - 128, ABOT + 2); ctx.bezierCurveTo(cx - 126, hy + 112 + breathe, cx - 100, hy + 92 + breathe, cx - 34, hy + 82 + breathe);
+    ctx.lineTo(cx + 34, hy + 82 + breathe); ctx.bezierCurveTo(cx + 100, hy + 92 + breathe, cx + 126, hy + 112 + breathe, cx + 128, ABOT + 2);
+    ctx.closePath(); ctx.fill();
+    // Gold raglan sleeves
+    for (const s of [-1, 1]) {
+      ctx.fillStyle = lin(cx + s * 60, hy + 90, cx + s * 128, ABOT, [[0, C.sleeve], [1, shade(C.sleeve, -0.45)]]);
+      ctx.beginPath();
+      ctx.moveTo(cx + s * 38, hy + 84 + breathe); ctx.lineTo(cx + s * 128, ABOT + 2); ctx.lineTo(cx + s * 98, ABOT + 2);
+      ctx.bezierCurveTo(cx + s * 92, hy + 150, cx + s * 70, hy + 110, cx + s * 38, hy + 84 + breathe); ctx.fill();
+    }
+    // Neck
+    ctx.fillStyle = lin(cx - 20, 0, cx + 20, 0, [[0, C.skinShade], [0.5, C.skin], [1, C.skinShade]]);
+    ctx.fillRect(cx - 18, hy + 40, 36, 46);
+    ctx.fillStyle = 'rgba(40,20,10,0.35)'; ctx.fillRect(cx - 18, hy + 40, 36, 14);
+    ctx.fillStyle = C.sleeve; ctx.beginPath(); ctx.ellipse(cx, hy + 84 + breathe, 30, 7, 0, 0, Math.PI); ctx.fill();
+
+    // Head
+    ctx.fillStyle = rad(cx - 12, hy - 10, 6, 70, [[0, C.skinLight], [0.55, C.skin], [1, C.skinShade]]);
+    ctx.beginPath(); ctx.ellipse(cx, hy, 44, 54, 0, 0, Math.PI * 2); ctx.fill();
+    ellipse(cx - 44, hy + 6, 8, 12, C.skinShade); ellipse(cx + 44, hy + 6, 8, 12, C.skinShade);
+    ctx.strokeStyle = C.brassLight; ctx.lineWidth = 2.5;
+    for (const s of [-1, 1]) { ctx.beginPath(); ctx.arc(cx + s * 46, hy + 26, 7, 0, Math.PI * 2); ctx.stroke(); }
+    // Rim light from the sunset
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = 'rgba(255,150,80,0.45)'; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.ellipse(cx, hy, 43, 53, 0, -1.3, 0.4); ctx.stroke(); ctx.restore();
+
+    // Face
+    const blink = ST.serve || ((T + 0.4) % 4.2) < 0.14;
+    for (const s of [-1, 1]) {
+      const ex = cx + s * 17, ey = hy + 2;
+      ctx.strokeStyle = C.hair; ctx.lineWidth = 3.5; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(ex - 10, ey - 16 + (s > 0 ? 0 : 1)); ctx.quadraticCurveTo(ex, ey - 21, ex + 10, ey - 15); ctx.stroke();
+      if (blink) { ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(ex - 8, ey + (ST.serve ? 3 : 0)); ctx.quadraticCurveTo(ex, ey + (ST.serve ? -6 : 4), ex + 8, ey + (ST.serve ? 3 : 0)); ctx.stroke(); continue; }
+      ellipse(ex, ey, 9, 6.5, '#f4ebe0');
+      ellipse(ex + 1, ey + 0.5, 5.5, 6, '#3a1f12');
+      ellipse(ex + 1, ey + 0.5, 2.6, 3, '#120805');
+      ellipse(ex + 3, ey - 2, 1.8, 1.8, '#ffffff');
+      ctx.strokeStyle = '#2a140c'; ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.ellipse(ex, ey, 9, 6.5, 0, Math.PI * 1.05, Math.PI * 1.95); ctx.stroke();
+    }
+    ctx.strokeStyle = C.skinShade; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(cx + 2, hy + 6); ctx.quadraticCurveTo(cx + 6, hy + 20, cx - 2, hy + 23); ctx.stroke();
+    ctx.fillStyle = '#7a3a2c';
+    if (ST.serve) {
+      ctx.beginPath(); ctx.moveTo(cx - 17, hy + 28); ctx.quadraticCurveTo(cx, hy + 50, cx + 17, hy + 28); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = '#f4ebe0'; ctx.beginPath(); ctx.moveTo(cx - 14, hy + 30); ctx.lineTo(cx + 14, hy + 30); ctx.lineTo(cx + 11, hy + 35); ctx.lineTo(cx - 11, hy + 35); ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.moveTo(cx - 13, hy + 32); ctx.quadraticCurveTo(cx, hy + 41, cx + 13, hy + 32); ctx.quadraticCurveTo(cx, hy + 36, cx - 13, hy + 32); ctx.fill();
+    }
+    ellipse(cx - 27, hy + 20, 9, 5, 'rgba(230,110,100,0.28)'); ellipse(cx + 27, hy + 20, 9, 5, 'rgba(230,110,100,0.28)');
+
+    // Front curls and sunglasses pushed up
+    for (let i = 0; i < 9; i++) ellipse(cx - 40 + i * 10, hy - 46 + Math.abs(i - 4) * 2.5, 11, 10, C.hair);
+    for (const s of [-1, 1]) {
+      ctx.fillStyle = '#16161e'; rr(cx + (s < 0 ? -36 : 6), hy - 62, 30, 15, 6); ctx.fill();
+      ctx.fillStyle = 'rgba(255,170,110,0.55)'; ctx.fillRect(cx + (s < 0 ? -30 : 12), hy - 59, 8, 3);
+    }
+    ctx.fillStyle = '#16161e'; ctx.fillRect(cx - 6, hy - 57, 12, 3);
+    ctx.restore();
+  }
+
+  // ---------- counter ----------
+  // The bar top is deep enough to work on: the glass sits on a mat in the foreground, under the guest.
+  const TOP = 572, EDGE = 704, LIP = 716;
+  const ST = { serve: false };
+  function counter() {
+    softShadow(() => { ctx.fillStyle = C.wood; ctx.fillRect(0, TOP, W, EDGE - TOP); }, 26, 'rgba(0,0,0,0.6)', -6);
+    ctx.fillStyle = lin(0, TOP, 0, EDGE, [[0, '#4a2a18'], [0.35, '#6e4026'], [1, C.woodLight]]);
+    ctx.fillRect(0, TOP, W, EDGE - TOP);
+    grain(0, TOP + 4, W, EDGE - TOP - 8, '#3a2216', 260, 0.35);
+    // Sunlight from the arch spilling across the bar top
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = lin(0, TOP, 0, EDGE, [[0, 'rgba(255,150,70,0.34)'], [1, 'rgba(255,150,70,0.04)']]);
+    ctx.beginPath(); ctx.moveTo(AX - AR, TOP); ctx.lineTo(AX + AR, TOP); ctx.lineTo(AX + AR + 110, EDGE); ctx.lineTo(AX - AR - 110, EDGE); ctx.fill();
+    ctx.restore();
+    ctx.fillStyle = 'rgba(0,0,0,0.35)'; ctx.fillRect(0, TOP, W, 6);
+    // Front lip, then the cabinet front on the bartender's side
+    ctx.fillStyle = lin(0, EDGE, 0, LIP, [[0, C.woodHi], [0.4, C.woodLight], [1, C.woodDark]]);
+    ctx.fillRect(0, EDGE, W, LIP - EDGE);
+    ctx.fillStyle = lin(0, LIP, 0, H, [[0, '#3a2216'], [1, '#160d09']]);
+    ctx.fillRect(0, LIP, W, H - LIP);
+    ctx.fillStyle = 'rgba(0,0,0,0.5)'; ctx.fillRect(0, LIP, W, 8);
+  }
+
+  // Every clickable thing wears the same brass plate. Decor never does.
+  function plate(cx, y, text, size = 18) {
+    ctx.font = font(size, 600);
+    const ph = size + 12, w = Math.max(ctx.measureText(text).width + size * 1.8, size * 4.4);
+    softShadow(() => {
+      ctx.fillStyle = lin(0, y, 0, y + ph, [[0, C.brassLight], [0.5, C.brass], [1, C.brassDark]]);
+      rr(cx - w / 2, y, w, ph, 5); ctx.fill();
+    }, 8, 'rgba(0,0,0,0.6)', 3);
+    ctx.fillStyle = C.brassDark; for (const sx of [-1, 1]) { ctx.beginPath(); ctx.arc(cx + sx * (w / 2 - 8), y + ph / 2, 2.5, 0, Math.PI * 2); ctx.fill(); }
+    label(text, cx, y + ph / 2 + 1, size, '#2a170c', 'center', 600);
+  }
+  function keycap(x, y, n, lit) {
+    softShadow(() => { ctx.fillStyle = lit ? C.brassLight : '#b89a6a'; rr(x, y, 26, 26, 5); ctx.fill(); }, 4, 'rgba(0,0,0,0.6)', 2);
+    ctx.fillStyle = lit ? '#fff1c8' : C.paper; rr(x + 3, y + 2, 20, 19, 4); ctx.fill();
+    label(String(n), x + 13, y + 12, 16, C.paperInk, 'center', 700);
+  }
+  function recess(x, y, w, h) {
+    ctx.fillStyle = lin(0, y, 0, y + h, [[0, '#070403'], [1, '#1a100b']]); rr(x, y, w, h, 6); ctx.fill();
+    ctx.strokeStyle = C.woodLight; ctx.lineWidth = 3; rr(x, y, w, h, 6); ctx.stroke();
+  }
+
+  function tumbler(x, by, w, h, fills = [], empty = false) {
+    ctx.fillStyle = 'rgba(210,235,240,0.2)';
+    ctx.beginPath(); ctx.moveTo(x, by - h); ctx.lineTo(x + w, by - h); ctx.lineTo(x + w - 4, by); ctx.lineTo(x + 4, by); ctx.fill();
+    let y = by - 6;
+    for (const [frac, color] of fills) {
+      const fh = (h - 10) * frac;
+      ctx.fillStyle = color; ctx.fillRect(x + 4, y - fh, w - 8, fh); y -= fh;
+    }
+    if (fills.length) { ctx.fillStyle = 'rgba(255,200,150,0.5)'; ctx.fillRect(x + 4, y, w - 8, 2); }
+    ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.fillRect(x + 6, by - h + 6, 3, h - 14);
+    ctx.fillStyle = 'rgba(200,230,240,0.45)'; ctx.fillRect(x + 4, by - 6, w - 8, 6);
+    ctx.strokeStyle = 'rgba(230,250,255,0.6)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(x, by - h); ctx.lineTo(x + 4, by); ctx.lineTo(x + w - 4, by); ctx.lineTo(x + w, by - h); ctx.stroke();
+    return y;
+  }
+
+  // Waiting guests sit at the ends of the bar, in shadow, so the room feels social.
+  function seatedGuest(cx, o) {
+    const hy = 486, d = v => shade(v, -0.45);
+    ctx.fillStyle = d(o.shirt);
+    ctx.beginPath(); ctx.moveTo(cx - 74, TOP); ctx.bezierCurveTo(cx - 72, hy + 66, cx - 52, hy + 52, cx - 18, hy + 46);
+    ctx.lineTo(cx + 18, hy + 46); ctx.bezierCurveTo(cx + 52, hy + 52, cx + 72, hy + 66, cx + 74, TOP); ctx.fill();
+    ctx.fillStyle = d(o.skin); ctx.fillRect(cx - 12, hy + 24, 24, 26);
+    if (o.bun) ellipse(cx - o.dir * 8, hy - 38, 16, 14, d(o.hair));
+    ellipse(cx, hy, 28, 34, d(o.skin));
+    ellipse(cx - o.dir * 4, hy - 20, 30, 18, d(o.hair));
+    for (const s of [-1, 1]) ellipse(cx + s * 10 + o.dir * 4, hy, 2.5, 3, '#1a0e08');
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = 'rgba(255,150,80,0.25)'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.ellipse(cx, hy, 27, 33, 0, o.dir > 0 ? -1.2 : Math.PI - 0.4, o.dir > 0 ? 0.4 : Math.PI + 1.2); ctx.stroke(); ctx.restore();
+    // Small "waiting" bubble; their order and patience live on the ticket
+    const bx = cx + o.dir * 46, by = hy - 54;
+    ctx.fillStyle = 'rgba(241,226,191,0.85)'; rr(bx - 24, by - 14, 48, 28, 14); ctx.fill();
+    for (let i = -1; i <= 1; i++) ellipse(bx + i * 11, by, 3.5, 3.5, C.paperSoft);
+  }
+
+  function glassRack() {
+    const base = 672;
+    softShadow(() => { ctx.fillStyle = C.wood; rr(76, base - 4, 250, 18, 4); ctx.fill(); }, 10);
+    ctx.fillStyle = C.woodHi; ctx.fillRect(80, base - 4, 242, 3);
+    for (let i = 0; i < 3; i++) tumbler(100 + i * 76, base - 2, 54, 72);
+    if (Math.floor(T * 1.2) % 3 === 0) glow(110 + (Math.floor(T * 0.4) % 3) * 76, base - 60, 16, '#ffffff', 0.8);
+    plate(201, 688, 'CLEAN  3');
+  }
+
+  // Rubber bar mat: the work area, front and center under the guest
+  function barMat() {
+    softShadow(() => {
+      ctx.fillStyle = '#15100d';
+      ctx.beginPath(); ctx.moveTo(668, 624); ctx.lineTo(932, 624); ctx.lineTo(958, 700); ctx.lineTo(642, 700); ctx.closePath(); ctx.fill();
+    }, 10);
+    ctx.strokeStyle = 'rgba(80,140,130,0.3)'; ctx.lineWidth = 1.5;
+    for (let i = 1; i < 14; i++) { const t = i / 14; ctx.beginPath(); ctx.moveTo(668 + 264 * t, 626); ctx.lineTo(642 + 316 * t, 698); ctx.stroke(); }
+    for (const y of [644, 664, 684]) { const t = (y - 624) / 76; ctx.beginPath(); ctx.moveTo(668 - 26 * t, y); ctx.lineTo(932 + 26 * t, y); ctx.stroke(); }
+  }
+
+  const GX = 748, GW = 104, GH = 144, GB = 694;
+  function pourStation() {
+    // Cola gun over the glass; its hose drops under the bar to the speed rail
+    ctx.strokeStyle = '#1a120e'; ctx.lineWidth = 8; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(866, 510); ctx.bezierCurveTo(940, 510, 976, 560, 980, 708); ctx.stroke();
+    softShadow(() => {
+      ctx.fillStyle = lin(0, 496, 0, 524, [[0, '#eef3f4'], [1, '#7f8a8e']]);
+      rr(770, 496, 100, 28, 9); ctx.fill();
+    }, 10);
+    [['#d9534f', 788], [C.cola, 808], ['#2fc4b2', 828], ['#f3e05a', 848]].forEach(([c, x]) => ellipse(x, 510, 5, 5, c));
+    ctx.fillStyle = '#6a7478'; ctx.fillRect(794, 524, 12, 12);
+    const surface = tumbler(GX, GB, GW, GH, [[0.28, C.rum], [0.45, C.cola]]);
+    const flow = (T * 160) % 18;
+    ctx.fillStyle = C.cola; ctx.fillRect(797, 536, 6, surface - 536);
+    ctx.fillStyle = 'rgba(160,80,50,0.8)';
+    for (let y = 536 + flow; y < surface; y += 18) ctx.fillRect(797, y, 6, 6);
+    for (let i = 0; i < 6; i++) {
+      const by = surface + 6 + ((T * 30 + i * 13) % 50);
+      ellipse(GX + 18 + i * 13, by, 2, 2, 'rgba(255,210,170,0.6)');
+    }
+    brackets(GX - 14, GB - GH - 14, GW + 28, GH + 22, 18);
+    // Brass gauge: 0 to 3 units, target 2 +/- 0.25 of cola, currently 1.6
+    const gX = 692, gTop = 556, gBot = 692, unit = (gBot - gTop - 8) / 3;
+    const yAt = u => gBot - 4 - u * unit;
+    softShadow(() => { ctx.fillStyle = lin(gX, 0, gX + 26, 0, [[0, C.brassDark], [0.5, C.brassLight], [1, C.brassDark]]); rr(gX, gTop, 26, gBot - gTop, 11); ctx.fill(); }, 8);
+    ctx.fillStyle = '#1a100a'; rr(gX + 6, gTop + 5, 14, gBot - gTop - 10, 6); ctx.fill();
+    ctx.fillStyle = 'rgba(109,187,99,0.9)'; ctx.fillRect(gX + 6, yAt(2.25), 14, yAt(1.75) - yAt(2.25));
+    ctx.fillStyle = C.cola; ctx.fillRect(gX + 8, yAt(1.6), 10, gBot - 5 - yAt(1.6));
+    ctx.fillStyle = '#c87a4a'; ctx.fillRect(gX + 8, yAt(1.6), 10, 2);
+    ctx.fillStyle = C.brassLight;
+    ctx.beginPath(); ctx.moveTo(gX + 28, yAt(1.6)); ctx.lineTo(gX + 38, yAt(1.6) - 6); ctx.lineTo(gX + 38, yAt(1.6) + 6); ctx.fill();
+    for (const u of [1, 2, 3]) ctx.fillRect(gX + 2, yAt(u), 4, 2);
+  }
+
+  // The serve beat: the glass slides to the guest, she reacts, coins hop into the jar.
+  function serveStation() {
+    const gx = 764, gb = 640, gw = 72, gh = 104;
+    ctx.strokeStyle = 'rgba(255,220,170,0.4)'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+    for (const dx of [10, 36, 62]) { ctx.beginPath(); ctx.moveTo(gx + dx, gb + 12); ctx.lineTo(gx + dx + (dx - 36) * 0.35, gb + 54); ctx.stroke(); }
+    tumbler(gx, gb, gw, gh, [[0.3, C.rum], [0.58, C.cola]]);
+    ctx.fillStyle = '#8fd14f'; ctx.beginPath(); ctx.arc(gx + gw - 6, gb - gh + 4, 12, Math.PI * 0.9, Math.PI * 1.9); ctx.fill();
+  }
+
+  function counterRight() {
+    const base = 690;
+    // Tip jar
+    softShadow(() => { ctx.fillStyle = 'rgba(210,235,240,0.22)'; rr(1004, base - 74, 56, 74, 12); ctx.fill(); }, 10);
+    const coins = ST.serve ? 10 : 7;
+    for (let i = 0; i < coins; i++) ellipse(1016 + (i % 4) * 11, base - 10 - Math.floor(i / 4) * 8, 6, 3, i % 3 ? C.brass : '#c9d3d6');
+    ctx.fillStyle = '#7fbf7a'; ctx.save(); ctx.translate(1038, base - 46); ctx.rotate(0.3); ctx.fillRect(-7, -16, 14, 30); ctx.restore();
+    ctx.fillStyle = C.paper; rr(1008, base - 44, 48, 20, 3); ctx.fill();
+    label('TIPS', 1032, base - 33, 15, C.ink, 'center', 700);
+    ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.fillRect(1010, base - 66, 4, 54);
+    softShadow(() => plant(false)(1566, base), 10);
+  }
+
+  // The guest book lies open-able on the counter, glowing when it has news
+  function guestBook() {
+    const cx = 1462, cy = 640;
+    glow(cx, cy, ST.serve ? 130 : 96, '#ffb35c', ST.serve ? 0.5 : 0.35);
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(-0.06);
+    softShadow(() => { ctx.fillStyle = '#5a221c'; rr(-58, -40, 116, 76, 6); ctx.fill(); }, 12);
+    ctx.fillStyle = '#efe0bc'; ctx.fillRect(-54, 30, 110, 7);
+    ctx.fillStyle = lin(-58, 0, 58, 0, [[0, '#4a1a16'], [0.5, '#7a2e24'], [1, '#4a1a16']]); rr(-58, -40, 116, 72, 6); ctx.fill();
+    ctx.strokeStyle = C.brassLight; ctx.lineWidth = 2; rr(-48, -31, 96, 54, 4); ctx.stroke();
+    ellipse(0, -4, 13, 13, C.brass); ellipse(0, -4, 7, 7, C.brassLight);
+    ctx.fillStyle = '#a8322a'; ctx.beginPath(); ctx.moveTo(30, 32); ctx.lineTo(40, 32); ctx.lineTo(40, 50); ctx.lineTo(35, 45); ctx.lineTo(30, 50); ctx.fill();
+    ctx.restore();
+    const pulse = 0.75 + Math.sin(T * 3) * 0.25;
+    ctx.save(); ctx.globalAlpha = pulse; ellipse(cx + 58, cy - 42, 16, 16, C.heart); ctx.restore();
+    label(ST.serve ? '+2' : '+1', cx + 58, cy - 41, 15, '#fff', 'center', 700);
+    plate(cx, 688, 'GUEST BOOK');
+  }
+
+  function churro() {
+    const cx = 1292, base = 690;
+    // Tail curls around the front and swishes
+    const sw = Math.sin(T * 1.8) * 14;
+    ctx.strokeStyle = C.cat; ctx.lineWidth = 15; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(cx + 40, base - 12); ctx.bezierCurveTo(cx + 70, base - 6, cx + 30, base + 4, cx - 30 - sw * 0.3, base - 2 - Math.abs(sw) * 0.4); ctx.stroke();
+    ctx.strokeStyle = C.catDark; ctx.lineWidth = 15;
+    ctx.beginPath(); ctx.moveTo(cx - 18 - sw * 0.25, base - 1); ctx.lineTo(cx - 30 - sw * 0.3, base - 2 - Math.abs(sw) * 0.4); ctx.stroke();
+    softShadow(() => ellipse(cx, base - 50, 48, 54, rad(cx - 14, base - 70, 6, 70, [[0, C.catLight], [0.6, C.cat], [1, C.catDark]])), 16);
+    ellipse(cx, base - 42, 22, 34, '#f6e6cf');
+    for (const s of [-1, 1]) ellipse(cx + s * 18, base - 6, 15, 9, '#f6e6cf');
+    ctx.strokeStyle = C.catDark; ctx.lineWidth = 6;
+    for (const s of [-1, 1]) for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(cx + s * 30, base - 72 + i * 20, 16, s < 0 ? -0.6 : Math.PI - 0.3, s < 0 ? 0.3 : Math.PI + 0.6); ctx.stroke(); }
+    // Head
+    const hy = base - 116;
+    for (const s of [-1, 1]) {
+      ctx.fillStyle = C.cat; ctx.beginPath(); ctx.moveTo(cx + s * 38, hy - 4); ctx.lineTo(cx + s * 34, hy - 46); ctx.lineTo(cx + s * 10, hy - 28); ctx.fill();
+      ctx.fillStyle = '#e8a090'; ctx.beginPath(); ctx.moveTo(cx + s * 32, hy - 10); ctx.lineTo(cx + s * 31, hy - 36); ctx.lineTo(cx + s * 16, hy - 24); ctx.fill();
+    }
+    ellipse(cx, hy, 42, 36, rad(cx - 10, hy - 14, 4, 50, [[0, C.catLight], [0.65, C.cat], [1, C.catDark]]));
+    ctx.fillStyle = C.catDark;
+    for (const dx of [-10, 0, 10]) { ctx.beginPath(); ctx.moveTo(cx + dx - 3, hy - 34); ctx.lineTo(cx + dx + 3, hy - 34); ctx.lineTo(cx + dx, hy - 18); ctx.fill(); }
+    ellipse(cx, hy + 14, 18, 12, '#f6e6cf');
+    // Content cat: slow blinks, eyes mostly half shut
+    const open = ((T + 1.1) % 5.5) < 1.6;
+    for (const s of [-1, 1]) {
+      const ex = cx + s * 17, ey = hy - 2;
+      if (open) { ellipse(ex, ey, 8, 7, '#9acd5a'); ellipse(ex, ey, 2.4, 6, '#14100c'); ellipse(ex + 2, ey - 2, 1.6, 1.6, '#fff'); }
+      else { ctx.strokeStyle = '#3a2010'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ex - 8, ey); ctx.quadraticCurveTo(ex, ey + 5, ex + 8, ey); ctx.stroke(); }
+    }
+    ctx.fillStyle = '#e07a7a'; ctx.beginPath(); ctx.moveTo(cx - 5, hy + 8); ctx.lineTo(cx + 5, hy + 8); ctx.lineTo(cx, hy + 13); ctx.fill();
+    ctx.strokeStyle = '#5a3020'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx, hy + 13); ctx.quadraticCurveTo(cx - 5, hy + 20, cx - 9, hy + 16); ctx.moveTo(cx, hy + 13); ctx.quadraticCurveTo(cx + 5, hy + 20, cx + 9, hy + 16); ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,245,230,0.8)'; ctx.lineWidth = 1.2;
+    for (const s of [-1, 1]) for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(cx + s * 16, hy + 12 + i * 3); ctx.lineTo(cx + s * 50, hy + 6 + i * 7); ctx.stroke(); }
+    // Teal collar and tag
+    ctx.strokeStyle = '#2fa49a'; ctx.lineWidth = 6; ctx.beginPath(); ctx.arc(cx, hy + 6, 34, 0.55, Math.PI - 0.55); ctx.stroke();
+    ellipse(cx, hy + 40, 6, 6, C.brassLight);
+    // Rim light from the sconce
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = 'rgba(255,170,90,0.35)'; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.ellipse(cx, base - 50, 47, 53, 0, Math.PI * 1.1, Math.PI * 1.6); ctx.stroke(); ctx.restore();
+    plate(cx, 688, 'CHURRO');
+  }
+
+  // Speed rail: every pour source in one row under the glass, labeled on the item, with hotkeys.
+  function speedRail() {
+    const x = 512, y = 728, w = 564, h = 164, sw = w / 5, by = y + 124;
+    recess(x, y, w, h);
+    const tap = cx => {
+      ctx.fillStyle = lin(cx - 7, 0, cx + 7, 0, [[0, C.brassDark], [0.5, C.brassLight], [1, C.brassDark]]); rr(cx - 7, by - 58, 14, 58, 4); ctx.fill();
+      ctx.fillStyle = C.brass; rr(cx - 14, by - 64, 28, 10, 4); ctx.fill();
+      ctx.save(); ctx.translate(cx, by - 92); ctx.rotate(-0.08);
+      ctx.fillStyle = lin(-11, 0, 11, 0, [[0, '#1f7f78'], [0.5, '#4fd2c2'], [1, '#17605a']]);
+      ctx.beginPath(); ctx.ellipse(0, 0, 11, 28, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#f1e2bf'; ctx.fillRect(-1, -24, 2, 48); ctx.restore();
+    };
+    const rum = cx => softShadow(() => bottle(C.rum, 100, { w: 46, neck: 14, cap: '#8a2a2a', label: C.paper })(cx, by), 10);
+    const cola = cx => {
+      ctx.fillStyle = lin(cx - 20, 0, cx + 20, 0, [[0, '#6a7478'], [0.5, '#dfe6e8'], [1, '#5a6468']]);
+      rr(cx - 20, by - 46, 40, 46, 6); ctx.fill();
+      ctx.fillStyle = '#1a120e'; rr(cx - 14, by - 46, 28, 8, 3); ctx.fill();
+      ctx.strokeStyle = '#1a120e'; ctx.lineWidth = 8; ctx.lineCap = 'round';
+      if (ST.serve) {
+        softShadow(() => { ctx.fillStyle = lin(0, by - 86, 0, by - 58, [[0, '#eef3f4'], [1, '#7f8a8e']]); rr(cx - 16, by - 92, 32, 50, 8); ctx.fill(); }, 6);
+        ctx.beginPath(); ctx.moveTo(cx + 18, by - 30); ctx.quadraticCurveTo(cx + 44, by - 40, cx + 40, by - 80); ctx.stroke();
+      } else {
+        ctx.beginPath(); ctx.moveTo(cx + 18, by - 30); ctx.bezierCurveTo(cx + 48, by - 40, cx + 50, y + 30, cx + 46, y + 4); ctx.stroke();
+      }
+    };
+    const nuts = cx => jar('#d8a865', 'rgba(216,168,101,0.25)')(cx, by);
+    const slots = [['DRAFT', tap], ['RUM', rum], ['COLA', cola], ['NUTS', nuts], [null]];
+    slots.forEach(([name, draw], i) => {
+      const cx = x + sw * (i + 0.5), x0 = x + sw * i;
+      if (!name) {
+        ctx.save(); ctx.setLineDash([6, 6]); ctx.strokeStyle = 'rgba(241,226,191,0.3)'; ctx.lineWidth = 2;
+        rr(cx - 38, y + 22, 76, 112, 8); ctx.stroke(); ctx.restore();
+        label('+', cx, y + 64, 32, 'rgba(241,226,191,0.35)', 'center', 400);
+        label('Upgrade', cx, y + 106, 15, 'rgba(241,226,191,0.45)', 'center', 400, true);
+        return;
+      }
+      const active = !ST.serve && name === 'COLA';
+      if (active) glow(cx, y + 80, 90, '#ffb35c', 0.3);
+      draw(cx);
+      keycap(x0 + 8, y + 8, i + 1, active);
+      if (active) brackets(x0 + 4, y + 4, sw - 8, h - 8, 14);
+    });
+    // Stainless rail across the front; each name tag clips onto it under its item
+    ctx.fillStyle = lin(0, by - 6, 0, by + 16, [[0, '#dfe6e8'], [0.5, '#8f9a9e'], [1, '#4a5458']]);
+    ctx.fillRect(x + 10, by - 6, w - 20, 20);
+    slots.forEach(([name], i) => { if (name) plate(x + sw * (i + 0.5), by, name, 15); });
+  }
+
+  // Back bar: dirty glasses, sink, and washer share one compact strip. A busser can take it over later.
+  function backBar() {
+    const x = 1084, y = 728, w = 310, h = 164, py = y + 116;
+    recess(x, y, w, h);
+    // Dirty tub
+    let cx = 1136;
+    ctx.fillStyle = lin(0, y + 60, 0, y + 108, [[0, '#9aa6ab'], [1, '#56626a']]);
+    ctx.beginPath(); ctx.moveTo(cx - 40, y + 62); ctx.lineTo(cx + 40, y + 62); ctx.lineTo(cx + 34, y + 108); ctx.lineTo(cx - 34, y + 108); ctx.fill();
+    tumbler(cx - 18, y + 70, 34, 44, [[0.15, 'rgba(140,110,60,0.7)']]);
+    plate(cx, py, 'DIRTY 1', 15);
+    // Sink
+    cx = 1239;
+    ctx.fillStyle = lin(0, y + 60, 0, y + 108, [[0, '#c9d3d6'], [1, '#6a7478']]); rr(cx - 42, y + 58, 84, 50, 8); ctx.fill();
+    ctx.fillStyle = lin(0, y + 66, 0, y + 100, [[0, '#7aa9b8'], [1, '#3f6f80']]); rr(cx - 34, y + 66, 68, 34, 6); ctx.fill();
+    for (let i = 0; i < 7; i++) ellipse(cx - 27 + i * 9 + Math.sin(T * 1.5 + i) * 2, y + 70 + (i % 2) * 4, 6, 4, 'rgba(255,255,255,0.85)');
+    ctx.strokeStyle = '#aab5b9'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(cx, y + 58); ctx.lineTo(cx, y + 30); ctx.quadraticCurveTo(cx, y + 22, cx + 10, y + 22); ctx.lineTo(cx + 22, y + 22); ctx.lineTo(cx + 22, y + 32); ctx.stroke();
+    plate(cx, py, 'SINK', 15);
+    // Washer
+    cx = 1342;
+    ctx.fillStyle = lin(cx - 42, 0, cx + 42, 0, [[0, '#7f8a8e'], [0.4, '#dfe6e8'], [1, '#6a7478']]); rr(cx - 42, y + 18, 84, 90, 8); ctx.fill();
+    ellipse(cx - 10, y + 70, 27, 27, C.brassDark);
+    ellipse(cx - 10, y + 70, 21, 21, rad(cx - 10, y + 70, 0, 21, [[0, '#9fd2e0'], [1, '#2f6f86']]));
+    ctx.save(); ctx.beginPath(); ctx.arc(cx - 10, y + 70, 21, 0, Math.PI * 2); ctx.clip();
+    for (let i = 0; i < 5; i++) { const a = T * 2 + i * 1.3; ellipse(cx - 10 + Math.cos(a) * 10, y + 70 + Math.sin(a) * 10, 5, 3.5, 'rgba(255,255,255,0.6)', a); }
+    ctx.restore();
+    ctx.fillStyle = '#1a2420'; rr(cx + 8, y + 24, 30, 22, 4); ctx.fill();
+    label(`${8 - Math.floor(T % 8)}s`, cx + 23, y + 35, 15, '#7df09a', 'center', 600);
+    plate(cx, py, 'WASH', 15);
+    label('Busser: hire one in the shop', x + w / 2, y + h - 14, 15, 'rgba(241,226,191,0.5)', 'center', 400, true);
+  }
+
+  // Tutorial-only tip that sits beside the glass; it goes away once you've poured a few drinks
+  function tutorialTag() {
+    const x = 418, y = 618, w = 228, h = 62;
+    parchment(x, y, w, h, 10);
+    ctx.fillStyle = '#e6d2a8'; ctx.beginPath(); ctx.moveTo(x + w - 2, y + 20); ctx.lineTo(x + w + 14, y + 31); ctx.lineTo(x + w - 2, y + 42); ctx.fill();
+    keycap(x + 14, y + 9, 3, true);
+    label('Hold to pour cola', x + 50, y + 22, 17, C.paperInk, 'left', 600);
+    label('Let go anytime; the fill stays', x + 16, y + 46, 15, C.paperSoft, 'left', 400, true);
+  }
+
+  // Serve payoff drawn over everything: medallion, coin hop, and the guest-book toast
+  function serveEffects() {
+    const mx = 662, my = 566;
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < 12; i++) {
+      const a = i * Math.PI / 6 + T * 0.4;
+      ctx.strokeStyle = 'rgba(255,200,110,0.35)'; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(mx + Math.cos(a) * 50, my + Math.sin(a) * 50); ctx.lineTo(mx + Math.cos(a) * 74, my + Math.sin(a) * 74); ctx.stroke();
+    }
+    ctx.restore();
+    softShadow(() => ellipse(mx, my, 46, 46, rad(mx - 14, my - 14, 4, 50, [[0, C.brassLight], [0.6, C.brass], [1, C.brassDark]])), 14, 'rgba(0,0,0,0.6)', 4);
+    ellipse(mx, my, 36, 36, C.paper);
+    for (let k = 0; k < 3; k++) sandDollar(mx - 18 + k * 18, my - 12, true);
+    label('PERFECT', mx, my + 14, 15, C.paperInk, 'center', 700);
+    // Coins hop from the glass to the tip jar
+    const p0 = [840, 560], p1 = [960, 440], p2 = [1032, 600];
+    ctx.save(); ctx.setLineDash([3, 7]); ctx.strokeStyle = 'rgba(242,208,138,0.6)'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(...p0); ctx.quadraticCurveTo(...p1, ...p2); ctx.stroke(); ctx.restore();
+    for (const t of [0.35, 0.6, 0.85]) {
+      const q = (a, b, c) => (1 - t) ** 2 * a + 2 * (1 - t) * t * b + t * t * c;
+      const x = q(p0[0], p1[0], p2[0]), y = q(p0[1], p1[1], p2[1]);
+      ellipse(x, y, 10, 10, C.brass); ellipse(x, y, 6, 6, C.brassLight);
+    }
+    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.8)'; ctx.shadowBlur = 8;
+    label('+$9', 962, 484, 26, C.brassLight, 'center', 700);
+    ctx.restore();
+    // Guest-book toast above the book
+    const tx = 1352, ty = 512, tw = 238, th = 60;
+    parchment(tx, ty, tw, th, 10);
+    ctx.fillStyle = '#e6d2a8'; ctx.beginPath(); ctx.moveTo(tx + 90, ty + th - 2); ctx.lineTo(tx + 102, ty + th + 12); ctx.lineTo(tx + 114, ty + th - 2); ctx.fill();
+    ctx.fillStyle = C.heart; rr(tx + 14, ty + 9, 52, 22, 10); ctx.fill();
+    label('NEW', tx + 40, ty + 21, 15, '#fff', 'center', 700);
+    label('in the guest book', tx + 74, ty + 20, 15, C.paperSoft, 'left', 400, true);
+    label('Maya tips in quarters', tx + 14, ty + 44, 17, C.paperInk, 'left', 600);
+  }
+
+  // ---------- UI ----------
+  function parchment(x, y, w, h, r = 6) {
+    softShadow(() => { ctx.fillStyle = C.paper; rr(x, y, w, h, r); ctx.fill(); }, 16, 'rgba(0,0,0,0.6)', 6);
+    ctx.fillStyle = lin(0, y, 0, y + h, [[0, '#f6ead0'], [1, '#e2cc9c']]); rr(x, y, w, h, r); ctx.fill();
+    ctx.strokeStyle = 'rgba(120,80,40,0.35)'; ctx.lineWidth = 1.5; rr(x + 4, y + 4, w - 8, h - 8, r - 2); ctx.stroke();
+  }
+  function sandDollar(x, y, full) {
+    ellipse(x, y, 10, 10, full ? '#efe0c0' : 'rgba(120,90,60,0.25)');
+    ctx.strokeStyle = full ? '#a8885a' : 'rgba(120,90,60,0.4)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2); ctx.stroke();
+    if (full) for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * Math.PI * 0.4; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * 2, y + Math.sin(a) * 2); ctx.lineTo(x + Math.cos(a) * 6, y + Math.sin(a) * 6); ctx.stroke(); }
+  }
+  function brackets(x, y, w, h, L = 18) {
+    ctx.strokeStyle = C.brassLight; ctx.lineWidth = 3;
+    for (const [px, py, dx, dy] of [[x, y, 1, 1], [x + w, y, -1, 1], [x, y + h, 1, -1], [x + w, y + h, -1, -1]]) {
+      ctx.beginPath(); ctx.moveTo(px + dx * L, py); ctx.lineTo(px, py); ctx.lineTo(px, py + dy * L); ctx.stroke();
+    }
+  }
+
+  function speechCard() {
+    const x = 680, y = 176, w = 240, h = 70;
+    parchment(x, y, w, h, 10);
+    ctx.fillStyle = '#e8d6ae';
+    ctx.beginPath(); ctx.moveTo(x + w / 2 - 14, y + h - 1); ctx.lineTo(x + w / 2 + 14, y + h - 1); ctx.lineTo(x + w / 2 + 4, y + h + 14); ctx.fill();
+    const lines = ST.serve ? ['Ooh, perfect.', 'Just how I like it.'] : ['Someone tried to surf', 'the pier today!'];
+    label(lines[0], AX, y + 24, 18, C.paperInk, 'center', 400, true);
+    label(lines[1], AX, y + 48, 18, C.paperInk, 'center', 400, true);
+    // Name tab
+    ctx.fillStyle = C.woodDark; rr(x + 14, y - 15, 74, 24, 5); ctx.fill();
+    ctx.strokeStyle = C.brass; ctx.lineWidth = 1.5; rr(x + 16, y - 13, 70, 20, 4); ctx.stroke();
+    label('Maya', x + 51, y - 2, 15, C.brassLight, 'center', 600);
+  }
+
+  function miniGuest(x, y, r, skin, hair, curly) {
+    ctx.save(); ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.clip();
+    ctx.fillStyle = lin(0, y - r, 0, y + r, [[0, C.skyMid], [1, C.skyLow]]); ctx.fillRect(x - r, y - r, r * 2, r * 2);
+    if (curly) for (let i = 0; i < 9; i++) ellipse(x - r * 0.62 + i * r * 0.155, y - r * 0.32 - Math.sin(i / 8 * Math.PI) * r * 0.24, r * 0.3, r * 0.3, hair);
+    else ellipse(x, y - r * 0.32, r * 0.62, r * 0.42, hair);
+    ellipse(x, y + r * 0.95, r * 0.8, r * 0.45, C.woodDark);
+    ellipse(x, y + r * 0.06, r * 0.44, r * 0.52, skin);
+    if (!curly) ellipse(x, y - r * 0.38, r * 0.48, r * 0.2, hair);
+    ctx.restore();
+    ctx.strokeStyle = C.brassDark; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  }
+
+  // Order tickets clipped to a brass rail. The selected guest stands in the arch; the rest wait at the bar.
+  // Recipe blocks carry a letter as well as a color, and the selected ticket ticks off what you've poured.
+  const PART = { R: ['#c7782e', '#2a170c'], C: ['#2e140c', '#f1e2bf'], D: ['#e3b04b', '#2a170c'] };
+  function ticketRail() {
+    const railY = 740;
+    softShadow(() => { ctx.fillStyle = lin(0, railY - 6, 0, railY + 6, [[0, C.brassLight], [0.5, C.brass], [1, C.brassDark]]); rr(22, railY - 6, 478, 12, 6); ctx.fill(); }, 8);
+    const tickets = [
+      { name: 'Maya', drink: 'Rum and cola', parts: 'RCC', done: ST.serve ? 3 : 1.6, pat: 3, skin: C.skin, hair: C.hair, curly: true, sel: true },
+      { name: 'Jules', drink: 'Draft', parts: 'DD', pat: 4, skin: '#e8b996', hair: '#e6c46a' },
+      { name: 'Ines', drink: 'Cola', parts: 'CC', pat: 1, skin: '#c48a64', hair: '#4a2a1a' },
+    ];
+    tickets.forEach((t, i) => {
+      const w = 148, h = 150, x = 30 + i * 158, y = railY + (t.sel ? -4 : 4);
+      ctx.save(); ctx.translate(x + w / 2, y); ctx.rotate(t.sel ? 0 : (i % 2 ? 0.02 : -0.025)); ctx.translate(-w / 2, 0);
+      parchment(0, 0, w, h, 4);
+      if (t.sel) { ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = 'rgba(255,190,110,0.5)'; ctx.lineWidth = 4; rr(1, 1, w - 2, h - 2, 4); ctx.stroke(); ctx.restore(); }
+      ctx.fillStyle = lin(0, -8, 0, 12, [[0, C.brassLight], [1, C.brassDark]]); rr(w / 2 - 16, -8, 32, 18, 3); ctx.fill();
+      miniGuest(32, 40, 22, t.skin, t.hair, t.curly);
+      label(t.name, 62, 32, 18, C.paperInk, 'left', 600);
+      label(t.sel ? (ST.serve ? 'served' : 'ordering') : 'waiting', 62, 54, 15, C.paperSoft, 'left', 400, true);
+      ctx.fillStyle = 'rgba(120,80,40,0.35)'; ctx.fillRect(12, 70, w - 24, 1.5);
+      label(t.drink, 14, 86, 16, C.paperInk, 'left', 600, true);
+      [...t.parts].forEach((k, j) => {
+        const [bg, fg] = PART[k], bx = 14 + j * 32, by = 98;
+        const filled = t.done === undefined ? 1 : Math.max(0, Math.min(1, t.done - j));
+        ctx.globalAlpha = t.done === undefined || filled >= 1 ? 1 : 0.4;
+        ctx.fillStyle = bg; rr(bx, by, 28, 24, 4); ctx.fill();
+        ctx.globalAlpha = 1;
+        if (filled > 0 && filled < 1) { ctx.fillStyle = bg; rr(bx, by, 28 * filled, 24, 4); ctx.fill(); }
+        label(k, bx + 14, by + 13, 15, fg, 'center', 700);
+        if (filled >= 1 && t.done !== undefined) {
+          ellipse(bx + 25, by + 2, 7, 7, '#4f8a3a');
+          ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(bx + 21, by + 2); ctx.lineTo(bx + 24, by + 5); ctx.lineTo(bx + 29, by - 1); ctx.stroke();
+        }
+      });
+      for (let k = 0; k < 4; k++) {
+        const sx = 22 + k * 22, sy = 138, full = k < t.pat;
+        ellipse(sx, sy, 8, 8, full ? '#efe0c0' : 'rgba(120,90,60,0.22)');
+        ctx.strokeStyle = full ? (t.pat === 1 ? C.heart : '#a8885a') : 'rgba(120,90,60,0.4)'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(sx, sy, 8, 0, Math.PI * 2); ctx.stroke();
+      }
+      if (t.sel && ST.serve) {
+        ctx.save(); ctx.translate(w / 2 + 6, 112); ctx.rotate(-0.12);
+        ctx.fillStyle = 'rgba(241,226,191,0.92)'; rr(-50, -16, 100, 32, 4); ctx.fill();
+        ctx.strokeStyle = 'rgba(63,122,53,0.85)'; ctx.lineWidth = 3; rr(-46, -13, 92, 26, 4); ctx.stroke();
+        label('PERFECT', 0, 1, 16, 'rgba(63,122,53,0.9)', 'center', 700);
+        ctx.restore();
+      }
+      ctx.restore();
+      if (t.sel) brackets(x - 6, y - 10, w + 12, h + 14, 16);
+    });
+  }
+
+  function openBook(cx, cy, sc, newFact) {
+    ctx.save();
+    ctx.translate(cx, cy); ctx.rotate(-0.012); ctx.scale(sc, sc);
+    softShadow(() => { ctx.fillStyle = '#4a1e1a'; rr(-236, -132, 472, 268, 10); ctx.fill(); }, 26, 'rgba(0,0,0,0.7)', 10);
+    for (const s of [-1, 1]) {
+      ctx.fillStyle = lin(0, 0, s * 226, 0, [[0, '#cdb486'], [0.08, '#efe0bc'], [1, '#f4e8cc']]);
+      ctx.beginPath(); ctx.moveTo(0, -124); ctx.quadraticCurveTo(s * 110, -132, s * 226, -122); ctx.lineTo(s * 226, 124); ctx.quadraticCurveTo(s * 110, 118, 0, 128); ctx.fill();
+    }
+    ctx.fillStyle = 'rgba(80,40,20,0.25)'; ctx.fillRect(-2, -124, 4, 252);
+    // Left page: sepia sketch and name
+    ctx.strokeStyle = '#8a6a48'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(-118, -40, 52, 60, 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.save(); ctx.beginPath(); ctx.ellipse(-118, -40, 50, 58, 0, 0, Math.PI * 2); ctx.clip();
+    ellipse(-118, -60, 40, 34, '#6a4a30'); ellipse(-118, -42, 24, 30, '#c8a27a'); ellipse(-118, 14, 46, 26, '#8a6a48');
+    for (let i = 0; i < 8; i++) ellipse(-148 + i * 9, -76 + Math.abs(i - 3.5) * 3, 9, 8, '#5a3c26');
+    ctx.restore();
+    label('Guest book', -118, -112, 15, C.paperSoft, 'center', 600, true);
+    label('Maya Reyes', -118, 46, 20, C.paperInk, 'center', 600);
+    label('Lifeguard \u00b7 visit 4', -118, 70, 16, C.paperSoft, 'center', 400, true);
+    for (let i = 0; i < 4; i++) ellipse(-150 + i * 21, 96, 6, 6, i < 3 ? C.heart : 'rgba(120,90,60,0.3)');
+    // Right page: what you have learned
+    label('What you know', 22, -98, 19, C.paperInk, 'left', 600);
+    ctx.fillStyle = 'rgba(120,80,40,0.35)'; ctx.fillRect(22, -84, 180, 1.5);
+    const facts = [
+      [true, 'Guards Tower 20 at OB'],
+      [true, 'Usual: rum and cola'],
+      [true, 'Tips in quarters'],
+      [false, 'Serve her twice more'],
+      [false, 'Ask about the pier'],
+    ];
+    facts.forEach(([known, text], i) => {
+      const y = -60 + i * 34;
+      if (i === newFact) {
+        ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = 'rgba(242,208,138,0.9)'; rr(18, y - 14, 196, 28, 6); ctx.fill(); ctx.restore();
+        ctx.fillStyle = C.heart; rr(132, y - 31, 42, 17, 8); ctx.fill();
+        label('NEW', 153, y - 22, 11, '#fff', 'center', 700);
+      }
+      if (known) {
+        ctx.strokeStyle = '#4f8a3a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(24, y); ctx.lineTo(30, y + 6); ctx.lineTo(40, y - 7); ctx.stroke();
+        label(text, 50, y, 16, C.paperInk, 'left', 400, true);
+      } else {
+        ctx.fillStyle = '#8a6a48'; rr(26, y - 3, 12, 10, 2); ctx.fill();
+        ctx.strokeStyle = '#8a6a48'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(32, y - 4, 4, Math.PI, 0); ctx.stroke();
+        label('???', 50, y - 6, 15, C.paperSoft, 'left', 600);
+        label(text, 50, y + 10, 13.5, 'rgba(122,90,64,0.85)', 'left', 400, true);
+      }
+    });
+    // Ribbon bookmark
+    ctx.fillStyle = '#a8322a'; ctx.beginPath(); ctx.moveTo(190, -130); ctx.lineTo(206, -130); ctx.lineTo(206, -76); ctx.lineTo(198, -84); ctx.lineTo(190, -76); ctx.fill();
+    ctx.restore();
+  }
+
+  function dayDial() {
+    const cx = 1490, cy = 808, r = 84;
+    softShadow(() => ellipse(cx, cy, r + 8, r + 8, C.brassDark), 24, 'rgba(0,0,0,0.7)', 8);
+    ellipse(cx, cy, r + 4, r + 4, rad(cx - 30, cy - 30, 10, r + 10, [[0, C.brassLight], [0.6, C.brass], [1, C.brassDark]]));
+    // Sun-to-moon arc showing the time of day
+    ctx.strokeStyle = '#2a170c'; ctx.lineWidth = 14;
+    ctx.beginPath(); ctx.arc(cx, cy, r - 12, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
+    ctx.strokeStyle = lin(cx - r, 0, cx + r, 0, [[0, '#ffd27a'], [0.6, '#e8784a'], [1, '#3d2c5c']]); ctx.lineWidth = 9;
+    ctx.beginPath(); ctx.arc(cx, cy, r - 12, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
+    const t = 0.72, a = Math.PI * (1.1 + 0.8 * t);
+    ellipse(cx + Math.cos(a) * (r - 12), cy + Math.sin(a) * (r - 12), 9, 9, '#fff3c8');
+    ctx.strokeStyle = '#2a170c'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx + Math.cos(a) * (r - 12), cy + Math.sin(a) * (r - 12), 9, 0, Math.PI * 2); ctx.stroke();
+    ellipse(cx, cy + 8, r - 30, r - 30, rad(cx, cy, 0, r, [[0, '#f6ead0'], [1, '#d9c08e']]));
+    ctx.strokeStyle = C.brassDark; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(cx, cy + 8, r - 30, 0, Math.PI * 2); ctx.stroke();
+    label('DAY 1', cx, cy - 6, 28, C.paperInk, 'center', 700);
+    label('Tuesday', cx, cy + 20, 17, C.paperSoft, 'center', 400, true);
+    label('6:40 pm', cx, cy + 42, 16, C.paperInk, 'center', 600);
+  }
+
+  function topButtons() {
+    // Settings only; the guest book lives on the counter
+    const x = 1562;
+    softShadow(() => ellipse(x, 26, 20, 20, C.brassDark), 8);
+    ellipse(x, 26, 18, 18, rad(x - 6, 20, 2, 22, [[0, C.brassLight], [1, C.brass]]));
+    ctx.strokeStyle = '#2a170c'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(x, 26, 7, 0, Math.PI * 2); ctx.stroke();
+    for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * 7, 26 + Math.sin(a) * 7); ctx.lineTo(x + Math.cos(a) * 11, 26 + Math.sin(a) * 11); ctx.stroke(); }
+    softShadow(() => { ctx.fillStyle = lin(0, 6, 0, 44, [[0, '#3a2216'], [1, '#1c110c']]); rr(1396, 6, 128, 38, 8); ctx.fill(); }, 10);
+    ctx.strokeStyle = C.brass; ctx.lineWidth = 2; rr(1400, 10, 120, 30, 6); ctx.stroke();
+    ellipse(1422, 25, 9, 9, C.brass); ellipse(1422, 25, 5, 5, C.brassLight);
+    label(ST.serve ? '$137' : '$128', 1472, 26, 21, C.brassLight, 'center', 600);
+    softShadow(() => { ctx.fillStyle = lin(0, 4, 0, 44, [[0, '#3a2216'], [1, '#1c110c']]); rr(40, 4, 230, 40, 6); ctx.fill(); }, 10);
+    ctx.strokeStyle = C.brass; ctx.lineWidth = 2; rr(44, 8, 222, 32, 4); ctx.stroke();
+    label('Pacific Pour', 155, 25, 22, C.brassLight, 'center', 600);
+  }
+
+  function vignette() {
+    ctx.save();
+    ctx.fillStyle = rad(W / 2, H * 0.45, 260, 1000, [[0, 'rgba(0,0,0,0)'], [0.6, 'rgba(10,4,2,0.25)'], [1, 'rgba(10,4,2,0.7)']]);
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'soft-light';
+    ctx.fillStyle = 'rgba(255,150,70,0.22)'; ctx.fillRect(0, 0, W, H);
+    ctx.restore();
+  }
+
+  // Film grain, built once
+  const noise = document.createElement('canvas');
+  noise.width = noise.height = 192;
+  {
+    const n = noise.getContext('2d'), img = n.createImageData(192, 192);
+    for (let i = 0; i < img.data.length; i += 4) { const v = Math.random() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 14; }
+    n.putImageData(img, 0, 0);
+  }
+
+  // ---------- compose ----------
+  // Regulars leave keepsakes as you get to know them; empty spots hint at more to come.
+  function keepsake(fn, who) {
+    return (cx, by, w, h) => {
+      fn(cx, by, w, h);
+      // Paper tag propped on the shelf beside the gift
+      const tx = cx + 42;
+      ctx.strokeStyle = 'rgba(241,226,191,0.6)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx + 8, by - 40); ctx.lineTo(tx - 20, by - 26); ctx.stroke();
+      ctx.save(); ctx.translate(tx, by - 26); ctx.rotate(0.06);
+      ctx.fillStyle = C.paper; rr(-30, 0, 60, 24, 3); ctx.fill();
+      label(who, 0, 12, 15, C.paperInk, 'center', 600, true);
+      ctx.restore();
+    };
+  }
+  function emptyKeepsake(cx, by) {
+    ctx.save(); ctx.setLineDash([5, 6]); ctx.strokeStyle = 'rgba(241,226,191,0.35)'; ctx.lineWidth = 2;
+    rr(cx - 36, by - 86, 72, 80, 8); ctx.stroke(); ctx.restore();
+    label('?', cx, by - 46, 30, 'rgba(241,226,191,0.4)', 'center', 600);
+  }
+  const leftItems = [
+    group([-30, bottle('#e6c27a', 104, { label: C.paper })], [30, bottle('#5f8a4a', 116, { w: 30, label: '#e8d8b0' })]),
+    bottle('#d9a24a', 96, { w: 46, label: '#2e4f9a', cap: '#2a1a12' }),
+    jar('#8fd14f', 'rgba(140,200,90,0.25)'),
+    plant(true), keepsake(surfTrophy, 'Maya'), emptyKeepsake,
+    coupes, photo, books,
+  ];
+  const rightItems = [
+    group([-26, bottle('#8fc4d6', 112, { w: 32, label: C.paper })], [26, bottle('#3a6a8a', 98, { w: 30, label: '#e8d8b0' })]),
+    group([-36, bottle('#6a2a1a', 60, { w: 22, neck: 6, label: C.paper })], [0, bottle('#7a3a1a', 70, { w: 22, neck: 6, label: '#f3e05a' })], [36, bottle('#5a1a1a', 54, { w: 22, neck: 6, label: C.paper })]),
+    jar('#b8243a', 'rgba(150,30,40,0.3)'),
+    conch, radio, plant(true),
+    shaker, books, plant(false),
+  ];
+
+  const JULES = { shirt: '#3a6a8a', skin: '#e8b996', hair: '#e6c46a', dir: 1 };
+  const INES = { shirt: '#7a3a4a', skin: '#c48a64', hair: '#4a2a1a', dir: -1, bun: true };
+  function render(serve = false) {
+    ST.serve = serve;
+    seed = 11;
+    ctx.setTransform(S, 0, 0, S, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    wall();
+    cabinet(40, 76, 3, 3, 164, 160, leftItems);
+    cabinet(1068, 76, 3, 3, 164, 160, rightItems);
+    // Decor recedes so the things you can act on stand out
+    ctx.fillStyle = 'rgba(8,4,2,0.4)'; ctx.fillRect(0, 48, W, 524);
+    seatedGuest(462, JULES);
+    seatedGuest(1150, INES);
+    view();
+    maya();
+    archFrame();
+    sconce(582, 330); sconce(1018, 330);
+    stringLights();
+    counter();
+    glassRack();
+    barMat();
+    if (serve) serveStation(); else pourStation();
+    counterRight();
+    churro();
+    guestBook();
+    speedRail();
+    backBar();
+    vignette();
+    ticketRail();
+    speechCard();
+    dayDial();
+    topButtons();
+    if (serve) serveEffects(); else tutorialTag();
+    ctx.fillStyle = ctx.createPattern(noise, 'repeat'); ctx.fillRect(0, 0, W, H);
+  }
+  function renderServe() { ctx = serveCtx; render(true); ctx = sceneCtx; }
+
+  function renderBook() {
+    ctx = bookCtx;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.filter = 'blur(6px)'; ctx.drawImage(canvas, 0, 0); ctx.filter = 'none';
+    ctx.setTransform(S, 0, 0, S, 0, 0);
+    ctx.fillStyle = 'rgba(12,6,3,0.62)'; ctx.fillRect(0, 0, W, H);
+    // Page tabs: one per guest you have met
+    [['Maya', true], ['Jules', false], ['Ines', false], ['Churro', false]].forEach(([n, on], i) => {
+      const tx = 1160, ty = 236 + i * 70;
+      ctx.fillStyle = on ? C.paper : '#b89a6a'; rr(tx, ty, on ? 118 : 104, 52, 8); ctx.fill();
+      ctx.strokeStyle = C.brassDark; ctx.lineWidth = 2; rr(tx, ty, on ? 118 : 104, 52, 8); ctx.stroke();
+      label(n, tx + 62, ty + 27, 18, C.paperInk, 'center', on ? 700 : 400, !on);
+    });
+    openBook(800, 440, 1.62, 0);
+    label('Guest book', 800, 150, 34, C.paper, 'center', 600);
+    label('Facts unlock as you get to know your regulars.', 800, 184, 18, 'rgba(241,226,191,0.75)', 'center', 400, true);
+    // Footer controls
+    parchment(560, 820, 480, 44, 22);
+    label('‹ ›  turn page', 600, 842, 17, C.paperInk, 'left', 600);
+    label('Service paused', 800, 842, 17, C.paperSoft, 'center', 400, true);
+    label('Tab  close', 1010, 842, 17, C.paperInk, 'right', 600);
+    ctx.fillStyle = ctx.createPattern(noise, 'repeat'); ctx.fillRect(0, 0, W, H);
+    ctx = sceneCtx;
+  }
+
+  function dotted(x0, x1, y) {
+    ctx.fillStyle = 'rgba(122,90,64,0.5)';
+    for (let x = x0; x < x1; x += 7) ctx.fillRect(x, y, 2, 2);
+  }
+  function ledgerRow(left, right, y, opts = {}) {
+    const x0 = opts.x0 || 0, x1 = opts.x1 || 0;
+    ctx.font = font(19, opts.bold ? 700 : 400, opts.italic);
+    const lw = ctx.measureText(left).width;
+    ctx.font = font(19, 700);
+    const rw = ctx.measureText(right).width;
+    label(left, x0, y, 19, opts.leftColor || C.paperInk, 'left', opts.bold ? 700 : 400, opts.italic);
+    dotted(x0 + lw + 10, x1 - rw - 10, y + 5);
+    label(right, x1, y, 19, opts.color || C.paperInk, 'right', 700);
+  }
+  function brassButton(cx, cy, w, text, primary) {
+    softShadow(() => { ctx.fillStyle = C.brassDark; rr(cx - w / 2, cy - 26, w, 52, 26); ctx.fill(); }, 14, 'rgba(0,0,0,0.7)', 6);
+    ctx.fillStyle = lin(0, cy - 24, 0, cy + 24, primary ? [[0, '#ffe3a6'], [0.5, C.brass], [1, C.brassDark]] : [[0, '#5a3a24'], [1, '#2a170c']]);
+    rr(cx - w / 2 + 3, cy - 23, w - 6, 46, 23); ctx.fill();
+    ctx.strokeStyle = primary ? '#fff0c8' : C.brass; ctx.lineWidth = 2; rr(cx - w / 2 + 7, cy - 19, w - 14, 38, 19); ctx.stroke();
+    label(text, cx, cy + 1, 22, primary ? '#2a170c' : C.brassLight, 'center', 700);
+  }
+
+  function renderResults() {
+    ctx = resultsCtx;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.filter = 'blur(5px) saturate(0.8)'; ctx.drawImage(canvas, 0, 0); ctx.filter = 'none';
+    ctx.setTransform(S, 0, 0, S, 0, 0);
+    // Closing time: night falls over the bar
+    ctx.save(); ctx.globalCompositeOperation = 'multiply';
+    ctx.fillStyle = '#4a3c66'; ctx.fillRect(0, 0, W, H); ctx.restore();
+    ctx.fillStyle = 'rgba(10,6,14,0.35)'; ctx.fillRect(0, 0, W, H);
+    glow(800, 140, 380, '#ffb35c', 0.18);
+
+    // Title ribbon
+    softShadow(() => {
+      ctx.fillStyle = lin(0, 38, 0, 108, [[0, '#7a2e24'], [1, '#4a1a16']]);
+      ctx.beginPath(); ctx.moveTo(500, 40); ctx.lineTo(1100, 40); ctx.lineTo(1070, 74); ctx.lineTo(1100, 108); ctx.lineTo(500, 108); ctx.lineTo(530, 74); ctx.closePath(); ctx.fill();
+    }, 18);
+    ctx.strokeStyle = C.brass; ctx.lineWidth = 2; ctx.strokeRect(548, 48, 504, 52);
+    label('Last call at the Pacific Pour', 800, 68, 28, C.paper, 'center', 600);
+    label('Day 1  \u00b7  Tuesday  \u00b7  closed 9:00 pm', 800, 92, 15, C.brassLight, 'center', 400, true);
+
+    // Left: the tab, a ledger card
+    ctx.save(); ctx.translate(120, 150); ctx.rotate(-0.004);
+    parchment(0, 0, 620, 560, 8);
+    label('The tab', 36, 44, 28, C.paperInk, 'left', 600);
+    ctx.fillStyle = 'rgba(120,80,40,0.35)'; ctx.fillRect(36, 66, 548, 1.5);
+    const o = { x0: 36, x1: 584 };
+    ledgerRow('Guests served', '14 / 16', 100, o);
+    ledgerRow('Perfect pours', '9', 136, o);
+    ledgerRow('Walkouts', '2', 172, o);
+    ledgerRow('Glasses washed', '11', 208, o);
+    ctx.fillStyle = 'rgba(120,80,40,0.25)'; ctx.fillRect(36, 236, 548, 1.5);
+    ledgerRow('Drinks', '$96', 266, o);
+    ledgerRow('Tips', '+$32', 302, { ...o, color: '#3d7a35' });
+    ledgerRow('Spills', '\u2212$4', 338, { ...o, color: '#a8322a' });
+    ctx.fillStyle = C.brass; ctx.fillRect(36, 364, 548, 3);
+    ellipse(50, 396, 11, 11, C.brass); ellipse(50, 396, 6, 6, C.brassLight);
+    label('Tonight', 72, 396, 24, C.paperInk, 'left', 700);
+    label('$124', 584, 396, 26, '#3d7a35', 'right', 700);
+    ledgerRow('Savings', '$128  \u2192  $252', 440, o);
+    ctx.fillStyle = 'rgba(120,80,40,0.25)'; ctx.fillRect(36, 470, 548, 1.5);
+    label('Bar vibe', 36, 512, 20, C.paperInk, 'left', 600);
+    for (let i = 0; i < 3; i++) {
+      const x = 180 + i * 40;
+      ctx.globalAlpha = i < 2 ? 1 : 0.3;
+      ellipse(x, 512, 11, 11, '#f0a840');
+      ctx.strokeStyle = '#f0a840'; ctx.lineWidth = 2.5;
+      for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * 14, 512 + Math.sin(a) * 14); ctx.lineTo(x + Math.cos(a) * 18, 512 + Math.sin(a) * 18); ctx.stroke(); }
+      ctx.globalAlpha = 1;
+    }
+    label('Sunny and warm', 584, 512, 19, C.paperSoft, 'right', 400, true);
+    ctx.restore();
+
+    // Right: tonight's stories, tied to the guest book
+    ctx.save(); ctx.translate(800, 150); ctx.rotate(0.004);
+    parchment(0, 0, 680, 560, 8);
+    label('Tonight\u2019s stories', 36, 44, 28, C.paperInk, 'left', 600);
+    ctx.fillStyle = 'rgba(120,80,40,0.35)'; ctx.fillRect(36, 66, 608, 1.5);
+    const story = (y, draw, name, hearts, line, fact) => {
+      draw(72, y + 34);
+      label(name, 124, y + 18, 21, C.paperInk, 'left', 700);
+      ctx.font = font(21, 700); const nw = ctx.measureText(name).width;
+      for (let i = 0; i < 4; i++) ellipse(124 + nw + 22 + i * 20, y + 18, 6.5, 6.5, i < hearts ? C.heart : 'rgba(120,90,60,0.25)');
+      label(line, 124, y + 46, 17, C.paperSoft, 'left', 400, true);
+      if (fact) {
+        ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = 'rgba(242,208,138,0.9)'; rr(120, y + 62, 420, 28, 6); ctx.fill(); ctx.restore();
+        ctx.fillStyle = C.heart; rr(130, y + 68, 40, 16, 8); ctx.fill();
+        label('NEW', 150, y + 77, 10.5, '#fff', 'center', 700);
+        label(fact, 180, y + 76, 16, C.paperInk, 'left', 400, true);
+      }
+    };
+    story(92, (x, y) => miniGuest(x, y, 30, C.skin, C.hair, true), 'Maya', 3, 'Became a regular. Wants to tell you about the pier.', 'Guards Tower 20 at OB');
+    story(208, (x, y) => miniGuest(x, y, 30, '#e8b996', '#e6c46a'), 'Jules', 2, 'Asked for nuts twice. The bowl was empty.', null);
+    story(296, (x, y) => {
+      ctx.save(); ctx.beginPath(); ctx.arc(x, y, 30, 0, Math.PI * 2); ctx.clip();
+      ctx.fillStyle = lin(0, y - 30, 0, y + 30, [[0, C.skyMid], [1, C.skyLow]]); ctx.fillRect(x - 30, y - 30, 60, 60);
+      ellipse(x, y + 6, 22, 18, C.cat); for (const s2 of [-1, 1]) { ctx.fillStyle = C.cat; ctx.beginPath(); ctx.moveTo(x + s2 * 20, y); ctx.lineTo(x + s2 * 18, y - 22); ctx.lineTo(x + s2 * 4, y - 10); ctx.fill(); }
+      ellipse(x, y + 12, 9, 6, '#f6e6cf');
+      ctx.restore(); ctx.strokeStyle = C.brassDark; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, 30, 0, Math.PI * 2); ctx.stroke();
+    }, 'Churro', 4, 'Petted once. Slept on the tip jar until close.', 'Only naps where it\u2019s warm');
+    ctx.fillStyle = 'rgba(120,80,40,0.25)'; ctx.fillRect(36, 418, 608, 1.5);
+    label('Tomorrow', 36, 452, 20, C.paperInk, 'left', 600);
+    ellipse(52, 494, 9, 9, '#8fd14f'); ctx.strokeStyle = '#4f8a3a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(52, 494, 9, 0, Math.PI * 2); ctx.stroke();
+    label('Lime wedges unlocked in the shop', 72, 494, 18, C.paperInk, 'left', 400);
+    ellipse(52, 528, 9, 9, C.skyLow);
+    label('Sunset rush expected: more guests, 5 to 7 pm', 72, 528, 18, C.paperInk, 'left', 400);
+    ctx.restore();
+
+    brassButton(640, 780, 240, 'Shop', false);
+    brassButton(960, 780, 280, 'Next day  \u203a', true);
+    label('Progress saved', 1480, 860, 15, 'rgba(241,226,191,0.6)', 'right', 400, true);
+    ctx.fillStyle = ctx.createPattern(noise, 'repeat'); ctx.fillRect(0, 0, W, H);
+    ctx = sceneCtx;
+  }
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animate = document.getElementById('animateToggle');
+  animate.checked = !reduceMotion;
+  let last = 0;
+  function loop(now) {
+    if (animate.checked && now - last >= 50) { T = now / 1000; render(); renderServe(); renderBook(); renderResults(); last = now; }
+    requestAnimationFrame(loop);
+  }
+  render(); renderServe(); renderBook(); renderResults();
+  requestAnimationFrame(loop);
+
+  const named = [
+    ['Shadow wood', 'wallDeep'], ['Wood', 'wood'], ['Wood highlight', 'woodHi'], ['Brass', 'brass'], ['Brass light', 'brassLight'],
+    ['Parchment', 'paper'], ['Ink', 'ink'], ['Dusk sky', 'skyTop'], ['Sunset rose', 'skyMid'], ['Sunset gold', 'skyLow'],
+    ['Lamp glow', 'glow'], ['Talavera blue', 'talaBlue'], ['Tile teal', 'tealTile'], ['Churro orange', 'cat'], ['Rum', 'rum'], ['Cola', 'cola'],
+  ];
+  document.getElementById('swatches').innerHTML = named.map(([n, k]) =>
+    `<div class="swatch"><i style="background:${C[k]}"></i><div>${n}<code>${C[k]}</code></div></div>`).join('');
+
+})();
+</script>
+</body>
+</html>

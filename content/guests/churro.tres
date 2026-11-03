@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/content/guest_profile.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/content/guest_fact.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/content/guest_topic.gd" id="3"]
+
+[sub_resource type="Resource" id="fact_0"]
+script = ExtResource("2")
+id = "warm"
+text = "Only naps where it is warm"
+unlock = 3
+target = "pet"
+count = 1
+hint = "Pet him"
+
+[sub_resource type="Resource" id="fact_1"]
+script = ExtResource("2")
+id = "tips"
+text = "Sleeps on the tip jar at close"
+unlock = 0
+count = 3
+requires = "warm"
+
+[sub_resource type="Resource" id="fact_2"]
+script = ExtResource("2")
+id = "name"
+text = "Named for his color, not his appetite"
+unlock = 0
+count = 7
+requires = "tips"
+
+[sub_resource type="Resource" id="topic_0"]
+script = ExtResource("3")
+id = "pet"
+line = "*slow blink*"
+
+[resource]
+script = ExtResource("1")
+id = "churro"
+display_name = "Churro"
+role = "Bar cat"
+topics = Array[Resource]([SubResource("topic_0")])
+facts = Array[Resource]([SubResource("fact_0"), SubResource("fact_1"), SubResource("fact_2")])

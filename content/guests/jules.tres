@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/content/guest_profile.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/content/guest_fact.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/content/guest_topic.gd" id="3"]
+
+[sub_resource type="Resource" id="fact_0"]
+script = ExtResource("2")
+id = "usual"
+text = "Usual: a cold draft"
+unlock = 2
+target = "draft_beer"
+count = 1
+
+[sub_resource type="Resource" id="fact_1"]
+script = ExtResource("2")
+id = "nuts"
+text = "Always wants the peanut bowl full"
+unlock = 0
+count = 2
+
+[sub_resource type="Resource" id="fact_2"]
+script = ExtResource("2")
+id = "student"
+text = "Taught Maya to surf, badly"
+unlock = 3
+target = "maya"
+count = 1
+hint = "Ask about Maya"
+
+[sub_resource type="Resource" id="fact_3"]
+script = ExtResource("2")
+id = "regular"
+text = "Never misses a sunset"
+unlock = 1
+count = 3
+
+[sub_resource type="Resource" id="topic_0"]
+script = ExtResource("3")
+id = "maya"
+line = "Maya says I can't surf. Ask her."
+
+[resource]
+script = ExtResource("1")
+id = "jules"
+display_name = "Jules Park"
+role = "Surf instructor"
+usual_drink = "draft_beer"
+topics = Array[Resource]([SubResource("topic_0")])
+facts = Array[Resource]([SubResource("fact_0"), SubResource("fact_1"), SubResource("fact_2"), SubResource("fact_3")])
