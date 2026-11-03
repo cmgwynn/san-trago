@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      build:
+        description: Export macOS and Windows builds
+        type: boolean
+        default: true
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: "4.7.2"
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the pinned Godot version
+        run: test "$(cat .godot-version)" = "$GODOT_VERSION"
+      - name: Install Godot
+        run: |
+          curl -sSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip -d "$HOME/godot" && rm godot.zip
+          echo "GODOT=$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" >> "$GITHUB_ENV"
+      - name: Run all test suites
+        run: tools/run_all_tests.sh
+
+  builds:
+    needs: tests
+    if: github.event_name == 'workflow_dispatch' && inputs.build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot
+        run: |
+          curl -sSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip -d "$HOME/godot" && rm godot.zip
+          echo "GODOT=$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" >> "$GITHUB_ENV"
+      - name: Cache export templates
+        id: templates
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
+          key: godot-templates-${{ env.GODOT_VERSION }}
+      - name: Install export templates
+        if: steps.templates.outputs.cache-hit != 'true'
+        run: |
+          curl -sSL -o templates.tpz "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          unzip -q templates.tpz templates/version.txt templates/macos.zip templates/windows_release_x86_64.exe templates/windows_release_x86_64_console.exe
+          dest="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$dest" && mv templates/* "$dest"/ && rm -rf templates templates.tpz
+      - name: Export
+        run: |
+          mkdir -p exports/macos exports/windows
+          "$GODOT" --headless --path . --editor --import --quit >/dev/null 2>&1 || true
+          "$GODOT" --headless --path . --export-release "macOS" "exports/macos/San Trago.zip"
+          "$GODOT" --headless --path . --export-release "Windows" "exports/windows/San Trago.exe"
+          test -s "exports/macos/San Trago.zip" && test -s "exports/windows/San Trago.exe"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: san-trago-macos
+          path: exports/macos/San Trago.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: san-trago-windows
+          path: exports/windows/San Trago.exe

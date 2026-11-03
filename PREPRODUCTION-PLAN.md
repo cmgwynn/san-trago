@@ -700,10 +700,17 @@ Depends on Stage 5; a minimal Godot project may exist earlier for Stage 4.
   (Done 2026-11-03: public repository cmgwynn/san-trago at the owner's choice;
   the creative lead's invite is still pending.)
 - Pin the Godot version and ignore generated caches. (Done: `.godot-version` 4.7.2.)
-- Create one reusable UI scene and a sample recipe Resource.
-- Provide clear fields, defaults, stable IDs, examples, and validation.
-- Prove that a recipe can be added without editing core logic.
-- Produce an exported desktop build and run it outside the editor.
+- Create one reusable UI scene and a sample recipe Resource. (Done: the lab card
+  scene used three times by the launcher; drink resources already existed.)
+- Provide clear fields, defaults, stable IDs, examples, and validation. (Done: the
+  content catalog checks IDs against file names and cross-file references.)
+- Prove that a recipe can be added without editing core logic. (Done: content tests
+  save a new drink and a guest who orders it, then load, validate, mix, and unlock
+  its guest-book fact without code changes.)
+- Produce an exported desktop build and run it outside the editor. (macOS done
+  2026-11-03: the build opened all three labs from packed content, headless and
+  windowed. Windows is exported but has not been run on Windows yet. CI runs every
+  suite on each push and can export both builds on demand.)
 - Each creator makes and merges a separate bounded change.
 - Record only the setup and authoring instructions needed to reproduce this.
 
@@ -883,7 +890,7 @@ rationale, and date as evidence and approvals arrive.
 |---|---|---|---|
 | D01 | Godot 4.x, GDScript, Resources; no HTML/JS layer | Direction approved 2026-11-02; workflow unverified | Stage 6 |
 | D02 | Fixed-view, mouse-first, single-player desktop; cozy pressure with short rushes | Approved 2026-11-02 | Validate through playtests |
-| D03 | macOS and Windows; mouse/keyboard only for initial release | Approved 2026-11-02 | Verify exported builds on both |
+| D03 | macOS and Windows; mouse/keyboard only for initial release | Approved 2026-11-02; macOS export verified 2026-11-03, Windows export built but not run | Verify exported builds on both |
 | D04 | Forgiving economy without stock limits, rent, or debt | Rules approved 2026-11-02; balance unverified | Stage 5 |
 | D05 | Opening checkpoint approved; detailed day/exception walkthrough drafted | Partial approval 2026-11-02 | Stage 2 review |
 | D06 | Static storyboard drafted; candidate checks 1280 x 800 and 1024 x 768. Visual direction proposed: front-on, Stardew-like pixel art, bright day, San Diego (concept 01); painted golden-hour alternative with bar cat and guest book (concept 02); genre-informed layout pass 2 (speed rail, back-bar strip, serve beat) | Owner direction 2026-11-03; creative lead review pending | Stage 3 |

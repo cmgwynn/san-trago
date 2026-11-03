@@ -4,12 +4,7 @@ const Book = preload("res://scripts/systems/guest_book.gd")
 const Profile = preload("res://scripts/content/guest_profile.gd")
 const Fact = preload("res://scripts/content/guest_fact.gd")
 const Topic = preload("res://scripts/content/guest_topic.gd")
-const GUEST_PATHS: Array[String] = [
-	"res://content/guests/maya.tres",
-	"res://content/guests/jules.tres",
-	"res://content/guests/churro.tres",
-]
-const DRINK_IDS: Array[String] = ["draft_beer", "rum_cola"]
+const Catalog = preload("res://scripts/content/content_catalog.gd")
 
 var checks: int = 0
 var failures: int = 0
@@ -62,19 +57,13 @@ func _run() -> void:
 
 
 func _content() -> void:
-	var loaded: Array = []
-	for path: String in GUEST_PATHS:
-		var guest: Resource = load(path)
-		expect(guest != null, "loads " + path)
-		if guest == null:
-			continue
-		expect(guest.validation_errors().is_empty(), "%s validates: %s" % [path, guest.validation_errors()])
-		for fact: Resource in guest.facts:
-			if fact.unlock == Fact.Unlock.SERVED_DRINK:
-				expect(DRINK_IDS.has(fact.target), "%s fact '%s' targets a real drink" % [guest.id, fact.id])
-		expect(guest.usual_drink.is_empty() or DRINK_IDS.has(guest.usual_drink), "%s's usual drink '%s' is a real drink" % [guest.id, guest.usual_drink])
+	var loaded: Array[Resource] = Catalog.load_dir(Catalog.GUESTS_DIR)
+	var drinks: Array[Resource] = Catalog.load_dir(Catalog.DRINKS_DIR)
+	expect(loaded.size() >= 3, "the catalog finds every guest file")
+	var errors := Catalog.validation_errors(drinks, loaded)
+	expect(errors.is_empty(), "all guest and drink content validates: %s" % [errors])
+	for guest: Resource in loaded:
 		expect(not guest.topics.is_empty(), "%s has something to talk about" % guest.id)
-		loaded.append(guest)
 	var book := Book.new(loaded)
 	expect(book.unread_count() == 0, "a fresh book has nothing to read")
 	var first: Array[String] = book.record_visit("maya")

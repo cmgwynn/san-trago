@@ -7,12 +7,7 @@ extends Control
 
 const Book = preload("res://scripts/systems/guest_book.gd")
 const DESIGN := Vector2(1600, 900)
-const GUEST_PATHS: Array[String] = [
-	"res://content/guests/maya.tres",
-	"res://content/guests/jules.tres",
-	"res://content/guests/churro.tres",
-]
-const DRINK_PATH := "res://content/drinks/%s.tres"
+const Catalog = preload("res://scripts/content/content_catalog.gd")
 ## Recipe block letters, in ticket order.
 const PART_LETTERS := {"rum": "R", "cola": "C", "draft": "D"}
 const QUEUE: Array[String] = ["maya", "jules"]
@@ -78,13 +73,19 @@ var fact_list: VBoxContainer
 var tabs: Dictionary = {}
 var capture_path: String = ""
 var frames: int = 0
+var drinks: Dictionary = {}
+## Book page order: the queue first, then everyone else in the catalog.
+var guest_ids: Array[String] = []
 
 
 func _ready() -> void:
-	var profiles: Array = []
-	for path: String in GUEST_PATHS:
-		profiles.append(load(path))
+	var profiles: Array[Resource] = Catalog.load_dir(Catalog.GUESTS_DIR)
+	drinks = Catalog.by_id(Catalog.load_dir(Catalog.DRINKS_DIR))
 	book = Book.new(profiles)
+	guest_ids.assign(QUEUE)
+	for profile: Resource in profiles:
+		if not guest_ids.has(profile.id):
+			guest_ids.append(profile.id)
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	_build()
 	resized.connect(_fit)
@@ -190,7 +191,7 @@ func show_page(guest_id: String) -> void:
 
 
 func _first_unread() -> String:
-	for id: String in GUEST_PATHS.map(func(p: String) -> String: return p.get_file().get_basename()):
+	for id: String in guest_ids:
 		if book.unread_count(id) > 0:
 			return id
 	return selected
@@ -227,7 +228,7 @@ func _refresh() -> void:
 
 
 func _usual(guest_id: String) -> Resource:
-	return load(DRINK_PATH % book.profiles[guest_id].usual_drink)
+	return drinks[book.profiles[guest_id].usual_drink]
 
 
 func _topic(guest_id: String) -> Resource:
@@ -448,8 +449,7 @@ func _build_overlay() -> void:
 	fact_list.add_theme_constant_override("separation", 10)
 	overlay.add_child(fact_list)
 	var tab_y := 240
-	for path: String in GUEST_PATHS:
-		var id := path.get_file().get_basename()
+	for id: String in guest_ids:
 		var tab := _button(overlay, "", Rect2(1180, tab_y, 130, 52), 18, "Tab_" + id)
 		tab.toggle_mode = true
 		tab.pressed.connect(show_page.bind(id))
