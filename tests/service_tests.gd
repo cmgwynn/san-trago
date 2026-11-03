@@ -2,6 +2,7 @@ extends SceneTree
 
 const Shift = preload("res://scripts/systems/service_shift.gd")
 const Scene = preload("res://scenes/service_lab.tscn")
+const Bot = preload("res://scripts/systems/service_bot.gd")
 var checks: int = 0
 var failures: int = 0
 
@@ -95,6 +96,43 @@ func _run() -> void:
 		profile.advance(200.0)
 		expect(profile.total_glasses() == profile.owned and profile.finished, "every setup conserves its owned inventory through busy closing")
 		expect(profile.served + profile.walkouts + profile.missed_arrivals + profile.closing_unserved == 16, "every scheduled arrival accounted for")
+	expect(Shift.PRESSURES.size() == 5 and Shift.PRESSURES[0].id == "baseline" and Shift.PRESSURES[1].id == "busier", "earlier presets keep their menu indexes")
+	var day_sizes := {2: 10, 3: 13, 4: 17}
+	var previous_rate := 0.0
+	for pressure: int in day_sizes:
+		var day := Shift.new(0, pressure)
+		var arrivals: int = day_sizes[pressure]
+		expect(day.open_seconds == 240.0, "day presets run a four-minute shift")
+		expect(day.arrival_times.size() == arrivals and day.recipe_sequence.size() == arrivals, "day schedule has matching order count")
+		var ordered := true
+		for i: int in range(1, arrivals):
+			ordered = ordered and day.arrival_times[i] > day.arrival_times[i - 1]
+		expect(ordered and day.arrival_times[-1] < day.open_seconds, "day arrivals are ordered and before closing")
+		var beers := day.recipe_sequence.count(0)
+		expect(absi(beers * 2 - arrivals) <= 1, "day orders are about half draft")
+		var rate := float(arrivals) / day.open_seconds
+		expect(rate > previous_rate, "each day is busier than the last")
+		previous_rate = rate
+		expect(day.comparison_summary().pressure == Shift.PRESSURES[pressure].id, "summary names the day preset")
+		day.advance(239.0)
+		expect(not day.finished and day.next_arrival == arrivals, "day stays open until every guest has arrived")
+		day.advance(60.0)
+		expect(day.finished and day.total_glasses() == day.owned, "day closes and conserves glasses")
+		expect(day.served + day.walkouts + day.missed_arrivals + day.closing_unserved == arrivals, "every day arrival accounted for")
+	var a: Resource = load("res://content/balance/worksheet.tres")
+	var settled := Bot.new(a.beer_active_seconds, a.mixed_active_seconds)
+	var learner := Bot.new(a.beer_active_seconds, a.mixed_active_seconds, a.learning_time_multiplier, 1.0, a.learning_waste_fraction)
+	for equipment: int in range(4):
+		var calm: Dictionary = learner.play(equipment, 2)
+		expect(calm.served == 10 and calm.walkouts == 0 and calm.missed_arrivals == 0, "learning bot serves everyone on day 1")
+		expect(calm.busy_ratio < 0.75, "day 1 leaves a learner regular breaks")
+		var settled_day_3: Dictionary = settled.play(equipment, 4)
+		expect(settled_day_3.served == 17 and settled_day_3.walkouts == 0, "settled bot can serve all of day 3")
+		expect(settled_day_3.busy_ratio < 0.8, "day 3 is busy but not maxed out for a settled player")
+	var rush: Dictionary = learner.play(0, 1)
+	expect(rush.served < rush.scheduled_arrivals, "bot is not trivially perfect: learner misses guests on the busier preset")
+	var wasteful: Dictionary = Bot.new(a.beer_active_seconds, a.mixed_active_seconds, 1.0, 1.0, 0.5).play(0, 2)
+	expect(wasteful.discards >= 4 and wasteful.total_glasses == 4, "bot remakes discarded drinks without losing glasses")
 	var measured := Shift.new(2)
 	measured.advance(0.01)
 	for glass: int in range(4):
@@ -291,7 +329,7 @@ func _run() -> void:
 	expect(lab.shift.elapsed == time and lab.shift.no_clean_seconds == no_clean_before, "pause excludes diagnostic time")
 	lab._toggle_pause()
 	for equipment: int in range(4):
-		for pressure: int in range(2):
+		for pressure: int in range(Shift.PRESSURES.size()):
 			for size: Vector2i in [Vector2i(1280, 800), Vector2i(1024, 768)]:
 				root.size = size
 				lab.active = false
@@ -325,7 +363,7 @@ func _run() -> void:
 				await _layout_settle()
 				_expect_positions(lab, positions, "paused")
 				lab._toggle_pause()
-				lab._process(200.0)
+				lab._process(300.0)
 				await _layout_settle()
 				_expect_positions(lab, positions, "long closing summary")
 	lab.equipment_choice.select(3)

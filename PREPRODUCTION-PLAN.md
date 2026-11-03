@@ -719,6 +719,15 @@ dishwasher for growth. Before approving: get her runs and at least two first-tim
 players through `tools/calibrate_balance.gd`, then check the ramp in the service lab.
 Prices, tips, and purchase pacing are still unmeasured.
 
+Day ramp presets, 2026-11-03: the service lab now offers Day 1 (10 guests), Day 2
+(13), and Day 3 (17) as four-minute shifts with waves and recovery gaps. A scripted
+bartender playing the real rules with measured prep times (plus 1 s per order of
+movement) on starter equipment: a learner serves all of Days 1 and 2 (busy 63% and
+89%) and misses 2 of 17 on Day 3; a settled player serves all of Day 3 (busy 72%).
+Equipment barely changes these results at this demand, which supports keeping the
+dishwasher for growth past about 20 guests. Next: owner plays the three days with
+starter equipment and the rack, then the creative lead and first-time players.
+
 - Model preparation and washing time, glasses, arrivals, patience, revenue,
   costs, tips, and purchases in a small spreadsheet or equivalent.
 - Compare efficient play, learning play, mistakes, extra glasses first, and
@@ -935,7 +944,7 @@ rationale, and date as evidence and approvals arrive.
 | D05 | Opening checkpoint approved; detailed day/exception walkthrough drafted | Partial approval 2026-11-02 | Stage 2 review |
 | D06 | Static storyboard drafted; candidate checks 1280 x 800 and 1024 x 768. Visual direction proposed: front-on, Stardew-like pixel art, bright day, San Diego (concept 01); painted golden-hour alternative with bar cat and guest book (concept 02); genre-informed layout pass 2 (speed rail, back-bar strip, serve beat) | Owner direction 2026-11-03; creative lead review pending | Stage 3 |
 | D07 | C preferred after owner playtest; carry station docking and retained timed fill forward | Working choice 2026-11-02; second-creator review and tuning open | Service-context experiment and further playtests |
-| D08 | Shift length, service spots, wave timing, patience, closing grace. Calibrated model (2026-11-03) proposes a day ramp: about 10, 12-14, then 16-18 guests per 4-minute shift | Open; proposal awaits creative lead and more players | Stage 5, then service playtests |
+| D08 | Shift length, service spots, wave timing, patience, closing grace. Calibrated model (2026-11-03) proposes a day ramp: about 10, 12-14, then 16-18 guests per 4-minute shift | Open; presets Day 1-3 (10/13/17) are playable in the service lab; awaiting owner, creative lead, and first-time player runs | Stage 5, then service playtests |
 | D09 | Upgrade prices and first meaningful-purchase pace | Open | Stage 5, then management playtests |
 | D10 | First-slice acceptance criteria and production authorization | Proposed | Preproduction exit gate |
 

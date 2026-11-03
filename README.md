@@ -132,6 +132,30 @@ or overwrite-protection prompt for this experimental service summary.
 Ask whether rack-plus-machine creates useful breathing room rather than simply
 waiting for cleaning. Starter equipment should remain comfortable at baseline;
 busier is a diagnostic challenge, not the new default difficulty.
+
+### Day ramp presets
+
+**Day 1 / 10 guests**, **Day 2 / 13 guests**, and **Day 3 / 17 guests** are the
+proposed first days from the calibrated worksheet: four-minute shifts with small
+waves and recovery gaps. Play them in order with starter equipment, then again
+with the rack, and export each run. Day 1 should feel relaxed, Day 2 steady, and
+Day 3 busy but fair. Then collect the runs:
+
+```bash
+godot --headless --path . --script tools/calibrate_balance.gd -- --collect --player=owner
+```
+
+`tools/day_ramp_report.gd` plays every preset with a scripted bartender
+([service_bot.gd](scripts/systems/service_bot.gd)) at settled, learning, and
+mistake-heavy speeds. It uses the real service rules and the measured prep times
+plus 1 s per order for moving around. It is a sanity check, not a player: on
+starter equipment it serves all of Days 1 and 2 at learning speed (busy 63% and
+89% of the time), and all of Day 3 when settled (busy 72%), while a learner misses
+2 of 17. Tests keep those properties.
+
+```bash
+godot --headless --path . --script tools/day_ramp_report.gd
+```
 Glass-capacity tiers, faster washing/equipment, and a busser who loads or starts
 the machine are future progression directions, not implemented presets.
 

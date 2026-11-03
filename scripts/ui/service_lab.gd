@@ -33,8 +33,8 @@ func _ready() -> void:
 	pressure_choice = OptionButton.new()
 	pressure_choice.clip_text = true
 	pressure_choice.custom_minimum_size.x = 180
-	pressure_choice.add_item("Baseline / 8 guests")
-	pressure_choice.add_item("Busier / 16 guests")
+	for preset: Dictionary in Shift.PRESSURES:
+		pressure_choice.add_item(preset.label)
 	$Margin/Layout/Toolbar.add_child(pressure_choice)
 	$Margin/Layout/Toolbar.move_child(pressure_choice, 1)
 	pressure_choice.item_selected.connect(_equipment_changed)
@@ -301,7 +301,7 @@ func _export() -> void:
 	summary["target_tolerance_units"] = TARGET_TOLERANCE
 	summary["seconds_per_pour_unit"] = MeteredPour.SECONDS_PER_UNIT
 	summary["timing"] = {
-		"open": Shift.OPEN_SECONDS, "closing_grace": Shift.GRACE_SECONDS,
+		"open": shift.open_seconds, "closing_grace": Shift.GRACE_SECONDS,
 		"patience": Shift.PATIENCE_SECONDS, "drinking": Shift.DRINK_SECONDS,
 		"sink": Shift.WASH_SECONDS, "machine_load": Shift.DISHWASHER_LOAD_SECONDS,
 		"machine_cycle": Shift.DISHWASHER_CYCLE_SECONDS,
@@ -382,7 +382,7 @@ func _update() -> void:
 		recipe_label.text = preparation_recipe.description if preparation_recipe != null else "Select a waiting guest when one arrives. You can wash or select a clean glass now."
 	else:
 		order_label.text = "Spot %d / %s" % [selected_spot + 1, _current_recipe().display_name]
-	var phase := "Closing / %.0fs grace left" % maxf(0.0, Shift.OPEN_SECONDS + Shift.GRACE_SECONDS - shift.elapsed) if shift.elapsed >= Shift.OPEN_SECONDS else "Open / %.0fs until closing" % maxf(0.0, Shift.OPEN_SECONDS - shift.elapsed)
+	var phase := "Closing / %.0fs grace left" % maxf(0.0, shift.open_seconds + Shift.GRACE_SECONDS - shift.elapsed) if shift.elapsed >= shift.open_seconds else "Open / %.0fs until closing" % maxf(0.0, shift.open_seconds - shift.elapsed)
 	metrics.text = "%s | Served %d | Walkouts %d | Missed %d | Errors %d | Discards %d\nNo clean supply %.1fs | Glass-blocked %.1fs (machine running %.1fs)" % [
 		phase, shift.served, shift.walkouts, shift.missed_arrivals, trial_errors, trial_discards,
 		shift.no_clean_seconds, shift.glass_blocked_seconds, shift.blocked_during_machine_seconds,
