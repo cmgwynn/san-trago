@@ -4,7 +4,8 @@ const Assumptions = preload("res://scripts/content/balance_assumptions.gd")
 const COLUMNS: Array[String] = [
 	"profile", "equipment", "glasses", "purchase_cents",
 	"active_seconds_per_order", "shift_workload_ratio", "rush_workload_ratio",
-	"rush_backlog_orders_estimate", "steady_glasses_needed_estimate",
+	"rush_backlog_orders_estimate", "comfortable_arrivals_per_shift",
+	"steady_glasses_needed_estimate", "rush_glasses_to_skip_washing",
 	"dishwasher_utilization_ratio", "sales_cents_if_all_served",
 	"tips_cents_if_all_served", "ingredient_cost_cents_if_all_served",
 	"waste_cost_cents_included", "profit_cents_if_all_served",
@@ -42,6 +43,10 @@ static func calculate(a: Assumptions) -> Dictionary:
 			if machine:
 				glass_cycle += fill_wait + a.dishwasher_cycle_seconds
 			var needed := ceili(rate * glass_cycle)
+			# Serving a whole rush before washing needs a clean glass per drink made
+			# during the rush, plus the one in hand. This is what extra glasses buy.
+			var rush_served := minf(rush_rate, 1.0 / prep) * a.rush_seconds
+			var rush_glasses := ceili(rush_served - 0.0001) + 1 if rush_rate > 0 else 0
 			var sales := roundi(a.arrivals * price)
 			var tips := a.arrivals * a.average_tip_cents
 			var base_cost := roundi(a.arrivals * cost)
@@ -55,6 +60,8 @@ static func calculate(a: Assumptions) -> Dictionary:
 				warnings.append("Rush builds a queue")
 			if needed > glasses:
 				warnings.append("Steady glass-buffer estimate exceeds inventory")
+			if not machine and rush_glasses > glasses:
+				warnings.append("Must stop to wash mid-rush")
 			if dishwasher_ratio >= 1.0:
 				warnings.append("Dishwasher cannot sustain estimated demand")
 			if profit <= 0:
@@ -71,7 +78,9 @@ static func calculate(a: Assumptions) -> Dictionary:
 				"shift_workload_ratio": snappedf(rate * work, 0.001),
 				"rush_workload_ratio": snappedf(rush_rate * work, 0.001),
 				"rush_backlog_orders_estimate": snappedf(maxf(0.0, rush_rate - 1.0 / work) * a.rush_seconds, 0.01),
+				"comfortable_arrivals_per_shift": floori(a.comfortable_workload * a.shift_seconds / work),
 				"steady_glasses_needed_estimate": needed,
+				"rush_glasses_to_skip_washing": rush_glasses,
 				"dishwasher_utilization_ratio": snappedf(dishwasher_ratio, 0.001),
 				"sales_cents_if_all_served": sales,
 				"tips_cents_if_all_served": tips,

@@ -7,7 +7,7 @@ GODOT="${GODOT:-godot}"
 cd "$(dirname "$0")/.."
 "$GODOT" --headless --path . --editor --import --quit >/dev/null 2>&1
 status=0
-for suite in run_tests service_tests balance_tests guest_book_tests content_tests layout_lab_tests launcher_tests; do
+for suite in run_tests service_tests balance_tests calibration_tests guest_book_tests content_tests layout_lab_tests launcher_tests; do
 	output=$("$GODOT" --headless --path . --script "tests/$suite.gd" 2>&1)
 	code=$?
 	summary=$(printf '%s\n' "$output" | grep -E "checks.*failures|failures: [0-9]+" | tail -1)

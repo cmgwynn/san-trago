@@ -281,9 +281,28 @@ learning, and mistake-heavy service against baseline equipment, extra glasses,
 and a dishwasher. It does not change or select either interaction experiment.
 
 Open [worksheet.tres](content/balance/worksheet.tres) in the Godot Inspector to
-edit the assumptions. Currency fields use integer cents. **All default times,
-prices, arrivals, and mistake rates are unmeasured hypotheses.** Replace them
-with observations once you have played both modes.
+edit the assumptions. Currency fields use integer cents. Prep times, the learning
+multiplier, wash time, glasses, and drinking time are **calibrated from playtests**
+(see below). Prices, tips, arrivals, rush shape, waste, and dishwasher figures are
+still unmeasured hypotheses.
+
+### Calibrating from playtests
+
+Play the interaction lab in mode C and the service lab, then collect your runs
+and recalibrate:
+
+```sh
+godot --headless --path . --script tools/calibrate_balance.gd -- --collect --player=yourname
+godot --headless --path . --script tools/calibrate_balance.gd -- --write
+```
+
+`--collect` copies your saved runs into [playtests/](playtests/)`yourname/` so they
+are shared through Git. Without `--write`, the tool only prints what would change.
+It measures [only what the runs show](scripts/systems/playtest_calibration.gd):
+settled prep time per drink (mode C trials after the first three), the learning
+multiplier (first three trials compared with the rest), wash time, and the lab's
+glass count and drinking time. More players make it better; a test fails if the
+worksheet falls out of sync with `playtests/`.
 
 Generate a spreadsheet-ready report:
 
@@ -301,7 +320,11 @@ Interpretation:
   at or above 1 leaves no recovery capacity.
 - Rush workload uses the rush arrival rate. Backlog estimates start with an
   empty queue and do not simulate walkouts, service spots, or glass shortages.
-- Extra glasses increase the buffer, not the player's work speed.
+- Extra glasses increase the buffer, not the player's work speed. "Rush glasses
+  to skip washing" is how many clean glasses it takes to serve a whole rush
+  before washing; fewer than that triggers "Must stop to wash mid-rush".
+- "Comfortable arrivals" is how many guests per shift keep workload at the
+  `comfortable_workload` target (0.8 by default). Use it to set demand per day.
 - Dishwasher workload includes active loading; its separate utilization ratio
   checks batch-cycle throughput. Full-batch waiting and glass circulation are
   rough steady-state estimates, not a scheduling simulation.
@@ -317,12 +340,12 @@ Interpretation:
   learning-player economy gate passes. `-1` means no positive profit.
 - Waste is included once in ingredient costs; never subtract it again.
 
-The initial worksheet exposes a design issue rather than concealing it: the
-learning profile overloads manual service, while the dishwasher eases that load.
-That could make the dishwasher mandatory. Before approving balance, measure
-actual preparation and washing, adjust demand/recovery, and verify that extra
-glasses remain a useful alternative. Do not select the faster input mode solely
-to rescue an overloaded service design.
+Calibrated findings (2026-11-03, one player): at 18 guests per 4-minute shift a
+settled player is comfortable (workload 0.69, comfortable up to 20), but a first-time
+player is overloaded (1.18, comfortable at about 12). The dishwasher alone doesn't
+fix that (0.99). The recovery path has to come from demand: start days light and
+ramp up. See the [plan's Stage 5 findings](PREPRODUCTION-PLAN.md#stage-5-model-workload-and-economy).
+Do not select a faster input mode solely to rescue an overloaded service design.
 
 ## Validate
 
@@ -362,7 +385,9 @@ per-ingredient partial retention, target boundaries, wrong ingredients,
 overpours, and fractional result exports. Content checks cover folder discovery,
 cross-file references, ID and file-name mismatches, and adding a drink and guest
 with no code changes. Launcher checks cover every lab card and returning with
-Ctrl/Cmd+L. The macOS export has been smoke-tested outside the editor; the Windows
+Ctrl/Cmd+L. Calibration checks cover hand-calculated measurements from synthetic
+runs, ignoring non-station modes and non-run files, and the shipped worksheet staying
+in sync with `playtests/`. The macOS export has been smoke-tested outside the editor; the Windows
 export is built but has not been run on Windows. Native visual feel and human
 preference still need separate checks.
 Balance tests independently cover hand-calculated totals, workload and machine

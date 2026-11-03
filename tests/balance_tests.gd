@@ -22,6 +22,15 @@ func _initialize() -> void:
 	expect(row.shift_workload_ratio == 0.788, "baseline workload matches hand calculation")
 	expect(is_equal_approx(row.rush_workload_ratio, 1.4), "rush overload is surfaced")
 	expect(is_equal_approx(row.rush_backlog_orders_estimate, 1.14), "rush backlog uses arrival minus service capacity")
+	expect(row.comfortable_arrivals_per_shift == 18, "0.8 x 240 s / 10.5 s per order is 18 comfortable arrivals")
+	expect(row.rush_glasses_to_skip_washing == 5, "a 30 s rush at 8/min serves 4 drinks, plus the glass in hand")
+	expect(report.rows[3].rush_glasses_to_skip_washing == 4, "a slower learner serves fewer rush drinks, so needs fewer glasses")
+	expect(report.rows[3].comfortable_arrivals_per_shift == 12, "learners (15.125 s per order) are comfortable with 12 arrivals")
+	var tight := Assumptions.new()
+	tight.starting_glasses = 4
+	var tight_rows: Array = Model.calculate(tight).rows
+	expect(tight_rows[0].warnings.contains("Must stop to wash mid-rush"), "too few glasses forces washing mid-rush")
+	expect(not tight_rows[1].warnings.contains("Must stop to wash mid-rush"), "extra glasses let an efficient player serve the whole rush")
 	expect(row.sales_cents_if_all_served == 13500, "weighted drink sales")
 	expect(row.ingredient_cost_cents_if_all_served == 3375, "ingredient cost counted once")
 	expect(row.profit_cents_if_all_served == 11475, "all-served profit matches hand calculation")
@@ -51,6 +60,9 @@ func _initialize() -> void:
 	a = Assumptions.new()
 	a.dishwasher_capacity = 0
 	expect(not Model.calculate(a).errors.is_empty(), "zero machine capacity rejected")
+	a = Assumptions.new()
+	a.comfortable_workload = 0.0
+	expect(not Model.calculate(a).errors.is_empty(), "a zero comfort target is rejected")
 	a = Assumptions.new()
 	a.rush_arrivals_per_minute = 100
 	expect(not Model.calculate(a).errors.is_empty(), "inconsistent rush and total demand rejected")

@@ -679,6 +679,46 @@ its header, scenario labels, monetary breakdown, and overload warnings were
 inspected. These checks verify the calculations, not the underlying assumptions
 or the first-slice balance gates.
 
+Calibration, 2026-11-03: the worksheet now takes measured values from the owner's
+playtests ([playtests/owner](playtests/owner/)): one mode C run of 10 drinks and one
+busier service run with the rack.
+
+| Value | Hypothesis | Measured | Source |
+|---|---|---|---|
+| Draft prep | 5.0 s | 5.64 s | Mode C trials 4-10 |
+| Rum and cola prep | 8.0 s | 6.87 s | Mode C trials 4-10 |
+| Learning slowdown | 1.5x | 1.8x | First 3 trials vs the rest |
+| Manual wash | 4.0 s | 3.0 s | Service lab sink (a lab setting; click overhead not measured) |
+| Glass held by guest | 12 s | 10 s | Service lab drinking time |
+| Starting glasses | 6 | 4 | Service lab starter (rack adds 2) |
+
+Cross-check: the service run served 13 of 16 at 10.7 s per serve while saturated;
+the model's settled cost per order is 9.25 s, so it is about 15% optimistic
+(reading and moving between stations). 3 guests were turned away because every
+seat was full, and none walked out.
+
+Findings at the worksheet's 18 guests per 4-minute shift:
+
+- Settled player: workload 0.69, comfortable up to 20 guests. Rushes queue briefly,
+  as intended.
+- First-time player: workload 1.18, comfortable at about 12 guests. Mistake-heavy
+  play: about 10. The dishwasher alone only reaches 0.99, so it can't be the
+  recovery path.
+- With 4 starting glasses, a settled player must stop to wash mid-rush; the extra
+  glasses remove that. This matches the owner's "the rack was plenty useful".
+- The dishwasher raises a settled player's comfortable demand from 20 to 27, so it
+  pays off only once demand passes about 20 guests. This matches the owner's "only
+  useful when you're busy enough". With 4 glasses, a learner using it waits on
+  batches, so it works best after the rack.
+
+Proposal for the creative lead (balance intent is hers): ramp demand by day.
+Day 1 about 10 guests, day 2 about 12-14, day 3 onward 16-18, with demand above
+20 reserved for players who own the dishwasher. This gives learners a recovery path
+and makes the two purchases useful for different reasons: the rack for rushes, the
+dishwasher for growth. Before approving: get her runs and at least two first-time
+players through `tools/calibrate_balance.gd`, then check the ramp in the service lab.
+Prices, tips, and purchase pacing are still unmeasured.
+
 - Model preparation and washing time, glasses, arrivals, patience, revenue,
   costs, tips, and purchases in a small spreadsheet or equivalent.
 - Compare efficient play, learning play, mistakes, extra glasses first, and
@@ -895,7 +935,7 @@ rationale, and date as evidence and approvals arrive.
 | D05 | Opening checkpoint approved; detailed day/exception walkthrough drafted | Partial approval 2026-11-02 | Stage 2 review |
 | D06 | Static storyboard drafted; candidate checks 1280 x 800 and 1024 x 768. Visual direction proposed: front-on, Stardew-like pixel art, bright day, San Diego (concept 01); painted golden-hour alternative with bar cat and guest book (concept 02); genre-informed layout pass 2 (speed rail, back-bar strip, serve beat) | Owner direction 2026-11-03; creative lead review pending | Stage 3 |
 | D07 | C preferred after owner playtest; carry station docking and retained timed fill forward | Working choice 2026-11-02; second-creator review and tuning open | Service-context experiment and further playtests |
-| D08 | Shift length, service spots, wave timing, patience, closing grace | Open | Stage 5, then service playtests |
+| D08 | Shift length, service spots, wave timing, patience, closing grace. Calibrated model (2026-11-03) proposes a day ramp: about 10, 12-14, then 16-18 guests per 4-minute shift | Open; proposal awaits creative lead and more players | Stage 5, then service playtests |
 | D09 | Upgrade prices and first meaningful-purchase pace | Open | Stage 5, then management playtests |
 | D10 | First-slice acceptance criteria and production authorization | Proposed | Preproduction exit gate |
 

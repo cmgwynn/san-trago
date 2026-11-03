@@ -1,0 +1,161 @@
+{
+	"experiment": "C_station",
+	"godot_version": "4.7.2-stable (official)",
+	"order_sequence": [
+		0,
+		1,
+		1,
+		0,
+		0,
+		1,
+		0,
+		1,
+		1,
+		0
+	],
+	"recipe_ids": [
+		"draft_beer",
+		"rum_cola"
+	],
+	"schema_version": 2,
+	"seconds_per_hold_unit": 0.65,
+	"target_tolerance_units": 0.25,
+	"timing_note": "Includes reading and recovery; excludes pause, focus loss and discard confirmation.",
+	"trials": [
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "draft_beer",
+			"seconds": 10.93,
+			"served_contents": {
+				"draft": 2.02564102564102
+			},
+			"station_drags": 0,
+			"station_taps": 1,
+			"units_added": 2.02564102564102,
+			"units_from_hold": 2.02564102564102
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "rum_cola",
+			"seconds": 10.43,
+			"served_contents": {
+				"cola": 1.94871794871794,
+				"rum": 0.794871794871794
+			},
+			"station_drags": 0,
+			"station_taps": 2,
+			"units_added": 2.74358974358974,
+			"units_from_hold": 2.74358974358974
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "rum_cola",
+			"seconds": 11.85,
+			"served_contents": {
+				"cola": 1.94871794871794,
+				"rum": 0.923076923076922
+			},
+			"station_drags": 0,
+			"station_taps": 2,
+			"units_added": 2.87179487179486,
+			"units_from_hold": 2.87179487179486
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "draft_beer",
+			"seconds": 6.62,
+			"served_contents": {
+				"draft": 1.97435897435897
+			},
+			"station_drags": 0,
+			"station_taps": 1,
+			"units_added": 1.97435897435897,
+			"units_from_hold": 1.97435897435897
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "draft_beer",
+			"seconds": 4.89,
+			"served_contents": {
+				"draft": 1.94871794871794
+			},
+			"station_drags": 0,
+			"station_taps": 1,
+			"units_added": 1.94871794871794,
+			"units_from_hold": 1.94871794871794
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "rum_cola",
+			"seconds": 6.54,
+			"served_contents": {
+				"cola": 2.07692307692307,
+				"rum": 0.871794871794871
+			},
+			"station_drags": 0,
+			"station_taps": 2,
+			"units_added": 2.94871794871794,
+			"units_from_hold": 2.94871794871794
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "draft_beer",
+			"seconds": 6.56,
+			"served_contents": {
+				"draft": 2.1025641025641
+			},
+			"station_drags": 0,
+			"station_taps": 1,
+			"units_added": 2.1025641025641,
+			"units_from_hold": 2.1025641025641
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "rum_cola",
+			"seconds": 6.82,
+			"served_contents": {
+				"cola": 2.03846153846153,
+				"rum": 1.03846153846154
+			},
+			"station_drags": 0,
+			"station_taps": 2,
+			"units_added": 3.07692307692307,
+			"units_from_hold": 3.07692307692307
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "rum_cola",
+			"seconds": 7.26,
+			"served_contents": {
+				"cola": 1.87152461538461,
+				"rum": 0.871794871794871
+			},
+			"station_drags": 0,
+			"station_taps": 2,
+			"units_added": 2.74331948717948,
+			"units_from_hold": 2.74331948717948
+		},
+		{
+			"discards": 0,
+			"incorrect_serve_attempts": 0,
+			"recipe_id": "draft_beer",
+			"seconds": 4.47,
+			"served_contents": {
+				"draft": 1.98717948717948
+			},
+			"station_drags": 0,
+			"station_taps": 1,
+			"units_added": 1.98717948717948,
+			"units_from_hold": 1.98717948717948
+		}
+	]
+}

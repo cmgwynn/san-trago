@@ -25,10 +25,10 @@ func _initialize() -> void:
 		for key: String in Model.COLUMNS:
 			values.append(str(row[key]))
 		csv.store_csv_line(values)
-		print("%s / %s: workload %.3f, rush %.3f, profit if all served $%.2f. %s" % [
+		print("%s / %s: workload %.3f, rush %.3f, comfortable at %d arrivals, profit if all served $%.2f. %s" % [
 			row.profile, row.equipment, row.shift_workload_ratio,
-			row.rush_workload_ratio, float(row.profit_cents_if_all_served) / 100.0,
-			row.warnings,
+			row.rush_workload_ratio, row.comfortable_arrivals_per_shift,
+			float(row.profit_cents_if_all_served) / 100.0, row.warnings,
 		])
 	csv.flush()
 	var error := csv.get_error()

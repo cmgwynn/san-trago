@@ -26,6 +26,8 @@ extends Resource
 @export var learning_waste_fraction: float = 0.1
 @export var mistake_time_multiplier: float = 1.75
 @export var mistake_waste_fraction: float = 0.3
+## Share of a player's time that service may fill and still feel cozy.
+@export var comfortable_workload: float = 0.8
 
 
 func validation_errors() -> PackedStringArray:
@@ -41,6 +43,7 @@ func validation_errors() -> PackedStringArray:
 		"mistake_time_multiplier": mistake_time_multiplier,
 		"starting_glasses": starting_glasses,
 		"dishwasher_capacity": dishwasher_capacity,
+		"comfortable_workload": comfortable_workload,
 	}
 	for field: String in positive:
 		if not is_finite(float(positive[field])) or float(positive[field]) <= 0.0:
